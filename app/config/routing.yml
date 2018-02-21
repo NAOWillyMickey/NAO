@@ -1,3 +1,7 @@
+ornito_research:
+    resource: "@OrnitoResearchBundle/Resources/config/routing.yml"
+    prefix:   /research
+
 ornito_observation:
     resource: "@OrnitoObservationBundle/Resources/config/routing.yml"
     prefix:   /observation

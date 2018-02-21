@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Ornito\CoreBundle\OrnitoCoreBundle(),
             new Ornito\ObservationBundle\OrnitoObservationBundle(),
+            new Ornito\ResearchBundle\OrnitoResearchBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
