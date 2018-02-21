@@ -30,6 +30,7 @@ class Watching
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime(message="Cette valeur n'est pas une date-heure valide.")
      */
     private $date;
 
@@ -37,6 +38,7 @@ class Watching
      * @var string
      *
      * @ORM\Column(name="validate_status", type="string", length=16)
+     * @Assert\Choice(choices={"untreated", "attested", "rejected"}, message="Choisir un statut de validation correct")
      */
     private $validateStatus;
 
@@ -44,6 +46,10 @@ class Watching
      * @var string|null
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * @Assert\Type(
+     *     type="string",
+     *     message="Cette valeur n'est pas une chaine de caractères."
+     * )
      */
     private $description;
 
@@ -51,6 +57,10 @@ class Watching
      * @var float
      *
      * @ORM\Column(name="latitude", type="float")
+     * @Assert\Type(
+     *     type="float",
+     *     message="Cette valeur n'est pas un nombre décimal."
+     * )
      */
     private $latitude;
 
@@ -58,6 +68,10 @@ class Watching
      * @var float
      *
      * @ORM\Column(name="longitude", type="float")
+     * @Assert\Type(
+     *     type="float",
+     *     message="Cette valeur n'est pas un nombre décimal."
+     * )
      */
     private $longitude;
 
