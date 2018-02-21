@@ -3,6 +3,7 @@
 namespace Ornito\ObservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Watching
@@ -59,6 +60,12 @@ class Watching
      * @ORM\Column(name="longitude", type="float")
      */
     private $longitude;
+
+    /**
+     * @Assert\Valid()
+     * @ORM\OneToOne(targetEntity="Ornito\ObservationBundle\Entity\Image", cascade={"persist", "remove"})
+     */
+    private $image;
 
     /**
      * Observation constructor.
@@ -197,5 +204,29 @@ class Watching
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param Image|null $image
+     *
+     * @return Watching
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image.
+     *
+     * @return \Ornito\ObservationBundle\Entity\Image|null
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
