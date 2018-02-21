@@ -1,0 +1,3 @@
+ornito_core_homepage:
+    path:     /
+    defaults: { _controller: OrnitoCoreBundle:Core:index }

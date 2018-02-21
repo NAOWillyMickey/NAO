@@ -1,0 +1,3 @@
+ornito_observation_homepage:
+    path:     /
+    defaults: { _controller: OrnitoObservationBundle:Observation:index }

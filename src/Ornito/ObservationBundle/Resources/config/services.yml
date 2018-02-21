@@ -1,0 +1,4 @@
+services:
+#    ornito_observation.example:
+#        class: Ornito\ObservationBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
