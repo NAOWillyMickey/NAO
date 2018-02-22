@@ -23,9 +23,11 @@ class LoadSpecies implements FixtureInterface
                 if ($pos2 != false) { // Check if occurrence is found
                     $tab = str_replace("\r\n","\t", $buffer); // Replace the carriage return "\r" and the new line "\n" of the end string by a tab "\t" to be parse after
                     $tab = explode("\t", $tab); // Split the string
-                    // Create a Species object and gets only columns we need
-                    $bird = new Species($tab['3'], $tab['4'], $tab['14'], $tab['15'], $tab['19'], $tab['20'], $tab['22'],$tab['39']);
-                    $manager->persist($bird);
+                    if (!empty($tab['3'])) {
+                        // Create a Species object and gets only columns we need
+                        $bird = new Species($tab['3'], $tab['4'], $tab['14'], $tab['15'], $tab['19'], $tab['20'], $tab['22'], $tab['39']);
+                        $manager->persist($bird);
+                    }
                 }
             }
         }
