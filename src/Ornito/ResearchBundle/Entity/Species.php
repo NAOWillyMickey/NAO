@@ -31,7 +31,7 @@ class Species
     /**
      * @var string|null
      *
-     * @ORM\Column(name="family", type="string", length=32, nullable=true)
+     * @ORM\Column(name="family", type="string", length=32)
      */
     private $family;
 
@@ -45,7 +45,7 @@ class Species
     /**
      * @var string|null
      *
-     * @ORM\Column(name="author", type="string", length=32, nullable=true)
+     * @ORM\Column(name="author", type="string", length=32)
      */
     private $author;
 
@@ -73,7 +73,7 @@ class Species
     /**
      * @var string|null
      *
-     * @ORM\Column(name="url", type="string", length=64, nullable=true)
+     * @ORM\Column(name="url", type="string", length=64)
      */
     private $url;
 
@@ -89,12 +89,12 @@ class Species
      * @param string $protectedStatus
      * @param string $url
      */
-    public function __construct($ordre, $family, $author, $scientificName, $vernFr, $vernEn, $protectedStatus, $url)
+    public function __construct($ordre, $family, $scientificName, $author, $vernFr, $vernEn, $protectedStatus, $url)
     {
         $this->ordre = $ordre;
         $this->family = $family;
-        $this->author = $author;
         $this->scientificName = $scientificName;
+        $this->author = $author;
         $this->vernFr = $vernFr;
         $this->vernEn = $vernEn;
         $this->protectedStatus = $protectedStatus;
