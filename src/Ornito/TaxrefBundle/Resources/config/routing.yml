@@ -1,0 +1,11 @@
+ornito_inventory_homepage:
+    path:     /
+    defaults:
+        _controller: OrnitoTaxrefBundle:Taxref:index
+
+ornito_inventory_find:
+    path:   /find/{id}
+    defaults:
+        _controller: OrnitoTaxrefBundle:Taxref:find
+    requirements:
+        id: \d+

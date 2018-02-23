@@ -1,3 +1,0 @@
-ornito_research_homepage:
-    path:     /
-    defaults: { _controller: OrnitoResearchBundle:Research:index }
