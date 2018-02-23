@@ -1,3 +1,30 @@
 ornito_observation_homepage:
-    path:     /
-    defaults: { _controller: OrnitoObservationBundle:Observation:index }
+    path: /
+    defaults:
+        _controller: OrnitoObservationBundle:Observation:index
+
+ornito_observation_add:
+    path: /add
+    defaults:
+        _controller: OrnitoObservationBundle:Observation:add
+
+ornito_observation_view:
+    path: /view/{id}
+    defaults:
+        _controller: OrnitoObservationBundle:Observation:view
+    requirements:
+        id: \d+
+
+ornito_observation_edit:
+    path: /edit/{id}
+    defaults:
+        _controller: OrnitoObservationBundle:Observation:edit
+    requirements:
+        id: \d+
+
+ornito_observation_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: OrnitoObservationBundle:Observation:delete
+    requirements:
+        id: \d+
