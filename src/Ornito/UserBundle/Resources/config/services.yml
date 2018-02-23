@@ -1,0 +1,4 @@
+services:
+#    ornito_user.example:
+#        class: Ornito\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
