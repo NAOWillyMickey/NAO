@@ -15,9 +15,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Ornito\CoreBundle\OrnitoCoreBundle(),
+            new Ornito\MainBundle\OrnitoMainBundle(),
             new Ornito\ObservationBundle\OrnitoObservationBundle(),
-            new Ornito\ResearchBundle\OrnitoResearchBundle(),
+            new Ornito\TaxrefBundle\OrnitoTaxrefBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
