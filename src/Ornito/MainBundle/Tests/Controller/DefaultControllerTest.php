@@ -1,6 +1,6 @@
 <?php
 
-namespace Ornito\CoreBundle\Tests\Controller;
+namespace Ornito\MainBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

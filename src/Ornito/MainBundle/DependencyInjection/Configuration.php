@@ -1,6 +1,6 @@
 <?php
 
-namespace Ornito\CoreBundle\DependencyInjection;
+namespace Ornito\MainBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

@@ -1,4 +1,4 @@
 services:
-#    ornito_core.example:
-#        class: Ornito\CoreBundle\Example
+#    ornito_main.example:
+#        class: Ornito\MainBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]

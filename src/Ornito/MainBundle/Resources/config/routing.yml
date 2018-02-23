@@ -1,3 +1,27 @@
-ornito_core_homepage:
-    path:     /
-    defaults: { _controller: OrnitoCoreBundle:Core:index }
+ornito_main_homepage:
+    path:     /{page}
+    defaults:
+        _controller: OrnitoMainBundle:Main:index
+        page: 1
+    requirements:
+        page: \d*
+
+ornito_main_legal:
+    path: /legal
+    defaults:
+        _controller: OrnitoMainBundle:Main:legal
+
+ornito_main_cgu:
+    path: /cgu
+    defaults:
+        _controller: OrnitoMainBundle:Main:cgu
+
+ornito_main_about:
+    path: /about-us
+    defaults:
+        _controller: OrnitoMainBundle:Main:aboutUs
+
+ornito_main_join:
+    path: /join-us
+    defaults:
+        _controller: OrnitoMainBundle:Main:joinUs
