@@ -1,6 +1,6 @@
-ornito_user:
-    resource: "@OrnitoUserBundle/Resources/config/routing.yml"
-    prefix:   /
+ornito_map:
+    resource: "@OrnitoMapBundle/Resources/config/routing.yml"
+    prefix:   /map
 
 ornito_inventory:
     resource: "@OrnitoTaxrefBundle/Resources/config/routing.yml"
@@ -12,6 +12,10 @@ ornito_observation:
 
 ornito_main:
     resource: "@OrnitoMainBundle/Resources/config/routing.yml"
+
+ornito_user:
+    resource: "@OrnitoUserBundle/Resources/config/routing.yml"
+    prefix:   /
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

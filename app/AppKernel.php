@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Ornito\TaxrefBundle\OrnitoTaxrefBundle(),
             new Ornito\UserBundle\OrnitoUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Ornito\MapBundle\OrnitoMapBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
