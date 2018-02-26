@@ -45,21 +45,21 @@ class Species
     /**
      * @var string|null
      *
-     * @ORM\Column(name="author", type="string", length=32)
+     * @ORM\Column(name="author", type="string", length=128)
      */
     private $author;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="vern_fr", type="string", length=64, nullable=true)
+     * @ORM\Column(name="vern_fr", type="string", length=128, nullable=true)
      */
     private $vernFr;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="vern_en", type="string", length=64, nullable=true)
+     * @ORM\Column(name="vern_en", type="string", length=128, nullable=true)
      */
     private $vernEn;
 
