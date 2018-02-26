@@ -9,3 +9,8 @@ ornito_inventory_find:
         _controller: OrnitoTaxrefBundle:Taxref:find
     requirements:
         id: \d+
+
+ornito_inventory_search:
+    path: /search
+    defaults:
+        _controller: OrnitoTaxrefBundle:Taxref:search
