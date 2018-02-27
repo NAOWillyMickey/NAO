@@ -10,4 +10,10 @@ namespace Ornito\TaxrefBundle\Repository;
  */
 class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findColumns()
+    {
+        $query = $this->_em->createQuery('SELECT s.ordre, s.family FROM OrnitoTaxrefBundle:Species s');
+        $results = $query->getResult();
+        return $results;
+    }
 }
