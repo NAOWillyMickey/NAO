@@ -2,3 +2,8 @@ ornito_map_homepage:
     path:     /
     defaults:
         _controller: OrnitoMapBundle:Map:index
+
+ornito_map_search:
+    path:     /search
+    defaults:
+        _controller: OrnitoMapBundle:Map:search
