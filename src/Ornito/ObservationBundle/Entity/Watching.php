@@ -3,6 +3,8 @@
 namespace Ornito\ObservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ornito\TaxrefBundle\Entity\Species;
+use Ornito\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -76,10 +78,33 @@ class Watching
     private $longitude;
 
     /**
+     * var string
+     *
+     * @ORM\Column(name="title", type="string")
+     * @Assert\Type(
+     *     type="string",
+     *     message="Cette valeur n'est pas une chaine de caractères."
+     * )
+     */
+    private $title;
+
+    /**
      * @Assert\Valid()
      * @ORM\OneToOne(targetEntity="Ornito\ObservationBundle\Entity\Image", cascade={"persist", "remove"})
      */
     private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ornito\UserBundle\Entity\User", inversedBy="watchings")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ornito\TaxrefBundle\Entity\Species")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $species;
 
     /**
      * Observation constructor.
@@ -242,5 +267,77 @@ class Watching
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return Watching
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set user.
+     *
+     * @param \Ornito\UserBundle\Entity\User $user
+     *
+     * @return Watching
+     */
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \Ornito\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set species.
+     *
+     * @param \Ornito\TaxrefBundle\Entity\Species $species
+     *
+     * @return Watching
+     */
+    public function setSpecies(Species $species)
+    {
+        $this->species = $species;
+
+        return $this;
+    }
+
+    /**
+     * Get species.
+     *
+     * @return \Ornito\TaxrefBundle\Entity\Species
+     */
+    public function getSpecies()
+    {
+        return $this->species;
     }
 }
