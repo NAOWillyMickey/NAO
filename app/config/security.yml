@@ -7,9 +7,8 @@ security:
         Ornito\UserBundle\Entity\User: sha512
 
     role_hierarchy:
-        ROLE_MEMBER: [ROLE_USER]
-        ROLE_NATURALIST: [ROLE_USER, ROLE_MEMBER]
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_MEMBER, ROLE_NATURALIST, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_NATURALIST: [ROLE_MEMBER]
+        ROLE_SUPER_ADMIN: [ROLE_NATURALIST, ROLE_ALLOWED_TO_SWITCH]
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
