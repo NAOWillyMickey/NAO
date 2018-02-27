@@ -3,6 +3,7 @@
 namespace Ornito\ObservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gumlet\ImageResize;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,7 +19,7 @@ class Image
     /**
      * The folder to store images from directory web/
      */
-    const FOLDER = 'uploads/img';
+    const FOLDER = 'uploads/photos';
 
     /**
      * @var int
@@ -48,8 +49,8 @@ class Image
      * @Assert\File(
      *     maxSize = "1024k",
      *     maxSizeMessage = "Le fichier est trop volumineux. La taille maximale autorisée est 1024k.",
-     *     mimeTypes = {"image/jpeg", "image/png"},
-     *     mimeTypesMessage = "Le type mime du fichier est invalide. Les types mime autorisés sont jpeg et png.")
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/png"},
+     *     mimeTypesMessage = "Le type mime du fichier est invalide. Les types mime autorisés sont jpeg, jpg et png.")
      */
     private $file;
 
@@ -96,11 +97,19 @@ class Image
             }
         }
 
+        $image = new ImageResize($this->file);
+        $image->resizeToWidth(700);
+        if ($this->extension = "png") {
+            $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_PNG);
+        } else {
+            $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_JPEG);
+        }
+
         // Move uploaded file into the directory
-        $this->file->move(
-            $this->getUploadRootDir(),
-            $this->id.'.'.$this->extension
-        );
+        //$this->file->move(
+        //    $this->getUploadRootDir(),
+        //    $this->id.'.'.$this->extension
+        //);
     }
 
     /**
