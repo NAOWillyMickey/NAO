@@ -98,7 +98,7 @@ class Avatar
         }
 
         $image = new ImageResize($this->file);
-        $image->resizeToWidth(700);
+        $image->resizeToWidth(200);
         if ($this->extension = "png") {
             $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_PNG);
         } else {
