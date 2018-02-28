@@ -1,22 +1,13 @@
-{# src/Ornito/MainBundle/Ressource/views/Main/layout.html.twig #}
+{# src/Ornito/MainBundle/Ressource/views/Main/about-us.html.twig #}
 
 {% extends "::base.html.twig" %}
 
-{% block title %}{{ parent() }} - {% endblock %}
+{% block title %}{{ parent() }}
+  - La NAO
+{% endblock %}
 
-{% block body %}{{ parent() }}
-
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-Hello About Us!
+{% block content %}{{ parent() }}
+  <!-- CONTENT HERE -->
+          Hello About Us!
+  <!-- END CONTENT -->
 {% endblock %}
