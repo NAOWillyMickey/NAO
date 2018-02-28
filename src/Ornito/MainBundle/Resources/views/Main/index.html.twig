@@ -1,1 +1,13 @@
-Hello Main Page!
+{# src/Ornito/MainBundle/Ressource/views/Main/index.html.twig #}
+
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }}
+  - HOME
+{% endblock %}
+
+{% block content %}{{ parent() }}
+  <!-- CONTENT HERE -->
+  Hello Main Page!
+  <!-- END CONTENT -->
+{% endblock %}

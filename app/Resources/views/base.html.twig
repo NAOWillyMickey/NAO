@@ -26,7 +26,7 @@
         <!-- CONTAINER -->
         <div class="col-lg-12 inline-flex allScreen marginAuto container">
           <div class="nav_logos">
-            <a href="#"><img src="{{ asset('assets/img/logo/iconApp-XS-shadowed.png') }}"></a>
+            <a href="{{ path('ornito_main_homepage')}}"><img src="{{ asset('assets/img/logo/iconApp-XS-shadowed.png') }}"></a>
           </div>
           <!-- BUTTON MENU ACCES IN MOBILE MODE -->
           <button class="menuButton navbar-toggler center justify-content-center" type="button" data-toggle="collapse" data-target="#navbarprincipal" aria-controls="navbarprincipal" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,16 +36,16 @@
           <div class="collapse navbar-collapse center justify-content-center" id="navbarprincipal">
             <ul class="align-items-center navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#">FIL D'ACTU</a>
+                <a class="nav-link" href="{{ path('ornito_main_homepage')}}">FIL D'ACTU</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">MAP</a>
+                <a class="nav-link" href="{{ path('ornito_map_homepage')}}">MAP</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">L'INVENTAIRE</a>
+                <a class="nav-link" href="{{ path('ornito_inventory_homepage')}}">L'INVENTAIRE</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">PARTICIPER</a>
+                <a class="nav-link" href="{{ path('ornito_main_join')}}">PARTICIPER</a>
               </li>
             </ul>
           </div>
@@ -65,19 +65,19 @@
                   <h6 class="dropdown-header">Compte: Membre</h6>
                   <li class="dropdown-divider"></li>
                   <li>
-                    <a href="#">
+                    <a href="{{ absolute_url(path('ornito_main_homepage')) }}profile">
                       <i class="fa fa-user"></i>
                       Mon Profil</a>
                   </li>
                   <li class="dropdown-divider"></li>
                   <li>
-                    <a href="#">
+                    <a href="">
                       <i class="fa fa-cog"></i>
                       Paramètre</a>
                   </li>
                   <li class="dropdown-divider"></li>
                   <li>
-                    <a href="#">
+                    <a href="">
                       <i class="fa fa-sign-out"></i>
                       Deconnexion</a>
                   </li>
@@ -99,8 +99,29 @@
       <!-- END CONTAINER -->
     </nav>
     <!-- END NAV -->
+    <!-- START WRAPPER FOR PAGE CONTENT MANAGEMENT ( WARNING : Sidebar Admin Menu have to be include in this wrapper to walk well/ Remove this comment during test reviews) -->
+    <section id="wrapper" name="contentArea">
+      <!-- DIV Overlay for overlay effect, handle by javascript -->
+      <div class="overlay">
+        <div class="center col-xs-5">
+          <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
+        </div>
+      </div>
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+          <span class="hamb-top"></span>
+          <span class="hamb-middle"></span>
+          <span class="hamb-bottom"></span>
+        </button>
+        {% block content %}
+          <!-- HERE THE CONTENT-->
+        {% endblock %}
+      </div>
+      <!-- /#page-content-wrapper -->
+    </section>
+    <!-- END BODY CONTENT SECTION -->
   {% endblock %}
-
   {% block footer %}
     <!-- SECTION CIRCULAR MENU -->
     <section id="circular_menu_plus">
@@ -109,10 +130,10 @@
           <a title="Communauté Facebook" href="" class="fa fa-facebook-square"></a>
         </div>
         <div>
-          <a title="Observations à Validées" href="#" class="fa fa-certificate"></a>
+          <a title="Observations à Validées" href="{{ path('ornito_observation_view', {'id' : 2})}}" class="fa fa-certificate"></a>
         </div>
         <div>
-          <a title="Ajouter une Observation" href="" class="fa fa-binoculars"></a>
+          <a title="Ajouter une Observation" href="{{ path('ornito_observation_add')}}" class="fa fa-binoculars"></a>
         </div>
         <div>
           <a title="Communauté Pinterest" href="" class="fa fa-pinterest-square"></a>
@@ -149,18 +170,17 @@
           <p class="text-muted font-weight-bold font-italic center">CopyRight
             <span class="badge badge-light">© 2018</span>
             ORNITHOTHEQUE Digital Apps
-            <a href="">LA NAO</a>
+            <a href="{{ path('ornito_main_about')}}">LA NAO</a>
             -
-            <a href="">Mentions Légales</a>
+            <a href="{{ path('ornito_main_legal')}}">Mentions Légales</a>
             -
-            <a href="">CGU</a>
+            <a href="{{ path('ornito_main_cgu')}}">CGU</a>
           </p>
         </div>
       </footer>
     </section>
     <!-- END SECTION FOOTER -->
   {% endblock %}
-
   {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
