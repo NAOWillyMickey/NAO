@@ -8,6 +8,152 @@
 
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
-          Hello About Us!
+  <div class="col-xs-11 col-md-9 col-lg-8 container">
+    <div class="row">
+      <div class="col-md-12 ">
+        <!-- CONTENT -->
+        <!-- Info block 1 -->
+        <section class="info-section">
+          <div class="container">
+            <div class="head-box text-center mb-5">
+              <h2>La NAO</h2>
+              <h6 class="text-underline-primary">Nos Amis les Oiseaux</h6>
+            </div>
+            <div class="three-panel-block mt-5">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="service-block-overlay text-center mb-5 p-lg-3">
+                    <i class="fa fa-leaf box-circle-solid mt-3 mb-3" aria-hidden="true"></i>
+                    <h3>Pour la Nature</h3>
+                    <p class="px-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="service-block-overlay text-center mb-5 p-lg-3">
+                    <i class="fa fa-users  box-circle-solid mt-3 mb-3" aria-hidden="true"></i>
+                    <h3>Pour l'Amitié</h3>
+                    <p class="px-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="service-block-overlay text-center mb-5 p-lg-3">
+                    <i class="fa fa-twitter box-circle-solid mt-3 mb-3" aria-hidden="true"></i>
+                    <h3>Pour les Oiseaux</h3>
+                    <p class="px-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="section-icon-logo" class="">
+          <div class="center  col-md-12">
+            <img src="{{ asset('assets/img/logo/iconApp-MD.png') }}" class="center img-fluid">
+          </div>
+        </section>
+        <!-- Info block 1 -->
+        <section class="info-section bg-success  py-0">
+          <div class="container-fluid">
+            <div class="col-md-12 col-lg-12 content-half mt-md-0 pl-5 pt-4 row">
+              <h3>L'Association</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+              <h3>Lorem Ipsum
+              </h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+        </section>
+        <!-- MEMBER TYPE SECTION -->
+        <section class="team-section py-5">
+          <div class="col-md-12 p-0 m-0">
+            <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
+          </div>
+          <div class="container">
+            <div class="row mb-5">
+              <div class="head-box text-center mb-5 col-md-12">
+                <h2>Devenez Membre de la Communauté</h2>
+                <h6 class="text-underline-primary mb-5">Type d'Accès et Fonctionnalités</h6>
+              </div>
+              <div class="col-md-4 mb-md-0 mb-sm-4">
+                <div class="member-box anim-lf t-bottom">
+                  <img class="img-fluid" src="{{ asset('assets/img/content/participer/dePassage.jpg') }}">
+                  <div class="overlay-content">
+                    <h3 class="text-white ml-3 my-0">De Passage</h3>
+                    <p class="text-white ml-3 mb-3">S'informer et découvrir</p>
+                    <span class="socail-l ml-3 mb-3">
+                      <a href="#" class="mr-2">
+                        <i title="Restez informé" class="fa fa-info box-circle-solid"></i>
+                      </a>
+                      <a href="#" class="mr-2">
+                        <i title="Découvrez les Fiches Oiseaux" class="fa fa-twitter box-circle-solid"></i>
+                      </a>
+                      <a href="#">
+                        <i title="Accéder à la Liste des Observations" class="fa fa-list box-circle-solid"></i>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-md-0 mb-sm-4">
+                <div class="member-box anim-lf t-bottom">
+                  <img class="img-fluid" src="{{ asset('assets/img/content/participer/membre.jpg') }}" alt="">
+                  <div class="overlay-content">
+                    <h3 class="text-white ml-3 my-0">Membre</h3>
+                    <p class="text-white ml-3 mb-3">Observer et Partager</p>
+                    <span class="socail-l ml-3 mb-3">
+                      <a href="#" class="mr-2">
+                        <i title="Personalisez votre Profil" class="fa fa-user box-circle-solid"></i>
+                      </a>
+                      <a href="#" class="mr-2">
+                        <i title="Partagez vos Observations" class="fa fa-binoculars box-circle-solid"></i>
+                      </a>
+                      <a href="#">
+                        <i title="Participez à la Protection des Oiseaux" class="fa fa-gavel box-circle-solid"></i>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 mb-md-0 mb-sm-4">
+                <div class="member-box anim-lf t-bottom">
+                  <img class="img-fluid" src="{{ asset('assets/img/content/participer/naturaliste.jpg') }}" alt="">
+                  <div class="overlay-content">
+                    <h3 class="text-white ml-3 my-0">Naturaliste</h3>
+                    <p class="text-white ml-3 mb-3">Suivi par des Professionels</p>
+                    <span class="socail-l ml-3 mb-3">
+                      <a href="#" class="mr-2">
+                        <i title="Certifiez votre Profil" class="fa fa-address-card box-circle-solid"></i>
+                      </a>
+                      <a href="#" class="mr-2">
+                        <i title="Validez les Observations des autres Membres" class="fa fa-certificate box-circle-solid"></i>
+                      </a>
+                      <a href="#">
+                        <i title="Accédez à une source de donnée participative" class="fa fa-stack-overflow box-circle-solid"></i>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <a class="btn btn-block " href="">Créer Mon Compte</a>
+            <hr>
+            <a class="btn btn-block " href="">Me Connecter</a>
+          </div>
+        </section>
+      </div>
+      <!-- END CONTENT -->
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
 {% endblock %}
