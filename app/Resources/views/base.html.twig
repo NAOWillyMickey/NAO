@@ -1,13 +1,179 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="ornithoteque">
+    <meta name="author" content="surikat-studio">
+    <title>
+      {% block title %}L'Ornithothèque!{% endblock %}
+    </title>
+    {% block stylesheets %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap-grid.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+      <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+  </head>
+  <body>
+    {% block body %}
+      <!-- START NAV -->
+      <nav class="navbar navbar-expand-md navbar-light bg-light rounded navbar-fixed-top">
+        <!-- CONTAINER -->
+        <div class="col-lg-12 inline-flex allScreen marginAuto container">
+          <div class="nav_logos">
+            <a href="#"><img src="{{ asset('assets/img/logo/iconApp-XS-shadowed.png') }}"></a>
+          </div>
+          <!-- BUTTON MENU ACCES IN MOBILE MODE -->
+          <button class="menuButton navbar-toggler center justify-content-center" type="button" data-toggle="collapse" data-target="#navbarprincipal" aria-controls="navbarprincipal" aria-expanded="false" aria-label="Toggle navigation">
+            MENU
+          </button>
+          <!-- MAIN MENU AREA -->
+          <div class="collapse navbar-collapse center justify-content-center" id="navbarprincipal">
+            <ul class="align-items-center navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">FIL D'ACTU</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">MAP</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">L'INVENTAIRE</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">PARTICIPER</a>
+              </li>
+            </ul>
+          </div>
+          <div class="profile_details float-left center">
+            <ul class="profile_details_limit">
+              <li class="dropdown profile_details_drop">
+                <a class="profile_details" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <div class="userMenuItem">
+                    <span class="dropdown-name">John D.</span>
+                    <span class="profil-img">
+                      <img class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="">
+                      <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                    </span>
+                  </div>
+                </a>
+                <ul class="dropdown-menu">
+                  <h6 class="dropdown-header">Compte: Membre</h6>
+                  <li class="dropdown-divider"></li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-user"></i>
+                      Mon Profil</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-cog"></i>
+                      Paramètre</a>
+                  </li>
+                  <li class="dropdown-divider"></li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-sign-out"></i>
+                      Deconnexion</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!-- LANGUAGE MENU BUTTON SELECT <span class="fa fa-question-circle fa-w-16 fa-2x"></span>-->
+          <div class="nav_logos float-right ">
+            <a href="" class="font-size-05em">
+              <span><img class="langSelector" src="{{ asset('assets/img/logo/fr_flag.png') }}"></span></a>
+            <hr>
+            <a href="" class="font-size-05em">
+              <span><img class="langSelector" src="{{ asset('assets/img/logo/uk_flag.png') }}"></span></a>
+          </button>
+        </div>
+        <!-- USER MENU ACCESS AREA -->
+      </div>
+      <!-- END CONTAINER -->
+    </nav>
+    <!-- END NAV -->
+  {% endblock %}
+
+  {% block footer %}
+    <!-- SECTION CIRCULAR MENU -->
+    <section id="circular_menu_plus">
+      <div id='ss_menu'>
+        <div>
+          <a title="Communauté Facebook" href="" class="fa fa-facebook-square"></a>
+        </div>
+        <div>
+          <a title="Observations à Validées" href="#" class="fa fa-certificate"></a>
+        </div>
+        <div>
+          <a title="Ajouter une Observation" href="" class="fa fa-binoculars"></a>
+        </div>
+        <div>
+          <a title="Communauté Pinterest" href="" class="fa fa-pinterest-square"></a>
+        </div>
+        <div class='menu'>
+          <div class='share' id='ss_toggle' data-rot='180'>
+            <div class='circle'></div>
+            <div class='bar'></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END SECTION CIRCULAR MENU -->
+    <!-- SECTION FOOTER -->
+    <section id="section_footer">
+      <footer>
+        <div class="p-1 border border-success border-left-0 border-right-0 border-bottom-0 container"></div>
+        <h4 class="center lead">FOLLOW US</h4>
+        <div class="text-center center-block">
+          <hr/>
+          <a href="https://www.facebook.com/">
+            <i id="social-fb" class="fa fa-facebook-square fa-3x social"></i>
+          </a>
+          <a href="https://twitter.com/">
+            <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
+          </a>
+          <a href="https://plus.google.com/">
+            <i id="social-gp" class="fa fa-pinterest-square fa-3x social"></i>
+          </a>
+          <a href="mailto:contact@ornithoteque.avrr.fr">
+            <i id="social-em" class="fa fa-envelope-square fa-3x social"></i>
+          </a>
+          <hr>
+          <p class="text-muted font-weight-bold font-italic center">CopyRight
+            <span class="badge badge-light">© 2018</span>
+            ORNITHOTHEQUE Digital Apps
+            <a href="">LA NAO</a>
+            -
+            <a href="">Mentions Légales</a>
+            -
+            <a href="">CGU</a>
+          </p>
+        </div>
+      </footer>
+    </section>
+    <!-- END SECTION FOOTER -->
+  {% endblock %}
+
+  {% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/esm/popper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.iife.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script type="text/javascript">
+      $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+      });
+    </script>
+  {% endblock %}
+</body>
 </html>
