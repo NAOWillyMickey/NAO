@@ -184,10 +184,178 @@
 $('#section_footer').hide();
 </script>
 =======
-
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
-          Hello Map
-  <!-- END CONTENT -->
->>>>>>> Path Integration In Main Template for navigation
+  <!-- CONTENT HERE -->
+  <div id="obsMapContainer" class="col-md-12 col-xs-12">
+    <div id="mapPanelButton" class="row">
+      <span>
+        <button id="mapPanelButtonControl" class="btn btn-xs bg-danger">
+          <i class="fa fa-close"></i>
+        </button>
+      </br>
+      <a href="#mapPanelSearchArea">
+        <button id="mapPanelButtonSearch" class="btn btn-xs bg-info">
+          <i class="fa fa-search"></i>
+        </button>
+      </a>
+    </br>
+    <a href="#mapPanelListArea">
+      <button id="mapPanelButtonList" class="btn btn-xs bg-primary">
+        <i class="fa fa-th-list"></i>
+      </button>
+    </a>
+  </span>
+</div>
+<div id="mapPanelContainer" class="col-md-4 col-xs-11">
+  <div id="mapPanelSearchArea">
+    <form id="mymapBirdSearhForm" name="mymapBirdSearhForm" class="col-xs-10 offset-1 form">
+      <div class="marginAuto">
+        <label for="mymapBirdOrder" class="input-group-addon">Ordre</label>
+        <select name="mymapBirdOrder" class="custom-select" placeholder="Ordre" id="mymapBirdOrder">
+          <option value="valeur1">Valeur 1</option>
+          <option value="valeur2">Valeur 2</option>
+          <option value="valeur3">Valeur 3</option>
+        </select>
+      </div>
+      <div class="marginAuto">
+        <label for="mymapBirdFamily" class="input-group-addon">Famille</label>
+        <select name="mymapBirdFamily" class="custom-select" placeholder="Famille" id="mymapBirdFamily">
+          <option value="valeur1">Valeur 1</option>
+          <option value="valeur2">Valeur 2</option>
+          <option value="valeur3">Valeur 3</option>
+        </select>
+      </div>
+      <div class="marginAuto">
+        <label for="mymapBirdSciName" class="input-group-addon">Nom Scientifique</label>
+        <select name="mymapBirdSciName" class="custom-select" placeholder="Nom Scientifique" id="mymapBirdSciName">
+          <option value="valeur1">Valeur 1</option>
+          <option value="valeur2">Valeur 2</option>
+          <option value="valeur3">Valeur 3</option>
+        </select>
+      </div>
+      <div class="marginAuto">
+        <label for="mymapBirdVerName" class="input-group-addon">Nom Vernaculaire</label>
+        <select name="mymapBirdVerName" class="custom-select" placeholder="Nom Scientifique" id="mymapBirdVerName">
+          <option value="valeur1">Valeur 1</option>
+          <option value="valeur2">Valeur 2</option>
+          <option value="valeur3">Valeur 3</option>
+        </select>
+      </div>
+      <div class="col-md-12 margin-top-10  ">
+        <input id="mymapFormSubmit" value="Valider" form="mymapBirdSearhForm" type="submit" name="mymapFormSubmit" class="float-right btn  btn-success"/>
+      </div>
+    </form>
+  </div>
+</br>
+<hr>
+<div id="mapPanelListArea" class="col-xs-12">
+  <div class="table-container">
+    <table class="table table-filter">
+      <tbody>
+        <tr >
+          <td>
+            <a href="#" class="pull-left">
+              <span class="profil-img">
+                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
+                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+              </span>
+              <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
+            </a>
+            <hr>
+            <a title="Voir l'Obs" href="">
+              <i class="fa fa-eye fa-lg"></i>
+            </a>
+            <a title="Voir sur la Map" href="">
+              <i class="fa fa-map fa-lg"></i>
+            </a>
+          </td>
+          <td>
+            <div class="media">
+              <div class="media-body">
+                <span class="media-meta pull-right">13 Février 2018</span>
+                <a href="">
+                  <h4 class="title">Héron Cendré<span class="pull-right">(.)</span></h4>
+                </a>
+                <p class="summary">Parc de la tête d'Or 69006 LYON</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr >
+          <td>
+            <a href="#" class="pull-left">
+              <span class="profil-img">
+                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
+                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+              </span>
+              <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
+            </a>
+            <hr>
+            <a title="Voir l'Obs" href="">
+              <i class="fa fa-eye fa-lg"></i>
+            </a>
+            <a title="Voir sur la Map" href="">
+              <i class="fa fa-map fa-lg"></i>
+            </a>
+          </td>
+          <td>
+            <div class="media">
+              <div class="media-body">
+                <span class="media-meta pull-right">17 Février 2018</span>
+                <a href="">
+                  <h4 class="title">Aigle Royale<span class="pull-right">(Protégé)</span></h4>
+                </a>
+                <p class="summary">Route des SAPIN 69009 LYON.</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#" class="pull-left">
+              <span class="profil-img">
+                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
+                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+              </span>
+              <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
+            </a>
+            <hr>
+            <a title="Voir l'Obs" href="">
+              <i class="fa fa-eye fa-lg"></i>
+            </a>
+            <a title="Voir sur la Map" href="">
+              <i class="fa fa-map fa-lg"></i>
+            </a>
+          </td>
+          <td>
+            <div class="media">
+              <div class="media-body">
+                <span class="media-meta pull-right">13 Février 2018</span>
+                <a href="">
+                  <h4 class="title">Faucon Pelerin<span class="pull-right">(Protégé)</span></h4>
+                </a>
+                <p class="summary">La Part Dieu 69006 LYON</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+<div id="mapContainer"></div>
+</div>
+
+<!-- END CONTENT -->
+<!-- END CONTENT -->
+{% endblock %}
+
+{% block javascripts %}{{ parent() }}
+<script type="text/javascript">
+/* FOOTER HIDDEN */
+$('#section_footer').hide();
+</script>
+>>>>>>> Template Integration Step 1
 {% endblock %}
