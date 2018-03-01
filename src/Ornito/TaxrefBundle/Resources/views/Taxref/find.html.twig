@@ -3,11 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-<<<<<<< HEAD
   - {{ 'Fiche Oiseau'|trans }}
-=======
-  - Bird Card
->>>>>>> Path Integration In Main Template for navigation
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -164,7 +160,14 @@
   </div>
   <!-- /#page-content-wrapper -->
 =======
-        Hello find Species!
->>>>>>> Path Integration In Main Template for navigation
+      <h6 class="center">Retour à L'Inventaire</h6>
+      <hr>
+      <a class="link" href="{{ path('ornito_inventory_homepage')}}">
+        <span class="float-left fa fa-arrow-circle-left fa-lg"></span>
+        --- Inventaire ---> Fiche Oiseau</a>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+>>>>>>> Templating Inegration Step 2
   <!-- END CONTENT -->
 {% endblock %}
