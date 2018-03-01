@@ -5,7 +5,6 @@
 {% block title %}{{ parent() }}
   - Map
 {% endblock %}
-<<<<<<< HEAD
 {% block stylesheets %}{{ parent() }}
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
@@ -90,6 +89,7 @@
             </a>
             <hr>
             <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {id : 2}) }}">
+<<<<<<< HEAD
               <i class="fa fa-eye fa-lg"></i>
             </a>
             <a title="Voir sur la Map" href="">
@@ -183,87 +183,6 @@
 /* FOOTER HIDDEN */
 $('#section_footer').hide();
 </script>
-=======
-{% block content %}{{ parent() }}
-  <!-- CONTENT HERE -->
-  <!-- CONTENT HERE -->
-  <div id="obsMapContainer" class="col-md-12 col-xs-12">
-    <div id="mapPanelButton" class="row">
-      <span>
-        <button id="mapPanelButtonControl" class="btn btn-xs bg-danger">
-          <i class="fa fa-close"></i>
-        </button>
-      </br>
-      <a href="#mapPanelSearchArea">
-        <button id="mapPanelButtonSearch" class="btn btn-xs bg-info">
-          <i class="fa fa-search"></i>
-        </button>
-      </a>
-    </br>
-    <a href="#mapPanelListArea">
-      <button id="mapPanelButtonList" class="btn btn-xs bg-primary">
-        <i class="fa fa-th-list"></i>
-      </button>
-    </a>
-  </span>
-</div>
-<div id="mapPanelContainer" class="col-md-4 col-xs-11">
-  <div id="mapPanelSearchArea">
-    <form id="mymapBirdSearhForm" name="mymapBirdSearhForm" class="col-xs-10 offset-1 form">
-      <div class="marginAuto">
-        <label for="mymapBirdOrder" class="input-group-addon">Ordre</label>
-        <select name="mymapBirdOrder" class="custom-select" placeholder="Ordre" id="mymapBirdOrder">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
-        </select>
-      </div>
-      <div class="marginAuto">
-        <label for="mymapBirdFamily" class="input-group-addon">Famille</label>
-        <select name="mymapBirdFamily" class="custom-select" placeholder="Famille" id="mymapBirdFamily">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
-        </select>
-      </div>
-      <div class="marginAuto">
-        <label for="mymapBirdSciName" class="input-group-addon">Nom Scientifique</label>
-        <select name="mymapBirdSciName" class="custom-select" placeholder="Nom Scientifique" id="mymapBirdSciName">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
-        </select>
-      </div>
-      <div class="marginAuto">
-        <label for="mymapBirdVerName" class="input-group-addon">Nom Vernaculaire</label>
-        <select name="mymapBirdVerName" class="custom-select" placeholder="Nom Scientifique" id="mymapBirdVerName">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
-        </select>
-      </div>
-      <div class="col-md-12 margin-top-10  ">
-        <input id="mymapFormSubmit" value="Valider" form="mymapBirdSearhForm" type="submit" name="mymapFormSubmit" class="float-right btn  btn-success"/>
-      </div>
-    </form>
-  </div>
-</br>
-<hr>
-<div id="mapPanelListArea" class="col-xs-12">
-  <div class="table-container">
-    <table class="table table-filter">
-      <tbody>
-        <tr >
-          <td>
-            <a href="#" class="pull-left">
-              <span class="profil-img">
-                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
-                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
-              </span>
-              <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
-            </a>
-            <hr>
-            <a title="Voir l'Obs" href="">
               <i class="fa fa-eye fa-lg"></i>
             </a>
             <a title="Voir sur la Map" href="">
@@ -274,7 +193,7 @@ $('#section_footer').hide();
             <div class="media">
               <div class="media-body">
                 <span class="media-meta pull-right">13 Février 2018</span>
-                <a href="">
+                <a href="{{ path('ornito_observation_view', {id : 2}) }}">
                   <h4 class="title">Héron Cendré<span class="pull-right">(.)</span></h4>
                 </a>
                 <p class="summary">Parc de la tête d'Or 69006 LYON</p>
@@ -292,7 +211,7 @@ $('#section_footer').hide();
               <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
             </a>
             <hr>
-            <a title="Voir l'Obs" href="">
+            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {id : 2}) }}">
               <i class="fa fa-eye fa-lg"></i>
             </a>
             <a title="Voir sur la Map" href="">
@@ -303,7 +222,7 @@ $('#section_footer').hide();
             <div class="media">
               <div class="media-body">
                 <span class="media-meta pull-right">17 Février 2018</span>
-                <a href="">
+                <a href="{{ path('ornito_observation_view', {id : 2}) }}">
                   <h4 class="title">Aigle Royale<span class="pull-right">(Protégé)</span></h4>
                 </a>
                 <p class="summary">Route des SAPIN 69009 LYON.</p>
@@ -321,7 +240,7 @@ $('#section_footer').hide();
               <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
             </a>
             <hr>
-            <a title="Voir l'Obs" href="">
+            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {id : 2}) }}">
               <i class="fa fa-eye fa-lg"></i>
             </a>
             <a title="Voir sur la Map" href="">
@@ -332,7 +251,7 @@ $('#section_footer').hide();
             <div class="media">
               <div class="media-body">
                 <span class="media-meta pull-right">13 Février 2018</span>
-                <a href="">
+                <a href="{{ path('ornito_observation_view', {id : 2}) }}">
                   <h4 class="title">Faucon Pelerin<span class="pull-right">(Protégé)</span></h4>
                 </a>
                 <p class="summary">La Part Dieu 69006 LYON</p>
