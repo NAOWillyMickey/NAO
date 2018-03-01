@@ -15,34 +15,26 @@ class MapController extends Controller
             ->getManager()
             ->getRepository('OrnitoTaxrefBundle:Species');
 
-        $req = $repository->findColumns();
-        $ordreList = $this->filter(array_column($req, 'ordre'));
-        $familyList = $this->filter(array_column($req, 'family'));
+        $ordreList = $repository->getList('ordre');
+        $familyList = $repository->getList('family');
+        $scientificList = $repository->getList('scientificName');
+        $vernList = $repository->getList('vernFr');
+        unset($vernList[0]); // Delete the first occurrence of the vernList array which is empty
+
         return $this->render('OrnitoMapBundle:Map:index.html.twig', array(
             'ordreList' => $ordreList,
-            'familyList' => $familyList
+            'familyList' => $familyList,
+            'scientificList' => $scientificList,
+            'vernList' => $vernList,
         ));
     }
 
-    public function filter($tab)
-    {
-        $list = array();
-        foreach ($tab as $value) {
-            if (!in_array($value, $list)) {
-                $list[] = $value;
-            }
-        }
-        return $list;
-    }
-
-    public function searchAction(Request $request)
+    public function searchAction(Request $request, $name, $value)
     {
         if ($request->isXmlHttpRequest()) {
             $repo = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
-            //$reqName = 'findBy'.$column;
-            //$req = $repo->$reqName($value);
-            $req = $repo->findAll();
-            return new JsonResponse(array('req' => $req));
+            $req = $repo->mySelectList($name, $value);
+            return new JsonResponse(array('json' => $req), 200);
         }
     }
 }
