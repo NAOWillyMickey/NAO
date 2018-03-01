@@ -10,10 +10,37 @@ namespace Ornito\TaxrefBundle\Repository;
  */
 class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findColumns()
+    /**
+     * Get a list of a column with its name given in parameter
+     * @return array by alphabetical order
+     */
+    public function getList($columnName)
     {
-        $query = $this->_em->createQuery('SELECT s.ordre, s.family FROM OrnitoTaxrefBundle:Species s');
-        $results = $query->getResult();
-        return $results;
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s.'.$columnName)
+            ->distinct(true)
+        ;
+        $result = $qb
+            ->getQuery()
+            ->getArrayResult();
+        sort($result);
+        return $result;
+    }
+
+    /**
+     * Get a list of species
+     * Parameters are the column's name & the value we want to find
+     * @return array
+     */
+    public function mySelectList($columnName, $value)
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb
+            ->where('s.' . $columnName . ' = :' . $columnName)
+            ->setParameter($columnName, $value)
+        ;
+        return $qb
+            ->getQuery()
+            ->getArrayResult();
     }
 }
