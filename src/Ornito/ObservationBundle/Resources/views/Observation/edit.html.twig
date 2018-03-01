@@ -5,9 +5,172 @@
 {% block title %}{{ parent() }}
   - Obs Edition
 {% endblock %}
-
+{% block stylesheets %}{{ parent() }}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+{% endblock %}
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
-        Hello Edit Observation!
+  <!-- PAGE TITLE -->
+  <h1 class="band_title elegantshd">Nouvelle Obs'
+    <a href="#content" class="btn">
+      <i class="fa fa-angle-double-down fa-2x"></i>
+    </a>
+  </h1>
+  <hr>
+  <div class="col-xs-12 col-md-12 col-lg-12 ">
+    <!-- CONTENT -->
+    <div id="content" class="col-xs-10 offset-1">
+      <ul class="timeline">
+        <!-- TIMELINE ARTICLE -->
+        <article class="timeline">
+          <li class="timeline-inverted">
+            <aside class="timeline-badge">
+              <a title="Voir le profil" href="">
+                <span class="profil-img">
+                  <img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="">
+                  <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                </span>
+                <span class="margin-left-10 badge badge-success dropdown-name">John D.</span>
+                <i title="Observation" class="fa fa-binoculars"></i>
+              </a>
+            </aside>
+            <div class="timeline-panel">
+              <div class="timeline-heading">
+                <section>
+                  <div>
+                    <div class="col-md-12 col-xs-12 alert alert-info alert-dismissable">
+                      <a class="panel-close close" data-dismiss="alert">×</a>
+                      <i class="fa fa-coffee"></i>
+                      This is an
+                      <strong>.alert</strong>. Use this to show important messages to the user.
+                    </div>
+                    <h3>Informations</h3>
+                    <div id="birdNewObsSearhForm" class="col-md-12">
+                      <form id="birdNewObsSearhForm" name="birdNewObsSearhForm" class="form-inline">
+                        <div class="marginAuto">
+                          <label for="newObsBirdOrder" class="input-group-addon">Ordre</label>
+                          <select name="newObsBirdOrder" class="custom-select" placeholder="Ordre" id="newObsBirdOrder">
+                            <option value="valeur1">Valeur 1</option>
+                            <option value="valeur2">Valeur 2</option>
+                            <option value="valeur3">Valeur 3</option>
+                          </select>
+                        </div>
+                        <div class="marginAuto">
+                          <label for="newObsBirdFamily" class="input-group-addon">Famille</label>
+                          <select name="newObsBirdFamily" class="custom-select" placeholder="Famille" id="newObsBirdFamily">
+                            <option value="valeur1">Valeur 1</option>
+                            <option value="valeur2">Valeur 2</option>
+                            <option value="valeur3">Valeur 3</option>
+                          </select>
+                        </div>
+                        <div class="marginAuto">
+                          <label for="newObsBirdSciName" class="input-group-addon">Nom Scientifique</label>
+                          <select name="newObsBirdSciName" class="custom-select" placeholder="Nom Scientifique" id="newObsBirdSciName">
+                            <option value="valeur1">Valeur 1</option>
+                            <option value="valeur2">Valeur 2</option>
+                            <option value="valeur3">Valeur 3</option>
+                          </select>
+                        </div>
+                        <div class="marginAuto">
+                          <label for="newObsBirdVerName" class="input-group-addon">Nom Vernaculaire</label>
+                          <select name="newObsBirdVerName" class="custom-select" placeholder="Nom Scientifique" id="newObsBirdVerName">
+                            <option value="valeur1">Valeur 1</option>
+                            <option value="valeur2">Valeur 2</option>
+                            <option value="valeur3">Valeur 3</option>
+                          </select>
+                        </div>
+                        <div class="marginAuto margin-top-10 ">
+                          <p>
+                            <button class="font-size-14 badge badge-dark  collapsed" type="button" data-toggle="collapse" data-target="#collapseLocalisation" aria-expanded="false" aria-controls="collapseLocalisation">
+                              Localisation
+                              <i class="fa fa-map-marker"></i>
+                            </button>
+                          </p>
+                          <div class="collapse" id="collapseLocalisation">
+                            <div id="localisation-card" class="col-xs-12 col-sm-12 col-md-12 card card-body">
+                              <ul class="font-size-12 list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  <label for="newObsBirdLat" class="input-group-addon">Latitude</label>
+                                  <input name="newObsBirdLat" id="newObsBirdLat" type="text" placeholder="Latitude" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  <label for="newObsBirdLng" class="input-group-addon">Longitude</label>
+                                  <input name="newObsBirdLng" id="newObsBirdLng" type="text" placeholder="Longitude" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  <button id="newObsGeolocalisatorButtonForm" type="button" class="btn btn-primary btn-xs">
+                                    Géolocaliser
+                                  </button>
+                                  <!-- Button trigger modal -->
+                                </li>
+
+                              </ul>
+                              <hr>
+                              <div class="col-md-12">
+                                <h5 class="font-size-12 modal-title" id="mapModalVerticalLabel">Selectionnez un point sur la Map ou Utilisez la Géolocalisation</h5>
+                                <h6 class="font-size-12 modal-title" id="mapModalVerticalLabel">Appuyez sur OK, Les coordonnées sont récupérées automatiquement</h6>
+                                <div id="newObsMap"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="marginAuto margin-top-10 col-md-12">
+                          <label for="newObsBirdTitle" class="input-group-addon">Titre</label>
+                          <input name="newObsBirdTitle" id="newObsBirdTitle" type="text" placeholder="Titre" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                        <div class="marginAuto margin-top-10 col-md-12">
+                          <label for="newObsBirdComment" class="marginAuto input-group-addon">Commentaire</label>
+                          <textarea rows="5" cols="50" name="newObsBirdComment" form="birdNewObsSearhForm" class="form-control" placeholder="Mon Commentaire" id="newObsBirdComment"></textarea>
+                        </div>
+                        <div class="marginAuto margin-top-10 col-md-12 text-centercustom-file">
+                          <input type="file" class="custom-file-input text-center center-block well well-sm" id="newObsPicture">
+                          <label class="custom-file-label" for="customFile">Charger une photo</label>
+                        </div>
+                        <div class="marginAuto">
+                          <img src="{{ asset('assets/img/obs/test/moineau.jpg') }}" class="margin-top-10 avatar img-circle img-fluid img-max-size-1" alt="Obs Picture">
+                        </div>
+                        <div class="col-md-12 margin-top-10  ">
+                          <input id="newObsBirdFormSubmit" value="Valider" type="submit" name="newObsBirdFormSubmit" class="float-right btn  btn-success"/>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- END birdNewObsSearhForm INPUT CONTENT -->
+                    <!--Map Modal -->
+                    <div class="modal" id="mapModalVertical" tabindex="-1" role="dialog" aria-labelledby="mapModalVerticalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+
+
+                          </div>
+                          <div class="modal-footer">
+                            <div class="col-md-12 ">
+                              <button type="button" class="font-size-08em btn btn-secondary" data-dismiss="modal">OK</button>
+                              <button id="newObsUseGeolocalisationButton" type="button" class="font-size-08em btn btn-primary">Géolocalisation</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END MODAL MAP CONTAINER -->
+                  </div>
+                  <!-- END birdNewObsSearhForm CONTAINER -->
+                </section>
+              </div>
+            </div>
+          </li>
+        </article>
+      </ul>
+    </div>
+    <!-- END CONTENT -->
+  </div>
+  <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
 {% endblock %}
