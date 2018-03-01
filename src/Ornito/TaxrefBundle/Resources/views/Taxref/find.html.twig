@@ -8,6 +8,163 @@
 
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
-        Hello find Species!
+  <!-- PAGE TITLE -->
+  <h1 class="band_title deepshd">Ovidus Ovidareus
+    <a href="#birdCard" class="btn">
+      <i class="fa fa-angle-double-down fa-2x"></i>
+    </a>
+  </h1>
+  <!-- CONTENT CONTAINER -->
+  <hr>
+  <div class="col-xs-11 col-md-9 col-lg-8 container">
+    <div class="row">
+      <div class="col-md-12 ">
+        <!-- CONTENT -->
+        <div class="container">
+          <div>
+            <h1 class="text-uppercase page-title">Carte d'Identité</h1>
+          </div>
+          <ul class="timeline">
+            <!-- TIMELINE ARTICLE -->
+            <article id="birdCard" class="timeline">
+              <li class="timeline-inverted">
+                <aside class="timeline-badge">
+                  <span class="letter-badge-container">
+                    <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">O</i>
+                  </span>
+                  <span class="margin-left-10 badge badge-info dropdown-name">Oiselo</span>
+                  <i class="fa fa-book"></i>
+                </aside>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <div class="margin-top-0  float-right  btn-group">
+                      <!--START Option panel Menu -->
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#">Action</a>
+                        </li>
+                        <li>
+                          <a href="#">Another action</a>
+                        </li>
+                        <li>
+                          <a href="#">Something else</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <a href="#">Separated link</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!--END Option panel Menu -->
+                    <h4 class="text-uppercase font-size-16 card-title">Ovidus Ovidareus</h4>
+                    <time class="obs-time">
+                      <i class="fa fa-calendar"></i>
+                      Mis à Jour: Le MERCREDI 07 MARS 2018 à 18h30</time>
+                  </div>
+                  <div class="timeline-body">
+                    <!-- OBS PANEL -->
+                    <div class="obs-panel container">
+                      <div class="col-sm-12 col-md-6 row box-shadow">
+                        <div class="col-md-12 img-panel-container">
+                          <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-danger">
+                            Protégé
+                            <i class="fa fa-gavel"></i>
+                          </span>
+                          <a href="assets/img/obs/test/moineau.jpg" data-toggle="lightbox">
+                            <img class="img-thumbnail" src="{{ asset('assets/img/obs/test/moineau.jpg') }}">
+                          </a>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="obs-row obs-header">
+                            <h2 class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
+                              Nom Scientifique
+                            </h2>
+                            <h3 class="font-size-16 toBbold italic">Ovidus Ovidareus
+                            </h3>
+                            <div class="obs-header-seperator"></div>
+                          </div>
+                          <div class="obs-row obs-desc">
+                            <div>
+                              <h2 class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                                Nom Vernaculaire
+                              </h2>
+                              <h4 class="font-size-14 toBold">Oiselo</h4>
+                              <h2 class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                                Nom Vernaculaire Anglais
+                              </h2>
+                              <h4 class="font-size-14 toBold">Birdilo</h4>
+                            </div>
+                            <div>
+                              <h3 class="margin-bottom-5 font-size-12 badge badge-pill badge-dark">
+                                DESCRIPTEUR
+                              </h3>
+                              <h4 class="font-size-14 toBold">Bosc, 1792</h4>
+                            </div>
+                            <hr>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="obs-comment col-sm-12 col-md-6">
+                        <h2 id="obsCommentBadge" class="margin-bottom-10 obs-comment-content badge badge-info">
+                          Description
+                        </h2>
+                        <div id="obsCommentContent" class="obs-comment-content">
+                          <ul class="text-uppercase italic list-group">
+                            <li class="italic list-group-item d-flex justify-content-between align-items-center">
+                              <span class="margin-bottom-5 badge badge-info badge-pill">ORDRE</span>
+                              Pélécaniformes
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <span class="margin-bottom-5 badge badge-info badge-pill">FAMILLE</span>
+                              Ardéidés
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <span class="margin-bottom-5 badge badge-info badge-pill">GENRE</span>
+                              Egretta
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <span class="margin-bottom-5 text-uppercase badge badge-info badge-pill">éspèce</span>
+                              gularis
+                            </li>
+                          </ul>
+                          <hr>
+                        </div>
+                        <button type="button" id='obsCommentButton' class="obs-comment-button font-size-12 badge badge-info">
+                          Voir le Commentaire
+                          <i class="fa fa-eye"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-lg btn-block">
+                          Fiche INPN
+                          <i class="fa fa-info-circle"></i>
+                        </button>
+                      </div>
+                      <hr>
+                    </div>
+                  </div>
+                  <hr>
+                  <div id="commentsystem">
+                    <div id="fb-comment"></div>
+                  </div>
+                </div>
+              </li>
+            </article>
+          </ul>
+        </div>
+        <!-- END CONTENT -->
+      </div>
+    </div>
+    <div class="col-md-12">
+      <h6 class="center">Retour à L'Inventaire</h6>
+      <hr>
+      <a class="link" href="{{ path('ornito_inventory_homepage')}}">
+        <span class="float-left fa fa-arrow-circle-left fa-lg"></span>
+        --- Inventaire ---> Fiche Oiseau</a>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
 {% endblock %}
