@@ -1,4 +1,4 @@
-{# src/Ornito/ObservationBundle/Ressource/views/Main/delete.html.twig #}
+{# src/Ornito/TaxrefBundle/Ressource/views/Main/index.html.twig #}
 
 {% extends "::base.html.twig" %}
 
@@ -8,6 +8,135 @@
 
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
-        Hello Inventory!
+  <!-- PAGE TITLE -->
+  <h1 class="band_title deepshd">INVENTAIRE</h1>
+  <!-- PAGE OPTION MENU -->
+  <div id="option-menu" class="d-flex justify-content-center row">
+    <!-- END PAGINATION OPTION FORM -->
+    <!-- BIRD SEARCH FORM -->
+    <div id="birdCardSearh" class="input-group">
+      <form id="birdCardSearhForm" name="birdCardSearhForm" class="col-md-12 d-flex justify-content-center flex-wrap form-inline">
+        <div>
+          <label class=" input-group-addon" for="ref-ordre">Ordre</label>
+          <input id="ref-ordre" name="ref-ordre" type="text" class="form-control"/>
+        </div>
+        <div>
+          <label class=" input-group-addon" for="ref-famille">Famille</label>
+          <input id="ref-famille" name="ref-famille" type="text" class="form-control"/>
+        </div>
+        <div>
+          <label class=" input-group-addon" for="ref-nomScientifique">Nom Scientifique</label>
+          <input id="ref-nomScientifique" name="ref-nomScientifique" type="text" class="form-control"/>
+        </div>
+        <div>
+          <label class=" input-group-addon" for="ref-nomVernaculaire">Nom Vernaculaire</label>
+          <input id="ref-nomVernaculaire" name="ref-nomVernaculaire" type="text" class="form-control"/>
+        </div>
+        <div>
+          <input id="birdCardSearhFormSubmit" value="Rechercher" type="submit" name="birdCardSearhFormSubmit" class="btn btn-lg btn-success"/>
+          <i class="fa fa-check"></i>
+        </div>
+      </form>
+    </div>
+    <!-- BIRD SEARCH FORM -->
+  </div>
+  <!-- END PAGE OPTION MENU -->
+  <!-- CONTENT CONTAINER -->
+  <hr>
+  <div class="col-xs-11 col-md-9 col-lg-8 container">
+    <div class="row">
+      <div class="col-md-12 ">
+        <!-- CONTENT -->
+        <div class="container">
+          <div class="">
+            <h1 class="text-uppercase page-title">Résultat de la recherche</h1>
+          </div>
+          <ul class="timeline">
+            <!-- TIMELINE ARTICLE -->
+            <article class="timeline">
+              <li class="timeline-inverted">
+                <aside class="timeline-badge">
+                  <span class="letter-badge-container">
+                    <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">O</i>
+                  </span>
+                  <span class="margin-left-10 badge badge-info dropdown-name">Oiselo</span>
+                  <i class="fa fa-book"></i>
+                </aside>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <div class="margin-top-0  float-right  btn-group">
+                      <!--START Option panel Menu -->
+                      <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#">Action</a>
+                        </li>
+                        <li>
+                          <a href="#">Another action</a>
+                        </li>
+                        <li>
+                          <a href="#">Something else</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <a href="#">Separated link</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!--END Option panel Menu -->
+                    <h4 class="text-uppercase font-size-16 card-title">Ovidus Ovidareus</h4>
+                    <time class="obs-time">
+                      <i class="fa fa-calendar"></i>
+                      Mis à Jour: Le MERCREDI 07 MARS 2018 à 18h30</time>
+                  </div>
+                  <div class="timeline-body">
+                    <!-- Presult PANEL -->
+                    <div class="container">
+                      <span class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
+                        Nom Scientifique
+                      </span>
+                      <span class="font-size-16 toBbold italic">
+                        Ovidus Ovidareus
+                      </span>
+                      <span class="margin-bottom-5 font-size-12 badge badge-pill badge-dark">
+                        DESCRIPTEUR
+                      </span>
+                      <span class="font-size-14 toBold">
+                        Bosc, 1792
+                      </span>
+                      <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                        Nom Vernaculaire
+                      </span>
+                      <span class="font-size-14 toBold">
+                        Oiselo
+                      </span>
+                      <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                        Nom Vernaculaire Anglais
+                      </span>
+                      <span class="font-size-14 toBold">
+                        Birdilo
+                      </span>
+                      <a title="Voir la Fiche" href="{{ path('ornito_inventory_find', {id : 2} ) }}">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">
+                          FICHE
+                          <i class="fa fa-info-circle"></i>
+                        </button>
+                      </a>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </li>
+            </article>
+            <!-- END ARTICLE TIMELINE -->
+          </ul>
+        </div>
+        <!-- END CONTENT -->
+      </div>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
 {% endblock %}
