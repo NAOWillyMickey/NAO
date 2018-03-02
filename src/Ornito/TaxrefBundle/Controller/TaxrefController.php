@@ -5,13 +5,28 @@ namespace Ornito\TaxrefBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class TaxrefController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('OrnitoTaxrefBundle:Taxref:index.html.twig');
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('OrnitoTaxrefBundle:Species');
+
+        $ordreList = $repository->getList('ordre');
+        $familyList = $repository->getList('family');
+        $scientificList = $repository->getList('scientificName');
+        $vernList = $repository->getList('vernFr');
+        unset($vernList[0]); // Delete the first occurrence of the vernList array which is empty
+
+        return $this->render('OrnitoTaxrefBundle:Taxref:index.html.twig', array(
+            'ordreList' => $ordreList,
+            'familyList' => $familyList,
+            'scientificList' => $scientificList,
+            'vernList' => $vernList,
+        ));
     }
 
     public function findAction($id)
@@ -19,12 +34,12 @@ class TaxrefController extends Controller
         return $this->render('OrnitoTaxrefBundle:Taxref:find.html.twig');
     }
 
-    public function searchAction(Request $request)
+    public function searchAction(Request $request, $name, $value)
     {
         if ($request->isXmlHttpRequest()) {
-
-            return new JsonResponse(array('parameters' => $request));
+            $repo = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
+            $req = $repo->mySelectList($name, $value);
+            return new JsonResponse(array('json' => $req), 200);
         }
-        return new Response('Requête AJAX échouée...');
     }
 }
