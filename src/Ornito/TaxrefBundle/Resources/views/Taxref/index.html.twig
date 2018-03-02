@@ -15,27 +15,48 @@
     <!-- END PAGINATION OPTION FORM -->
     <!-- BIRD SEARCH FORM -->
     <div id="birdCardSearh" class="input-group">
-      <form id="birdCardSearhForm" name="birdCardSearhForm" class="col-md-12 d-flex justify-content-center flex-wrap form-inline">
-        <div>
-          <label class=" input-group-addon" for="ref-ordre">Ordre</label>
-          <input id="ref-ordre" name="ref-ordre" type="text" class="form-control"/>
+      <form id="birdCardSearhForm" name="birdCardSearhForm" class="col-md-12 d-flex justify-content-center align-items-end flex-wrap">
+        <div class="margin-5  form-group ">
+          <label for="ref-ordre" class="input-group-addon">Ordre</label>
+          <select id="ref-ordre" class="form-control" name="ordre">
+            <option disabled selected value="">----------</option>
+              {% for item in ordreList %}
+                <option value="{{ item.ordre }}">{{ item.ordre }}</option>
+              {% endfor %}
+          </select>
         </div>
-        <div>
-          <label class=" input-group-addon" for="ref-famille">Famille</label>
-          <input id="ref-famille" name="ref-famille" type="text" class="form-control"/>
+        <div class="margin-5  form-group ">
+          <label for="ref-famille" class="input-group-addon">Famille</label>
+          <select id="ref-famille" class="form-control" name="family">
+            <option disabled selected value="">----------</option>
+              {% for item in familyList %}
+                <option value="{{ item.family }}">{{ item.family }}</option>
+              {% endfor %}
+          </select>
         </div>
-        <div>
-          <label class=" input-group-addon" for="ref-nomScientifique">Nom Scientifique</label>
-          <input id="ref-nomScientifique" name="ref-nomScientifique" type="text" class="form-control"/>
+        <div class="margin-5  form-group ">
+          <label for="ref-nomScientifique" class="input-group-addon">Nom Scientifique</label>
+          <select id="ref-nomScientifique" class="form-control" name="scientificName">
+            <option disabled selected value="noVern">----------</option>
+              {% for item in scientificList %}
+                <option value="{{ item.scientificName }}">{{ item.scientificName }}</option>
+              {% endfor %}
+          </select>
         </div>
-        <div>
-          <label class=" input-group-addon" for="ref-nomVernaculaire">Nom Vernaculaire</label>
-          <input id="ref-nomVernaculaire" name="ref-nomVernaculaire" type="text" class="form-control"/>
+        <div class="margin-5  form-group ">
+          <label for="ref-nomVernaculaire" class="input-group-addon">Nom Vernaculaire</label>
+          <select id="ref-nomVernaculaire" class="form-control" name="vernFr">
+            <option disabled selected value="noVern">----------</option>
+              {% for item in vernList %}
+                <option value="{{ item.vernFr }}">{{ item.vernFr }}</option>
+              {% endfor %}
+          </select>
         </div>
         <div>
           <input id="birdCardSearhFormSubmit" value="Rechercher" type="submit" name="birdCardSearhFormSubmit" class="btn btn-lg btn-success"/>
           <i class="fa fa-check"></i>
         </div>
+        <a hidden id="path" href="{{ url('ornito_inventory_search') }}"></a>
       </form>
     </div>
     <!-- BIRD SEARCH FORM -->
@@ -141,4 +162,7 @@
   </div>
   <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
+{% endblock %}
+{% block javascripts %}{{ parent() }}
+<script src="{{ asset('assets/js/select_form.js') }}"></script>
 {% endblock %}
