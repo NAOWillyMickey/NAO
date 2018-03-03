@@ -37,12 +37,12 @@
             <ul class="align-items-center navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('ornito_main_homepage')}}">{{ 'FIL D\'ACTU'|trans }}</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('ornito_map_homepage')}}">{{ 'MAP'|trans }}</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ path('ornito_inventory_homepage')}}">{{ 'L\'INVENTAIRE'|trans }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('ornito_map_homepage')}}">{{ 'MAP'|trans }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ path('ornito_inventory_homepage')}}">{{ 'L\'INVENTAIRE'|trans }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('ornito_main_join')}}">{{ 'PARTICIPER'|trans }}</a>
@@ -50,40 +50,51 @@
             </ul>
           </div>
           <div class="profile_details float-left center">
-            <ul class="profile_details_limit">
-              <li class="dropdown profile_details_drop">
-                <a class="profile_details" href="#" data-toggle="dropdown" aria-expanded="false">
-                  <div class="userMenuItem">
-                    <span class="dropdown-name">John D.</span>
-                    <span class="profil-img">
-                      <img class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="">
-                      <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
-                    </span>
-                  </div>
-                </a>
-                <ul class="dropdown-menu">
-                  <h6 class="dropdown-header">{{ 'Compte'|trans }} - {{ 'Membre'|trans }}</h6>
-                  <li class="dropdown-divider"></li>
-                  <li>
-                    <a href="{{ absolute_url(path('ornito_main_homepage')) }}profile">
-                      <i class="fa fa-user"></i>
-                      {{ 'Mon Profil'|trans }}</a>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li>
-                    <a href="">
-                      <i class="fa fa-cog"></i>
-                      {{ 'Paramètres'|trans }}</a>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li>
-                    <a href="">
-                      <i class="fa fa-sign-out"></i>
-                      {{ 'Déconnexion'|trans }}</a>
+            <div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <ul class="profile_details_limit">
+                  <li class="dropdown profile_details_drop">
+                    <a class="profile_details" href="#" data-toggle="dropdown" aria-expanded="false">
+                      <div class="userMenuItem">
+                        <span class="dropdown-name">{{ app.user.username }}</span>
+                        <span class="profil-img">
+                          <img class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="">
+                          <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                        </span>
+                      </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <h6 class="dropdown-header">{{ 'Compte'|trans }} - {{ 'Membre'|trans }}</h6>
+                      <li class="dropdown-divider"></li>
+                      <li>
+                        <a href="{{ (path('fos_user_profile_show')) }}">
+                          <i class="fa fa-user"></i>
+                          {{ 'Mon Profil'|trans }}</a>
+                      </li>
+                      <li class="dropdown-divider"></li>
+                      <li>
+                        <a href="{{ (path('fos_user_profile_edit')) }}">
+                          <i class="fa fa-cog"></i>
+                          {{ 'Paramètres'|trans }}</a>
+                      </li>
+                      <li class="dropdown-divider"></li>
+                      <li>
+                        <a href="{{ path('fos_user_security_logout') }}">
+                          <i class="fa fa-sign-out"></i>
+                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                        </a>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
-              </li>
-            </ul>
+            {% else %}
+                <a class="dropdown-name" href="{{ path('fos_user_security_login') }}">
+                  <i class="fa fa-sign-in"></i>
+                  {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                </a>
+            {% endif %}
+            </div>
+
           </div>
           <!-- LANGUAGE MENU BUTTON SELECT <span class="fa fa-question-circle fa-w-16 fa-2x"></span>-->
           <div class="nav_logos float-right ">
@@ -114,6 +125,17 @@
           <span class="hamb-middle"></span>
           <span class="hamb-bottom"></span>
         </button>
+        {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                <div class="alert alert-{{ type }} alert-dismissable">
+                  <a class="panel-close close" data-dismiss="alert">×</a>
+                  <i class="fa fa-exclamation-triangle"></i>
+                  <strong>{{ message }}</strong>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
         {% block content %}
           <!-- HERE THE CONTENT-->
         {% endblock %}

@@ -31,8 +31,8 @@ security:
             logout:
                 path: fos_user_security_logout
                 target: fos_user_security_login
+            logout_on_user_change: true
             remember_me:
-                secret: %secret%
+                secret: "%secret%"
                 lifetime: 604800
                 # 1 week in seconds
-
