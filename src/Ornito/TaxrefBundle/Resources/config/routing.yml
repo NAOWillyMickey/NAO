@@ -11,8 +11,6 @@ ornito_inventory_find:
         id: \d+
 
 ornito_inventory_search:
-    path: /search/{name}/{value}
+    path: /search
     defaults:
         _controller: OrnitoTaxrefBundle:Taxref:search
-        name:
-        value:
