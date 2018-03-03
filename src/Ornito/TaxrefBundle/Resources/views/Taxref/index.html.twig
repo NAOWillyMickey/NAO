@@ -3,57 +3,57 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  -
+  - {{ "Inventaire"|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
   <!-- PAGE TITLE -->
-  <h1 class="band_title deepshd">INVENTAIRE</h1>
+  <h1 class="band_title deepshd">{{ "INVENTAIRE"|trans }}</h1>
   <!-- PAGE OPTION MENU -->
   <div id="option-menu" class="d-flex justify-content-center row">
     <!-- END PAGINATION OPTION FORM -->
     <!-- BIRD SEARCH FORM -->
     <div id="birdCardSearh" class="input-group">
-      <form id="birdCardSearhForm" name="birdCardSearhForm" class="col-md-12 d-flex justify-content-center align-items-end flex-wrap">
+      <form id="birdCardSearhForm" name="birdCardSearhForm" class="col-md-12 d-flex justify-content-center align-items-end flex-wrap" method="post" action="{{ url('ornito_inventory_homepage') }}">
         <div class="margin-5  form-group ">
-          <label for="ref-ordre" class="input-group-addon">Ordre</label>
+          <label for="ref-ordre" class="input-group-addon">{{ "Ordre"|trans }}</label>
           <select id="ref-ordre" class="form-control" name="ordre">
-            <option disabled selected value="">----------</option>
+            <option disabled selected value=""></option>
               {% for item in ordreList %}
                 <option value="{{ item.ordre }}">{{ item.ordre }}</option>
               {% endfor %}
           </select>
         </div>
         <div class="margin-5  form-group ">
-          <label for="ref-famille" class="input-group-addon">Famille</label>
+          <label for="ref-famille" class="input-group-addon">{{ "Famille"|trans }}</label>
           <select id="ref-famille" class="form-control" name="family">
-            <option disabled selected value="">----------</option>
+            <option disabled selected value=""></option>
               {% for item in familyList %}
                 <option value="{{ item.family }}">{{ item.family }}</option>
               {% endfor %}
           </select>
         </div>
         <div class="margin-5  form-group ">
-          <label for="ref-nomScientifique" class="input-group-addon">Nom Scientifique</label>
+          <label for="ref-nomScientifique" class="input-group-addon">{{ "Nom Scientifique"|trans }}</label>
           <select id="ref-nomScientifique" class="form-control" name="scientificName">
-            <option disabled selected value="noVern">----------</option>
+            <option disabled selected value=""></option>
               {% for item in scientificList %}
                 <option value="{{ item.scientificName }}">{{ item.scientificName }}</option>
               {% endfor %}
           </select>
         </div>
         <div class="margin-5  form-group ">
-          <label for="ref-nomVernaculaire" class="input-group-addon">Nom Vernaculaire</label>
+          <label for="ref-nomVernaculaire" class="input-group-addon">{{ "Nom Vernaculaire"|trans }}</label>
           <select id="ref-nomVernaculaire" class="form-control" name="vernFr">
-            <option disabled selected value="noVern">----------</option>
+            <option disabled selected value="noVern"></option>
               {% for item in vernList %}
                 <option value="{{ item.vernFr }}">{{ item.vernFr }}</option>
               {% endfor %}
           </select>
         </div>
         <div>
-          <input id="birdCardSearhFormSubmit" value="Rechercher" type="submit" name="birdCardSearhFormSubmit" class="btn btn-lg btn-success"/>
+          <input id="birdCardSearchFormSubmit" value="{{ "RECHERCHER"|trans }}" type="submit" name="birdCardSearchFormSubmit" class="btn btn-lg btn-success"/>
           <i class="fa fa-check"></i>
         </div>
         <a hidden id="path" href="{{ url('ornito_inventory_search') }}"></a>
@@ -70,90 +70,105 @@
         <!-- CONTENT -->
         <div class="container">
           <div class="">
-            <h1 class="text-uppercase page-title">Résultat de la recherche</h1>
+            <h1 class="text-uppercase page-title">{{ "Résultat de la recherche"|trans }}</h1>
           </div>
           <ul class="timeline">
             <!-- TIMELINE ARTICLE -->
-            <article class="timeline">
-              <li class="timeline-inverted">
-                <aside class="timeline-badge">
-                  <span class="letter-badge-container">
-                    <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">O</i>
-                  </span>
-                  <span class="margin-left-10 badge badge-info dropdown-name">Oiselo</span>
-                  <i class="fa fa-book"></i>
-                </aside>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <div class="margin-top-0  float-right  btn-group">
-                      <!--START Option panel Menu -->
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li>
-                          <a href="#">Action</a>
-                        </li>
-                        <li>
-                          <a href="#">Another action</a>
-                        </li>
-                        <li>
-                          <a href="#">Something else</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                          <a href="#">Separated link</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <!--END Option panel Menu -->
-                    <h4 class="text-uppercase font-size-16 card-title">Ovidus Ovidareus</h4>
-                    <time class="obs-time">
-                      <i class="fa fa-calendar"></i>
-                      Mis à Jour: Le MERCREDI 07 MARS 2018 à 18h30</time>
-                  </div>
-                  <div class="timeline-body">
-                    <!-- Presult PANEL -->
-                    <div class="container">
-                      <span class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
-                        Nom Scientifique
-                      </span>
-                      <span class="font-size-16 toBbold italic">
-                        Ovidus Ovidareus
-                      </span>
-                      <span class="margin-bottom-5 font-size-12 badge badge-pill badge-dark">
-                        DESCRIPTEUR
-                      </span>
-                      <span class="font-size-14 toBold">
-                        Bosc, 1792
-                      </span>
-                      <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
-                        Nom Vernaculaire
-                      </span>
-                      <span class="font-size-14 toBold">
-                        Oiselo
-                      </span>
-                      <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
-                        Nom Vernaculaire Anglais
-                      </span>
-                      <span class="font-size-14 toBold">
-                        Birdilo
-                      </span>
-                      <a title="Voir la Fiche" href="{{ path('ornito_inventory_find', {id : 2} ) }}">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                          FICHE
-                          <i class="fa fa-info-circle"></i>
-                        </button>
-                      </a>
-                    </div>
-                    <hr>
-                  </div>
-                </div>
-              </li>
-            </article>
+              {% if birds %}
+                {% for bird in birds %}
+                  <article class="timeline">
+                    <li class="timeline-inverted">
+                      <aside class="timeline-badge">
+                          <span class="letter-badge-container">
+                            <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">{{ bird.scientificName|first|upper }}</i>
+                          </span>
+                        {% if bird.vernFr == true %}
+                          <span class="margin-left-10 badge badge-info dropdown-name">{{ bird.vernFr }}</span>
+                        {% endif %}
+                        <i class="fa fa-book"></i>
+                      </aside>
+                      <div class="timeline-panel">
+                        <div class="timeline-heading">
+                          <div class="margin-top-0  float-right  btn-group">
+                            <!--START Option panel Menu -->
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
+                              <i class="fa fa-ellipsis-h"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <li>
+                                <a href="#">Action</a>
+                              </li>
+                              <li>
+                                <a href="#">Another action</a>
+                              </li>
+                              <li>
+                                <a href="#">Something else</a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <a href="#">Separated link</a>
+                              </li>
+                            </ul>
+                          </div>
+                          <!--END Option panel Menu -->
+                          <h4 class="text-uppercase font-size-16 card-title">{{ bird.scientificName }}</h4>
+                        </div>
+                        <div class="timeline-body">
+                          <!-- Presult PANEL -->
+                          <div class="container">
+                            <span class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
+                                {{ "Nom Scientifique"|trans }}
+                            </span>
+                            <span class="font-size-16 toBbold italic">
+                                {{ bird.scientificName }}
+                            </span>
+                            <span class="margin-bottom-5 font-size-12 badge badge-pill badge-dark">
+                                {{ "DESCRIPTEUR"|trans }}
+                            </span>
+                            <span class="font-size-14 toBold">
+                                {{ bird.author }}
+                            </span>
+                            <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                                {{ "Nom Vernaculaire"|trans }}
+                            </span>
+                            {% if bird.vernFr == true %}
+                              <span class="font-size-14 toBold">
+                                  {{ bird.vernFr }}
+                              </span>
+                            {% else %}
+                              <span class="font-size-14 toBold">
+                                  {{ "Non défini"|trans }}
+                              </span>
+                            {% endif %}
+                            <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                                {{ "Nom Vernaculaire Anglais"|trans }}
+                            </span>
+                            {% if bird.vernEn == true %}
+                              <span class="font-size-14 toBold">
+                                {{ bird.vernEn }}
+                            </span>
+                            {% else %}
+                              <span class="font-size-14 toBold">
+                                {{ "Non défini"|trans }}
+                            </span>
+                            {% endif %}
+                            <a title="Voir la Fiche" href="{{ path('ornito_inventory_find', {id : bird.id} ) }}">
+                              <button type="button" class="btn btn-primary btn-lg btn-block">
+                                {{ "FICHE"|trans }}
+                                <i class="fa fa-info-circle"></i>
+                              </button>
+                            </a>
+                          </div>
+                          <hr>
+                        </div>
+                      </div>
+                    </li>
+                  </article>
+                {% endfor %}
+              {% endif %}
             <!--
             END ARTICLE TIMELINE
-          -->
+            -->
           </ul>
         </div>
         <!-- END CONTENT -->
