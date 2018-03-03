@@ -28,19 +28,14 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * Get a list of species
-     * Parameters are the column's name & the value we want to find
+     * Get the list of species
      * @return array
      */
-    public function mySelectList($columnName, $value)
+    public function mySelectList()
     {
-        $qb = $this->createQueryBuilder('s');
-        $qb
-            ->where('s.' . $columnName . ' = :' . $columnName)
-            ->setParameter($columnName, $value)
-        ;
-        return $qb
-            ->getQuery()
-            ->getArrayResult();
+        $queryBuilder = $this->createQueryBuilder('species');
+        $query = $queryBuilder->getQuery();
+        $results = $query->getScalarResult();
+        return $results;
     }
 }
