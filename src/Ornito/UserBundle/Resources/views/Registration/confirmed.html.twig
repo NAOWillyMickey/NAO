@@ -1,0 +1,48 @@
+{# src/Ornito/UserBundle/Resources/views/Registration/confirmed.html.twig #}
+
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }}
+  - REGISTER
+{% endblock %}
+
+{% block content %}{{ parent() }}
+  <!-- CONTENT HERE -->
+  {% trans_default_domain 'FOSUserBundle' %}
+
+  <div class="col-md-12 ">
+    <!-- CONTENT -->
+    <div class="d-flex justify-content-center">
+      <div class="row">
+        <div class="d-flex justify-content-center">
+          <div class="account-box">
+            <div class="logoLoginPage">
+              <img class="marginAuto" src="{{asset('assets/img/logo/logo-ornithotequeLD.png') }}" alt="Logo Ornithotheque"/>
+            </div>
+            <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+            {% if targetUrl %}
+              <p>
+                <a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
+              </p>
+            {% endif %}
+            <hr/>
+            <div class="row">
+              <div class="col-md-6 row-block">
+                <a href="{{ (path('fos_user_profile_show')) }}" class="btn btn-facebook btn-block">
+                  MON PROFIL
+                  <span class="fa fa-user fa-2x"></span>
+                </a>
+              </div>
+              <div class="col-md-6 row-block">
+                <a href="{{ path('ornito_main_homepage')}}" class="btn btn-google btn-block">
+                  FIL D'ACTU
+                  <span class="fa fa-home fa-2x"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END CONTENT -->
+  {% endblock %}
