@@ -59,11 +59,11 @@ class TaxrefController extends Controller
         ));
     }
 
-    public function searchAction(Request $request, $name, $value)
+    public function searchAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $repo = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
-            $req = $repo->mySelectList($name, $value);
+            $req = $repo->mySelectList();
             return new JsonResponse(array('json' => $req), 200);
         }
     }
