@@ -3,13 +3,13 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - Bird Card
+  - {{ 'Fiche Oiseau'|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
   <!-- PAGE TITLE -->
-  <h1 class="band_title deepshd">Ovidus Ovidareus
+  <h1 class="band_title deepshd">{{ bird.scientificName }}
     <a href="#birdCard" class="btn">
       <i class="fa fa-angle-double-down fa-2x"></i>
     </a>
@@ -22,7 +22,7 @@
         <!-- CONTENT -->
         <div class="container">
           <div>
-            <h1 class="text-uppercase page-title">Carte d'Identité</h1>
+            <h1 class="text-uppercase page-title">{{ "Carte d'Identité"|trans }}</h1>
           </div>
           <ul class="timeline">
             <!-- TIMELINE ARTICLE -->
@@ -30,78 +30,69 @@
               <li class="timeline-inverted">
                 <aside class="timeline-badge">
                   <span class="letter-badge-container">
-                    <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">O</i>
+                    <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">{{ bird.scientificName|first|upper }}</i>
                   </span>
-                  <span class="margin-left-10 badge badge-info dropdown-name">Oiselo</span>
+                  {% if bird.vernFr == true %}
+                    <span class="margin-left-10 badge badge-info dropdown-name">{{ bird.vernFr }}</span>
+                  {% endif %}
                   <i class="fa fa-book"></i>
                 </aside>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
-                    <div class="margin-top-0  float-right  btn-group">
-                      <!--START Option panel Menu -->
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li>
-                          <a href="#">Action</a>
-                        </li>
-                        <li>
-                          <a href="#">Another action</a>
-                        </li>
-                        <li>
-                          <a href="#">Something else</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                          <a href="#">Separated link</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <!--END Option panel Menu -->
-                    <h4 class="text-uppercase font-size-16 card-title">Ovidus Ovidareus</h4>
-                    <time class="obs-time">
-                      <i class="fa fa-calendar"></i>
-                      Mis à Jour: Le MERCREDI 07 MARS 2018 à 18h30</time>
+                    <h4 class="text-uppercase font-size-16 card-title">{{ bird.scientificName }}</h4>
                   </div>
                   <div class="timeline-body">
                     <!-- OBS PANEL -->
                     <div class="obs-panel container">
                       <div class="col-sm-12 col-md-6 row box-shadow">
                         <div class="col-md-12 img-panel-container">
-                          <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-danger">
-                            Protégé
-                            <i class="fa fa-gavel"></i>
-                          </span>
-                          <a href="assets/img/obs/test/moineau.jpg" data-toggle="lightbox">
-                            <img class="img-thumbnail" src="{{ asset('assets/img/obs/test/moineau.jpg') }}">
-                          </a>
+                          {% if bird.protectedStatus == true %}
+                              {% if bird.protectedStatus starts with 'P' %}
+                                <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-danger">
+                                  {{ "Protégé"|trans }}
+                                  <i class="fa fa-gavel"></i>
+                                </span>
+                              {% else %}
+                                <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-warning">
+                                  {{ "En danger"|trans }}
+                                  <i class="fa fa-gavel"></i>
+                                </span>
+                              {%  endif %}
+                          {% else %}
+                              <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-success">
+                                {{ "Non menacée"|trans }}
+                                <i class="fa fa-gavel"></i>
+                              </span>
+                          {% endif %}
                         </div>
                         <div class="col-md-12">
                           <div class="obs-row obs-header">
                             <h2 class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
-                              Nom Scientifique
+                              {{ "Nom Scientifique"|trans }}
                             </h2>
-                            <h3 class="font-size-16 toBbold italic">Ovidus Ovidareus
-                            </h3>
+                            <h3 class="font-size-16 toBbold italic">{{ bird.scientificName }}</h3>
                             <div class="obs-header-seperator"></div>
                           </div>
                           <div class="obs-row obs-desc">
                             <div>
-                              <h2 class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
-                                Nom Vernaculaire
-                              </h2>
-                              <h4 class="font-size-14 toBold">Oiselo</h4>
-                              <h2 class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
-                                Nom Vernaculaire Anglais
-                              </h2>
-                              <h4 class="font-size-14 toBold">Birdilo</h4>
+                              <h2 class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">{{ "Nom Vernaculaire"|trans }}</h2>
+                              {% if bird.vernFr == true %}
+                                <h4 class="font-size-14 toBold">{{ bird.vernFr }}</h4>
+                              {% else %}
+                                <h4 class="font-size-14 toBold">{{ "Non défini"|trans }}</h4>
+                              {% endif %}
+                              <h2 class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">{{ "Nom Vernaculaire Anglais"|trans }}</h2>
+                                {% if bird.vernEn == true %}
+                                  <h4 class="font-size-14 toBold">{{ bird.vernEn }}</h4>
+                                {% else %}
+                                  <h4 class="font-size-14 toBold">{{ "Non défini"|trans }}</h4>
+                                {% endif %}
                             </div>
                             <div>
                               <h3 class="margin-bottom-5 font-size-12 badge badge-pill badge-dark">
-                                DESCRIPTEUR
+                                {{ "Descripteur"|trans }}
                               </h3>
-                              <h4 class="font-size-14 toBold">Bosc, 1792</h4>
+                              <h4 class="font-size-14 toBold">{{ bird.author }}</h4>
                             </div>
                             <hr>
                           </div>
@@ -109,26 +100,25 @@
                       </div>
                       <hr>
                       <div class="obs-comment col-sm-12 col-md-6">
-                        <h2 id="obsCommentBadge" class="margin-bottom-10 obs-comment-content badge badge-info">
-                          Description
-                        </h2>
                         <div id="obsCommentContent" class="obs-comment-content">
                           <ul class="text-uppercase italic list-group">
                             <li class="italic list-group-item d-flex justify-content-between align-items-center">
-                              <span class="margin-bottom-5 badge badge-info badge-pill">ORDRE</span>
-                              Pélécaniformes
+                              <span class="margin-bottom-5 badge badge-info badge-pill">{{ "ORDRE"|trans }}</span>
+                              {{ bird.ordre }}
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                              <span class="margin-bottom-5 badge badge-info badge-pill">FAMILLE</span>
-                              Ardéidés
+                              <span class="margin-bottom-5 badge badge-info badge-pill">{{ "FAMILLE"|trans }}</span>
+                                {{ bird.family }}
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                              <span class="margin-bottom-5 badge badge-info badge-pill">GENRE</span>
-                              Egretta
+                              <span class="margin-bottom-5 badge badge-info badge-pill">{{ "GENRE"|trans }}</span>
+                              {% set genre = bird.scientificName|split(' ') %}
+                              {{ genre.0 }}
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                              <span class="margin-bottom-5 text-uppercase badge badge-info badge-pill">éspèce</span>
-                              gularis
+                              <span class="margin-bottom-5 text-uppercase badge badge-info badge-pill">{{ "ESPECE"|trans }}</span>
+                              {% set espece = genre.1 %}
+                              {{ espece }}
                             </li>
                           </ul>
                           <hr>
@@ -137,10 +127,12 @@
                           Voir le Commentaire
                           <i class="fa fa-eye"></i>
                         </button>
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                          Fiche INPN
-                          <i class="fa fa-info-circle"></i>
-                        </button>
+                        <a href="{{ bird.url }}">
+                          <button type="button" class="btn btn-primary btn-lg btn-block">
+                              {{ "FICHE INPN"|trans }}
+                            <i class="fa fa-info-circle"></i>
+                          </button>
+                        </a>
                       </div>
                       <hr>
                     </div>
@@ -158,11 +150,11 @@
       </div>
     </div>
     <div class="col-md-12">
-      <h6 class="center">Retour à L'Inventaire</h6>
+      <h6 class="center">{{ "Retour à L'Inventaire"|trans }}</h6>
       <hr>
       <a class="link" href="{{ path('ornito_inventory_homepage')}}">
         <span class="float-left fa fa-arrow-circle-left fa-lg"></span>
-        --- Inventaire ---> Fiche Oiseau</a>
+        --- {{ "Inventaire"|trans }} ---> {{ "Fiche Oiseau"|trans }}</a>
     </div>
   </div>
   <!-- /#page-content-wrapper -->
