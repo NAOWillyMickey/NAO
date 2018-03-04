@@ -192,11 +192,12 @@ i {
 .nav_logos {
   margin-left: 0.5em;
 }
-
+.app_logo {
+  margin-left: 32px;
+}
 .userMenuItem {
   margin-top: 15px;
 }
-
 .menuInfoButton {
   height: 70px;
   width: 40px;
@@ -205,12 +206,10 @@ i {
   padding-right: 5px;
   border-left: 1px solid #80808024;
 }
-
 .menuButton {
   margin-bottom: 0px;
   font-size: 12px;
 }
-
 .menuButton:hover {
   padding: 10px;
   font-size: 14px;
@@ -593,12 +592,12 @@ ul.dropdown-menu.drp-mnu li {
 
 .hamburger {
   position: fixed;
-  top: 25px;
+  top: 20px;
   z-index: 999;
   display: block;
-  width: 12px;
-  height: 26px;
-  margin-left: 1px;
+  width: 32px;
+  height: 32px;
+  margin-left: 5px;
   background: transparent;
   border: none;
 }

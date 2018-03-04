@@ -1,0 +1,97 @@
+{# src/Ornito/UserBundle/Ressource/views/Admin/index.html.twig #}
+
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ parent() }}
+  - ADMIN MODE
+{% endblock %}
+
+{% block content %}{{ parent() }}
+  <!-- CONTENT HERE -->
+
+  <div role="tabpanel" class="tab-pane" id="adminProfilePanel">
+    <section class="content">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="pull-right">
+              <div class="btn-group">
+                <button type="button" class="btn btn-success btn-filter" data-target="Membre">Membre</button>
+                <button type="button" class="btn btn-warning btn-filter" data-target="MembreNaturaliste">Naturaliste</button>
+                <button type="button" class="btn btn-danger btn-filter" data-target="MembreAdmin">Admin</button>
+                <button type="button" class="btn btn-danger btn-filter" data-target="pending">Certification</button>
+                <button type="button" class="btn btn-default btn-filter" data-target="all">Tous</button>
+              </div>
+            </div>
+            <div class="table-container">
+              <table class="table table-filter">
+                <tbody>
+                  {% for user in usersList %}
+                    <tr data-status="{% for role in user.roles %}{% if role == "ROLE_MEMBER" %}{{ 'Membre'|trans }}{% endif %}{% if role == "ROLE_NATURALIST" %}{{ 'Naturaliste'|trans }}{% endif %}{% if role == "ROLE_SUPER_ADMIN" %}{{ 'Admin'|trans }}{% endif %}{% endfor %}">
+                      <td>
+                        <div class="ckbox">
+                          <input type="checkbox" id="checkbox1">
+                          <label for="checkbox1"></label>
+                        </div>
+                      </td>
+                      <td>
+                        <a title="Voir le profil" href="">
+                          <i class="fa fa-eye"></i>
+                        </a>
+                        <a title="Modifier" href="">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                        <a title="Supprimer" href="">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <div class="media">
+                          <div class="media-body">
+                            <a href="#" class="pull-left">
+                              <span class="profil-img">
+                                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
+                                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                              </span>
+                            </a>
+                            <span class="media-meta pull-right">Inscit le 21 janvier 2018</span>
+                            <h4 class="title">
+                              <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username|e }}</span>
+                              <span class="pull-right valid">(
+                              {% for role in user.roles %}
+                                {% if role == "ROLE_MEMBER" %}
+                                  {{ 'Membre'|trans }}
+                                {% endif %}
+                                {% if role == "ROLE_NATURALIST" %}
+                                  {{ 'Naturaliste'|trans }}
+                                {% endif %}
+                                {% if role == "ROLE_SUPER_ADMIN" %}
+                                  {{ 'Admin'|trans }}
+                                {% endif %}
+                              {% endfor %}
+                              )</span>
+                            </h4>
+                            <hr>
+                            <p class="summary">102 Observations validés</p>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="content-footer">
+          <p>
+            Footer
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<!-- END Tab panes -->
+<!-- END CONTENT -->
+{% endblock %}
