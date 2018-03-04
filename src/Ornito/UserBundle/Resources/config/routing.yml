@@ -1,0 +1,4 @@
+ornito_user_admin_list:
+    path:     /admin/users
+    defaults:
+        _controller: OrnitoUserBundle:Admin:index
