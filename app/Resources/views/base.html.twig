@@ -25,7 +25,7 @@
       <nav class="navbar navbar-expand-md navbar-light bg-light rounded navbar-fixed-top">
         <!-- CONTAINER -->
         <div class="col-lg-12 inline-flex allScreen marginAuto container">
-          <div class="nav_logos">
+          <div class="app_logo">
             <a href="{{ path('ornito_main_homepage')}}"><img src="{{ asset('assets/img/logo/iconApp-XS-shadowed.png') }}"></a>
           </div>
           <!-- BUTTON MENU ACCES IN MOBILE MODE -->
@@ -113,18 +113,31 @@
     <!-- START WRAPPER FOR PAGE CONTENT MANAGEMENT ( WARNING : Sidebar Admin Menu have to be include in this wrapper to walk well/ Remove this comment during test reviews) -->
     <section id="wrapper" name="contentArea">
       <!-- DIV Overlay for overlay effect, handle by javascript -->
-      <div class="overlay">
-        <div class="center col-xs-5">
-          <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
-        </div>
-      </div>
+      <div class="overlay"></div>
+      {% if is_granted("ROLE_SUPER_ADMIN") %}
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+          <li class="sidebar-brand"><a href="#">ADMIN</a></li>
+          <li class="dropdown-divider"></li>
+          <li class="dropdown-divider"></li>
+          <li><a href="{{ path('ornito_user_admin_list') }}">GESTION UTILISATEUR</a></li>
+          <li class="dropdown-divider"></li>
+          <li><a href="#">GESTION CONTENU</a></li>
+  		    <li><a href="#">CONFIGURATION</a></li>
+        </ul>
+      </nav>
+      <!-- /#sidebar-wrapper -->
+      {% endif %}
       <!-- Page Content -->
       <div id="page-content-wrapper">
+        {% if is_granted("ROLE_SUPER_ADMIN") %}
         <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
           <span class="hamb-top"></span>
           <span class="hamb-middle"></span>
           <span class="hamb-bottom"></span>
         </button>
+        {% endif %}
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}

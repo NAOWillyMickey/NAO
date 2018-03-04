@@ -29,11 +29,11 @@ class MapController extends Controller
         ));
     }
 
-    public function searchAction(Request $request)
+    public function searchAction(Request $request, $name, $value)
     {
         if ($request->isXmlHttpRequest()) {
             $repo = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
-            $req = $repo->mySelectList();
+            $req = $repo->mySelectList($name, $value);
             return new JsonResponse(array('json' => $req), 200);
         }
     }
