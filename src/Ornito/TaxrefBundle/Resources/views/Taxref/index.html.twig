@@ -18,7 +18,7 @@
       <form id="birdCardSearhForm" name="birdCardSearhForm" class="col-md-12 d-flex justify-content-center align-items-end flex-wrap" method="post" action="{{ url('ornito_inventory_homepage') }}">
         <div class="margin-5  form-group ">
           <label for="ref-ordre" class="input-group-addon">{{ "Ordre"|trans }}</label>
-          <select id="ref-ordre" class="form-control" name="ordre">
+          <select id="ref-ordre" class="form-control" name="ordre" required>
             <option disabled selected value=""></option>
               {% for item in ordreList %}
                 <option value="{{ item.ordre }}">{{ item.ordre }}</option>
