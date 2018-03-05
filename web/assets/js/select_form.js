@@ -16,13 +16,15 @@ $(function () {
         type: 'GET',
         url: pathElt.attr("href"),
         dataType : "json",
-        timeout: 12000,
+        timeout: 10000,
         success: function(response) {
             speciesList = response.json;
             $(formElt).show(1000,"linear");
         },
-        error: function() {
-            alert('La requête n\'a pas abouti'); }
+        error: function(jqXHR, textStatus) {
+            var msg = "Request failed : " + textStatus + ". Please reload this page. Thank you.";
+            $('#option-menu').append('<div id="errorMsg" class="alert alert-warning">'+msg+'</div>');
+        }
     });
 
     $('select').change(function() {
