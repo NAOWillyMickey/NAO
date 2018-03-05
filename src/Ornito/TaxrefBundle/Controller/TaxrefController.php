@@ -17,16 +17,16 @@ class TaxrefController extends Controller
             ->getManager()
             ->getRepository('OrnitoTaxrefBundle:Species');
 
+        // The request method is "POST"
         if ($request->isMethod('POST')) {
             $data = $request->request;
             $tab = [];
+            // Push from request, data in an array
             foreach ($data as $key => $value) {
                 array_push($tab, $key, $value);
             }
-            for ($i = 0; $i < 2; $i++) {
-                array_pop($tab);
-            }
-            $output = array_slice($tab, -2);
+            // Get the 2 lines we need from the array for the next method parameters
+            $output = array_slice($tab, -4,2);
             $birds = $repository->mySelectList($output[0], $output[1]);
         }
 
@@ -59,11 +59,11 @@ class TaxrefController extends Controller
         ));
     }
 
-    public function searchAction(Request $request, $name, $value)
+    public function searchAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
             $repo = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
-            $req = $repo->mySelectList($name, $value);
+            $req = $repo->findAllSpecies();
             return new JsonResponse(array('json' => $req), 200);
         }
     }

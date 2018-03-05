@@ -43,4 +43,16 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getArrayResult();
     }
+
+    /**
+     * Get the list of species
+     * @return array
+     */
+    public function findAllSpecies()
+    {
+        $queryBuilder = $this->createQueryBuilder('species');
+        $query = $queryBuilder->getQuery();
+        $results = $query->getScalarResult();
+        return $results;
+    }
 }
