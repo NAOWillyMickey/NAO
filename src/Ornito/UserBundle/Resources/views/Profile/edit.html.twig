@@ -9,12 +9,202 @@
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
   {% trans_default_domain 'FOSUserBundle' %}
-
+  <!-- CONTENT -->
   {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-      {{ form_widget(form) }}
-      <div>
-          <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
+  <div class="container">
+    <!-- ARTICLE -->
+    <article class="">
+      <div id="profileTabMenu">
+        <!--START Option panel Menu -->
+        <div class="margin-top-0 float-right btn-group">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
+            <i class="fa fa-ellipsis-h"></i>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li>
+              <a href="#">Action</a>
+            </li>
+            <li>
+              <a href="#">Another action</a>
+            </li>
+            <li>
+              <a href="#">Something else</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#">Separated link</a>
+            </li>
+          </ul>
+        </div>
+        <!--END Option panel Menu -->
+        <!-- TAB MENU -->
+        <div class="text-uppercase card-title">
+          <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li role="presentation" class="nav-item active">
+              <a href="#generalConfigPanel" aria-controls="generalConfigPanel" role="tab" data-toggle="tab" class="font-size-14 nav-link">Général</a>
+            </li>
+            <li role="presentation" class="nav-item">
+              <a href="#contactConfigPanel" aria-controls="contactConfigPanel" role="tab" data-toggle="tab" class="nav-link">Contacts</a>
+            </li>
+            <li role="presentation" class="nav-item">
+              <a href="{{ (path('fos_user_change_password')) }}" class="nav-link">Sécurité</a>
+            </li>
+            <li role="presentation" class="nav-item">
+              <a href="{{ (path('fos_user_profile_show')) }}" class="nav-link">Profil</a>
+            </li>
+          </ul>
+        </div>
       </div>
+      <!-- END TAB MENU -->
+      {% for key, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+          <div class="alert alert-{{ key }} alert-dismissable">
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <i class="fa fa-coffee"></i>
+            <strong>{{ message|trans({}, 'FOSUserBundle') }}</strong>
+          </div>
+        {% endfor %}
+      {% endfor %}
+      <div class="container">
+        <div class="row">
+          <!-- BOX CONTAINER -->
+          <div class="card">
+            <!-- TAB PANELS GENERAL -->
+            <div class="tab-content">
+              <!-- Tab panes 1 PROFIL -->
+              <div role="tabpanel" class="col-md-12 tab-pane active" id="generalConfigPanel">
+                <section class="content">
+                  <div class="container">
+                    <div class="row">
+                      <!-- left column -->
+                      <div class="col-md-5 col-sm-6 col-xs-12">
+                        <div class="text-center">
+                          <img src="{{ asset('assets/uploads/users/userPic.jpg') }}" class="avatar img-circle img-thumbnail" alt="avatar">
+                          <h6>{{ 'Changer mon Avatar'|trans }}</h6>
+                          <input type="file" class="text-center btn btn-sm  center-block well well-sm">
+                        </div>
+                      </div>
+                      <!-- edit form column -->
+                      <div class="col-md-7 col-sm-6 col-xs-12 personal-info">
+                        <h3>Informations Personnelles</h3>
+                        <div class="form-horizontal" role="form">
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Prénom:</label>
+                            <div class="col-lg-8">
+                              {{ form_widget(form.firstName, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Prénom'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Nom:</label>
+                            <div class="col-lg-8">
+                              {{ form_widget(form.lastName, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Nom'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="col-lg-3 control-label">Pseudo:</label>
+                            <div class="col-lg-8">
+                              {{ form_widget(form.username, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Pseudo'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <span class="fa fa-envelope-square fa-3x social social-em"></span>
+                            <label class="col-md-3 control-label">Mon Mail:</label>
+                            <div class="col-md-8">
+                              {{ form_widget(form.email, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Mail'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="bio" class="col-lg-3 control-label">Bio:</label>
+                            <div class="col-lg-12">
+                              {{ form_widget(form.bio, {'attr': {'class': 'form-control', 'placeholder' : 'Ma Bio', 'name' : 'Ma Bio', 'rows': '15'}}) }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <!-- Tab panes 2 CONTACT INFOS -->
+              <div role="tabpanel" class="tab-pane" id="contactConfigPanel">
+                <section class="content">
+                  <div class="container">
+                    <div class="row">
+                      <!-- edit form column -->
+                      <div class="col-md-12 col-sm-12 col-xs-12 personal-info">
+                        <h3>Informations de Contact</h3>
+                        <div class="form-horizontal" role="form">
+                          <div class="form-group">
+                            <span class="fa fa-facebook-square fa-3x social social-fb"></span>
+                            <label class="col-md-3 control-label">Mon Facebook:</label>
+                            <div class="col-md-8">
+                              {{ form_widget(form.facebook, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Facebook'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <span class="fa fa-google-plus-square fa-3x social social-gp"></span>
+                            <label class="col-md-3 control-label">Mon Google +:</label>
+                            <div class="col-md-8">
+                              {{ form_widget(form.googlePlus, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Google +'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <span class="fa fa-twitter-square fa-3x social social-tw"></span>
+                            <label class="col-md-3 control-label">Mon Twitter:</label>
+                            <div class="col-md-8">
+                              {{ form_widget(form.twitter, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Twitter'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <span class="fa fa-pinterest-square fa-3x social social-gp"></span>
+                            <label class="col-md-3 control-label">Mon Pinterest:</label>
+                            <div class="col-md-8">
+                              {{ form_widget(form.pinterest, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Pinterest'}}) }}
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <span class="fa fa-linkedin-square fa-3x social social-fb"></span>
+                            <label class="col-md-3 control-label">Mon Linkedin:</label>
+                            <div class="col-md-8">
+                              {{ form_widget(form.linkedin, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Linkedin'}}) }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <!-- END Tab panes 2 -->
+            </div>
+            <!-- END Tab panes -->
+            <section id="validationForm">
+                <div >
+                  <div class="col-md-4">
+                    <label class="control-label">Sécurisation</label>
+                    {{ form_widget(form.current_password, {'attr': {'class': 'form-control' ,'placeholder' : 'Mon Password'}}) }}
+                  </div>
+                  <div class="float-right form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                      <div>
+                        <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans }}"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </section>
+          </div>
+          <!-- END BOX CONTAINER -->
+        </div>
+        <!-- END row -->
+      </div>
+      <!-- END CONTAINER -->
+
+      <hr>
+    </article>
+  </div>
+
   {{ form_end(form) }}
   <!-- END CONTENT -->
 {% endblock %}

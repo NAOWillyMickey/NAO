@@ -2,3 +2,8 @@ ornito_user_admin_list:
     path:     /admin/users
     defaults:
         _controller: OrnitoUserBundle:Admin:index
+
+#ornito_user_profile_edit:
+#    path:     /profile/edit
+#    defaults:
+#        _controller: OrnitoUserBundle:Profile:edit

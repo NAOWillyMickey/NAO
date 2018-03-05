@@ -79,11 +79,18 @@
                     <a href="#naturalistProfilePanel" aria-controls="naturalistProfilePanel" role="tab" data-toggle="tab" class="nav-link">Naturaliste</a>
                   </li>
                   <li role="presentation" class="nav-item">
-                    <a href="{{ (path('fos_user_profile_edit')) }}"   class="nav-link">Admin</a>
+                    <a href="{{ (path('fos_user_profile_edit')) }}" class="nav-link">Admin</a>
                   </li>
                 </ul>
               </div>
             </div>
+            {% for key, messages in app.session.flashbag.all() %}
+              {% for message in messages %}
+                <div class="alert alert-{{ key }}">
+                  {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+              {% endfor %}
+            {% endfor %}
             <!-- END TAB MENU -->
             <div class="container">
               <div class="row">
@@ -101,6 +108,10 @@
                           </span>
                           <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                           <hr>
+                          <div>
+                            <h2>{{ user.firstName }}
+                              {{ user.lastName }}</h2>
+                          </div>
                         </div>
                         <div class="col-md-12">
                           <div class="float-left">
@@ -306,19 +317,19 @@
                         </div>
                       </section>
                     </div>
+                  </div>
+                  <!-- END BOX CONTAINER -->
                 </div>
-                <!-- END BOX CONTAINER -->
+                <!-- END row -->
               </div>
-              <!-- END row -->
-            </div>
-            <!-- END CONTAINER -->
-            <hr>
-          </article>
+              <!-- END CONTAINER -->
+              <hr>
+            </article>
+          </div>
+          <!-- END CONTENT -->
         </div>
-        <!-- END CONTENT -->
       </div>
     </div>
-  </div>
-  <!-- /#page-content-wrapper -->
-  <!-- END CONTENT -->
-{% endblock %}
+    <!-- /#page-content-wrapper -->
+    <!-- END CONTENT -->
+  {% endblock %}

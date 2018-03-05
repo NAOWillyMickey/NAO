@@ -2,3 +2,7 @@ services:
 #    ornito_user.example:
 #        class: Ornito\UserBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    ornito_user_form_registration:
+        class: Ornito\UserBundle\Form\ProfileType
+        tag:
+          - { name: form.type, alias: app_user_profile }
