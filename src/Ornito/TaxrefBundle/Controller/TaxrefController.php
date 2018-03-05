@@ -30,11 +30,11 @@ class TaxrefController extends Controller
             $birds = $repository->mySelectList($output[0], $output[1]);
             // If user change values of the select form
             if ($birds === null) {
-                $request->getSession()->getFlashBag()->add('notice', 'Select a bird in the list please!!!');
+                $request->getSession()->getFlashBag()->add('danger', 'Select a bird in the list please!!!');
             }
         } elseif ($request->isMethod('POST') && count($request->request) <= 1) {
             // User override the required field and send an empty form
-            $request->getSession()->getFlashBag()->add('notice', 'You should select a bird in the select form before find it...');
+            $request->getSession()->getFlashBag()->add('danger', 'You should select a bird in the select form before find it...');
         }
 
         $ordreList = $repository->getList('ordre');
