@@ -4,8 +4,6 @@ ornito_map_homepage:
         _controller: OrnitoMapBundle:Map:index
 
 ornito_map_search:
-    path:     /search/{name}/{value}
+    path:     /search
     defaults:
         _controller: OrnitoMapBundle:Map:search
-        name:
-        value:
