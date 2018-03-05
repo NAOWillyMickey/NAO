@@ -19,7 +19,7 @@
         <div class="margin-5  form-group ">
           <label for="ref-ordre" class="input-group-addon">{{ "Ordre"|trans }}</label>
           <select id="ref-ordre" class="form-control" name="ordre" required>
-            <option disabled selected value=""></option>
+            <option disabled selected value="emptyOrdre"></option>
               {% for item in ordreList %}
                 <option value="{{ item.ordre }}">{{ item.ordre }}</option>
               {% endfor %}
@@ -28,7 +28,7 @@
         <div class="margin-5  form-group ">
           <label for="ref-famille" class="input-group-addon">{{ "Famille"|trans }}</label>
           <select id="ref-famille" class="form-control" name="family">
-            <option disabled selected value=""></option>
+            <option disabled selected value="emptyFamily"></option>
               {% for item in familyList %}
                 <option value="{{ item.family }}">{{ item.family }}</option>
               {% endfor %}
@@ -37,7 +37,7 @@
         <div class="margin-5  form-group ">
           <label for="ref-nomScientifique" class="input-group-addon">{{ "Nom Scientifique"|trans }}</label>
           <select id="ref-nomScientifique" class="form-control" name="scientificName">
-            <option disabled selected value=""></option>
+            <option disabled selected value="emptyScientific"></option>
               {% for item in scientificList %}
                 <option value="{{ item.scientificName }}">{{ item.scientificName }}</option>
               {% endfor %}
@@ -46,15 +46,18 @@
         <div class="margin-5  form-group ">
           <label for="ref-nomVernaculaire" class="input-group-addon">{{ "Nom Vernaculaire"|trans }}</label>
           <select id="ref-nomVernaculaire" class="form-control" name="vernFr">
-            <option disabled selected value="noVern"></option>
+            <option disabled selected value="emptyVern"></option>
               {% for item in vernList %}
                 <option value="{{ item.vernFr }}">{{ item.vernFr }}</option>
               {% endfor %}
           </select>
         </div>
         <div>
-          <input id="birdCardSearchFormSubmit" value="{{ "RECHERCHER"|trans }}" type="submit" name="birdCardSearchFormSubmit" class="btn btn-lg btn-success"/>
+          <input id="birdCardSearchFormSubmit" value="{{ "Rechercher"|trans }}" type="submit" name="birdCardSearchFormSubmit" class="btn btn-lg btn-success"/>
           <i class="fa fa-check"></i>
+        </div>
+        <div>
+          <input id="resetButton" value="{{ "Reset"|trans }}" type="button" class="btn btn-lg btn-success"/>
         </div>
         <a hidden id="path" href="{{ url('ornito_inventory_search') }}"></a>
       </form>
