@@ -38,6 +38,7 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
         $qb
             ->where('s.' . $columnName . ' = :' . $columnName)
             ->setParameter($columnName, $value)
+            ->orderBy('s.scientificName')
         ;
         return $qb
             ->getQuery()
