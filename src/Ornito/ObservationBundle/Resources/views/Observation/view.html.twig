@@ -217,10 +217,10 @@
 <script type="text/javascript">
 
 
-  var latitude = {{ watching.latitude }};
-  var longitude = {{ watching.longitude }};
+  var latitude = {{ watch.latitude }};
+  var longitude = {{ watch.longitude }};
   var latiLongi = [latitude, longitude];
-  var ObsViewMap = L.map('ObsViewMap').setView([{{ watching.latitude }}, {{ watching.longitude }}], 8);
+  var ObsViewMap = L.map('ObsViewMap').setView([{{ watch.latitude }}, {{ watch.longitude }}], 8);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 25,
@@ -232,7 +232,7 @@
 
 
     L.marker(latiLongi).addTo(ObsViewMap)
-      .bindPopup("<span class='profil-picture-mini'>{% if watching.user.avatar == null %}<a href='{{ (path('ornito_user_profile_show', {username : watching.user.username ,  userId : watching.user.id})) }}'><i class='fa fa-user fa-2x shadowed' aria-hidden='true'></i></a>{% else %}<a title='{{ "Voir le profil"|trans }}' href='{{ (path('ornito_user_profile_show', {username : watching.user.username ,  userId : watching.user.id})) }}'><img title='{{ watching.user.username }}' class='profil-picture-mini shadowed' src='/{{ watching.user.avatar.webPath }}' alt='UserPicture'></a>{% endif %}<span class='margin-left-10  badge badge-success dropdown-name'>{{ watching.user.username }}</span><h2 class='italic font-size-12'>{{ watching.species.scientificName }}</h2><time class='float-right font-size-1em obs-time'><i class='fa fa-calendar'></i></br>date : {{ watching.date|date('d-m-Y H:i:s') }}</time></span><center class='margin-top-10'><hr><h3 class='text-uppercase font-size-12 card-title'>{{ watching.title }}</h3><hr /><a href='/{{ watching.image.webPath }}' data-toggle='lightbox'><img  alt='/{{ watching.image.alt}}' title='/{{ watching.image.alt}}' class='float-right obs-picture-mini' src='/{{ watching.image.webPath }}'></a><hr /></h2</h2 class='float-left'>Observation dans un périmètre </br> de 100 à 200 metres de ce point </center>").openPopup();
+      .bindPopup("<span class='profil-picture-mini'>{% if watch.user.avatar == null %}<a href='{{ (path('ornito_user_profile_show', {username : watch.user.username ,  userId : watch.user.id})) }}'><i class='fa fa-user fa-2x shadowed' aria-hidden='true'></i></a>{% else %}<a title='{{ "Voir le profil"|trans }}' href='{{ (path('ornito_user_profile_show', {username : watch.user.username ,  userId : watch.user.id})) }}'><img title='{{ watch.user.username }}' class='profil-picture-mini shadowed' src='/{{ watch.user.avatar.webPath }}' alt='UserPicture'></a>{% endif %}<span class='margin-left-10  badge badge-success dropdown-name'>{{ watch.user.username }}</span><h2 class='italic font-size-12'>{{ watch.species.scientificName }}</h2><time class='float-right font-size-1em obs-time'><i class='fa fa-calendar'></i></br>date : {{ watch.date|date('d-m-Y H:i:s') }}</time></span><center class='margin-top-10'><hr><h3 class='text-uppercase font-size-12 card-title'>{{ watch.title }}</h3><hr /><a href='/{{ watch.image.webPath }}' data-toggle='lightbox'><img  alt='/{{ watch.image.alt}}' title='/{{ watch.image.alt}}' class='float-right obs-picture-mini' src='/{{ watch.image.webPath }}'></a><hr /></h2</h2 class='float-left'>Observation dans un périmètre </br> de 100 à 200 metres de ce point </center>").openPopup();
 
     L.circle(latiLongi, 20000).addTo(ObsViewMap);
     L.circle(latiLongi, 200).addTo(ObsViewMap);
