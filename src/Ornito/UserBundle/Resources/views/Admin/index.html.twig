@@ -11,28 +11,17 @@
 
   <div role="tabpanel" class="tab-pane" id="adminProfilePanel">
     <section class="content">
-<<<<<<< HEAD
       <h1 class="font-size-14 center">{{ "CENTRE DE GESTION DES COMPTES UTILISATEURS"|trans }}</h1>
-=======
-      <h1 class="font-size-14 center">CENTRE DE GESTION DES COMPTES UTILISATEURS</h1>
->>>>>>> User Bundle Update
       <hr />
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="pull-right">
               <div class="btn-group">
-<<<<<<< HEAD
                 <button type="button" class="btn btn-success btn-filter" data-target="Membre">{{ "Membre"|trans }}</button>
                 <button type="button" class="btn btn-warning btn-filter" data-target="MembreNaturaliste">{{ "Naturaliste"|trans }}</button>
                 <button type="button" class="btn btn-danger btn-filter" data-target="MembreAdmin">{{ "Admin"|trans }}</button>
                 <button type="button" class="btn btn-default btn-filter" data-target="all">{{ "Tous"|trans }}</button>
-=======
-                <button type="button" class="btn btn-success btn-filter" data-target="Membre">Membre</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="MembreNaturaliste">Naturaliste</button>
-                <button type="button" class="btn btn-danger btn-filter" data-target="MembreAdmin">Admin</button>
-                <button type="button" class="btn btn-default btn-filter" data-target="all">Tous</button>
->>>>>>> User Bundle Update
               </div>
             </div>
             <div class="table-container">
@@ -45,21 +34,13 @@
                         </div>
                       </td>
                       <td>
-<<<<<<< HEAD
                         <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}">
-=======
-                        <a title="Voir le profil" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}">
->>>>>>> User Bundle Update
                           <i class="fa fa-eye"></i>
                         </a>
                         <a title="{{ "Modifier"|trans }}" href="">
                           <i class="fa fa-edit"></i>
                         </a>
-<<<<<<< HEAD
                         <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez vous vraiment supprimer cette utilisateur'|trans }}" href="{{ (path('ornito_user_admin_delete', { userId : user.id })) }}">
-=======
-                        <a title="Supprimer" class="delete" data-confirm="Voulez vous vraiment supprimer cette utilisateur?" href="{{ (path('ornito_user_admin_delete', { userId : user.id })) }}">
->>>>>>> User Bundle Update
                           <i class="fa fa-trash"></i>
                         </a>
                       </td>
@@ -68,7 +49,6 @@
                           <div class="media-body">
                             <a href="#" class="pull-left">
                               <span class="profil-img">
-<<<<<<< HEAD
                                 {% if user.avatar == null %}
                                   <a href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
                                 {% else %}
@@ -77,13 +57,6 @@
                               </span>
                             </a>
                             <span class="media-meta pull-right">{{ "Inscit le"|trans }} {{ user.registerAt|date('d-m-Y') }}</span>
-=======
-                                <a title="Voir le profil" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
-                                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
-                              </span>
-                            </a>
-                            <span class="media-meta pull-right">Inscit le {{ user.registerAt|date('d-m-Y') }}</span>
->>>>>>> User Bundle Update
                             <h4 class="title">
                               <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username|e }}</span>
                               <span class="pull-right valid">(
