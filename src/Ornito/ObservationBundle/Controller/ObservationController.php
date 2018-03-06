@@ -6,6 +6,7 @@ use Ornito\ObservationBundle\Entity\Watching;
 use Ornito\ObservationBundle\Form\WatchingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ObservationController extends Controller
 {
@@ -16,7 +17,17 @@ class ObservationController extends Controller
 
     public function viewAction($id)
     {
-        return $this->render('OrnitoObservationBundle:Observation:view.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $watching = $em->getRepository('OrnitoObservationBundle:Watching')->find($id);
+
+        if ($watching === null) {
+            throw new NotFoundHttpException('L\'observation d\'id ' .$id. ' n\'existe pas!');
+        }
+
+        return $this->render('OrnitoObservationBundle:Observation:view.html.twig', array(
+            'watch' => $watching,
+
+        ));
     }
 
     public function addAction(Request $request)
@@ -28,6 +39,8 @@ class ObservationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($watching);
             $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'Annonce bien enregistrée.');
 
             $this->redirectToRoute('ornito_observation_view', array(
                 'id' => $watching->getId(),
