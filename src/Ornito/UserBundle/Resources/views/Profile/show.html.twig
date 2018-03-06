@@ -15,11 +15,7 @@
       {% if user.avatar == null %}
         <i class="fa fa-user fa-4x shadowed" aria-hidden="true"></i>
       {% else %}
-<<<<<<< HEAD
       <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="{{ asset(user.avatar.webPath) }}" alt="User Picture {{ user.username }}">
-=======
-      <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="/{{ user.avatar.webPath }}" alt="User Picture {{ user.username }}">
->>>>>>> SYMFONY UPDATE & UserBundle Update
       {% endif %}
     </span>
     {{ user.username }}
@@ -99,11 +95,7 @@
                             {% if user.avatar == null %}
                               <i class="fa fa-user fa-4x shadowed" aria-hidden="true"></i>
                             {% else %}
-<<<<<<< HEAD
                               <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}">
-=======
-                            <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="/{{ user.avatar.webPath }}" alt="User Picture {{ user.username }}">
->>>>>>> SYMFONY UPDATE & UserBundle Update
                             {% endif %}
                           </span>
                           <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
@@ -279,16 +271,11 @@
                                             <div class="media">
                                               <a href="#" class="pull-left">
                                                 <span class="profil-img">
-<<<<<<< HEAD
                                                   {% if user.avatar == null %}
                                                     <a href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
                                                   {% else %}
                                                   <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
                                                   {% endif %}
-=======
-                                                  <a title="Voir le profil" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="" alt="User Picture"></a>
-                                                  <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
->>>>>>> SYMFONY UPDATE & UserBundle Update
                                                 </span>
                                                 <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                                               </a>
@@ -393,11 +380,7 @@
                                                   {% if user.avatar == null %}
                                                     <i class="fa fa-user fa-lg shadowed" aria-hidden="true"></i>
                                                   {% else %}
-<<<<<<< HEAD
                                                   <a title="{{ "Voir le profil"|trans }}" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
-=======
-                                                  <a title="Voir le profil" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
->>>>>>> SYMFONY UPDATE & UserBundle Update
                                                   {% endif %}
                                                 </span>
                                                 <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
