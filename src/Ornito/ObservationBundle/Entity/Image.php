@@ -104,12 +104,6 @@ class Image
         } else {
             $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_JPEG);
         }
-
-        // Move uploaded file into the directory
-        //$this->file->move(
-        //    $this->getUploadRootDir(),
-        //    $this->id.'.'.$this->extension
-        //);
     }
 
     /**
@@ -210,6 +204,14 @@ class Image
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
