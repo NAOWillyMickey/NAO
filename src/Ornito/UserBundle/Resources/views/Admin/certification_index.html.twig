@@ -1,4 +1,4 @@
-{# src/Ornito/UserBundle/Ressource/views/Admin/index.html.twig #}
+{# src/Ornito/UserBundle/Ressource/views/Admin/certification_index.html.twig #}
 
 {% extends "::base.html.twig" %}
 
@@ -11,28 +11,35 @@
 
   <div role="tabpanel" class="tab-pane" id="adminProfilePanel">
     <section class="content">
-      <h1 class="font-size-14 center">CENTRE DE GESTION DES COMPTES UTILISATEURS</h1>
-      <hr />
+      <h1 class="font-size-14 center">CENTRE DE CERTIFICATION DES COMPTES NATURALISTES</h1>
+      <hr/>
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="pull-right">
               <div class="btn-group">
-                <button type="button" class="btn btn-success btn-filter" data-target="Membre">Membre</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="MembreNaturaliste">Naturaliste</button>
-                <button type="button" class="btn btn-danger btn-filter" data-target="MembreAdmin">Admin</button>
-                <button type="button" class="btn btn-default btn-filter" data-target="all">Tous</button>
+                <button type="button" class="btn btn-success btn-filter" data-target="validate">Validé</button>
+                <button type="button" class="btn btn-warning btn-filter" data-target="pending">En Attente</button>
+                <button type="button" class="btn btn-danger btn-filter" data-target="declined">Décliné</button>
+                <button type="button" class="btn btn-default btn-filter" data-target="all">UTILISATEURS</button>
               </div>
             </div>
             <div class="table-container">
               <table class="table table-filter">
                 <tbody>
                   {% for user in usersList %}
-                    <tr data-status="{% for role in user.roles %}{% if role == "ROLE_MEMBER" %}{{ 'Membre'|trans }}{% endif %}{% if role == "ROLE_NATURALIST" %}{{ 'Naturaliste'|trans }}{% endif %}{% if role == "ROLE_SUPER_ADMIN" %}{{ 'Admin'|trans }}{% endif %}{% endfor %}">
+                    <tr data-status="{{ user.naturalistPromote }}">
                       <td>
                         <div class="ckbox">
-                          <input type="checkbox" id="checkbox1">
-                          <label for="checkbox1"></label>
+                          {% if user.naturalistPromote == 'pending' %}
+                            <a href="{{ path('ornito_user_naturalist_promote_validation', { 'userId': user.id} ) }}">
+                              <button class="btn btn-success btn-sm">Certifier</button>
+                            </a>
+                            <hr/>
+                            <a href="{{ path('ornito_user_naturalist_promote_declination', { 'userId': user.id} )}}">
+                              <button class="btn btn-danger btn-sm">Décliner</button>
+                            </a>
+                          {% endif %}
                         </div>
                       </td>
                       <td>
@@ -42,7 +49,7 @@
                         <a title="Modifier" href="">
                           <i class="fa fa-edit"></i>
                         </a>
-                        <a title="Supprimer" class="delete" data-confirm="Voulez vous vraiment supprimer cette utilisateur?" href="{{ (path('ornito_user_admin_delete', { userId : user.id })) }}">
+                        <a title="Supprimer" href="{{ (path('ornito_user_admin_delete', { userId : user.id })) }}">
                           <i class="fa fa-trash"></i>
                         </a>
                       </td>
@@ -55,22 +62,17 @@
                                 <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
                               </span>
                             </a>
-                            <span class="media-meta pull-right">Inscit le {{ user.registerAt|date('d-m-Y') }}</span>
+                            <span class="media-meta pull-right">Inscit le
+                              {{ user.registerAt|date('d-m-Y') }}</span>
                             <h4 class="title">
                               <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username|e }}</span>
                               <span class="pull-right valid">(
-                              {% for role in user.roles %}
-                                {% if role == "ROLE_MEMBER" %}
-                                  {{ 'Membre'|trans }}
+                                {% if user.naturalistPromote == null %}
+                                  Aucune Demande
+                                {% else %}
+                                  {{ user.naturalistPromote }}
                                 {% endif %}
-                                {% if role == "ROLE_NATURALIST" %}
-                                  {{ 'Naturaliste'|trans }}
-                                {% endif %}
-                                {% if role == "ROLE_SUPER_ADMIN" %}
-                                  {{ 'Admin'|trans }}
-                                {% endif %}
-                              {% endfor %}
-                              )</span>
+                                )</span>
                             </h4>
                             <hr>
                             <p class="summary">102 Observations validés</p>
@@ -86,7 +88,7 @@
         </div>
         <div class="content-footer">
           <p class="text-muted">
-            User Admin Center
+            Naturalist Certification Center
           </p>
         </div>
       </div>
@@ -94,11 +96,40 @@
   </div>
 </div>
 <!-- END Tab panes -->
+<div id="myModal" class="modal fade in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <a class="btn btn-default" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove"></span></a>
+        <h4 class="modal-title">Modal Heading</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Text in a modal</h4>
+        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+      </div>
+      <div class="modal-footer">
+        <div class="btn-group">
+          <button class="btn btn-danger" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span>
+            Cancel</button>
+          <button class="btn btn-primary">
+            <span class="glyphicon glyphicon-check"></span>
+            Save</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dalog -->
+</div>
 <!-- END CONTENT -->
 {% endblock %}
 {% block javascripts %}{{ parent() }}
 <script type="text/javascript">
-/* FOOTER HIDDEN */
-$('#section_footer').hide();
+  /* FOOTER HIDDEN */
+  $('#section_footer').hide();
 </script>
 {% endblock %}

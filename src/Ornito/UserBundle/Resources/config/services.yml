@@ -2,7 +2,13 @@ services:
 #    ornito_user.example:
 #        class: Ornito\UserBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
-    ornito_user_form_registration:
+    ornito_user_form_profile:
         class: Ornito\UserBundle\Form\ProfileType
-        tag:
+        tags:
           - { name: form.type, alias: app_user_profile }
+
+    ornito_users_manager:
+        class: Ornito\UserBundle\Services\UsersManager
+        arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@fos_user.user_manager"
