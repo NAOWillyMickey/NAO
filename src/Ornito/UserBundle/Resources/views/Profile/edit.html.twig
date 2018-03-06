@@ -57,9 +57,12 @@
                       <!-- left column -->
                       <div class="col-md-5 col-sm-6 col-xs-12">
                         <div class="text-center">
-                          <img src="{{ asset('assets/uploads/users/userPic.jpg') }}" class="avatar img-circle img-thumbnail" alt="avatar">
+                          {% if app.user.avatar == null %}
+                          {% else %}
+                          <img src="/{{ app.user.avatar.webPath }}" class="avatar img-circle img-thumbnail" alt="avatar">
+                          {% endif %}
                           <h6>{{ 'Changer mon Avatar'|trans }}</h6>
-                          <input type="file" class="text-center btn btn-sm  center-block well well-sm">
+                          {{ form_widget(form.avatar, {'attr': {'class': 'text-center btn btn-sm  center-block well well-sm' ,'placeholder' : 'Mon Prénom'}}) }}
                         </div>
                       </div>
                       <!-- edit form column -->
