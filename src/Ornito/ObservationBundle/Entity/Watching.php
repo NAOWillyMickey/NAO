@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="watching")
  * @ORM\Entity(repositoryClass="Ornito\ObservationBundle\Repository\WatchingRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Watching
 {
@@ -109,10 +110,10 @@ class Watching
     /**
      * Observation constructor.
      */
-    public function __construct()
+    public function __construct($user)
     {
         $this->date = new \DateTime();
-        $this->validateStatus = self::UNTREATED;
+        $this->user = $user;
     }
 
     /**
@@ -339,5 +340,17 @@ class Watching
     public function getSpecies()
     {
         return $this->species;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function selectValidateStatus()
+    {
+        if (in_array('ROLE_NATURALIST', $this->user->getRoles())) {
+            $this->setValidateStatus(self::ATTESTED);
+        } else {
+            $this->setValidateStatus(self::UNTREATED);
+        }
     }
 }
