@@ -11,17 +11,17 @@
 
   <div role="tabpanel" class="tab-pane" id="adminProfilePanel">
     <section class="content">
-      <h1 class="font-size-14 center">CENTRE DE CERTIFICATION DES COMPTES NATURALISTES</h1>
+      <h1 class="font-size-14 center">{{ "CENTRE DE CERTIFICATION DES COMPTES NATURALISTES"|trans }}</h1>
       <hr/>
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="pull-right">
               <div class="btn-group">
-                <button type="button" class="btn btn-success btn-filter" data-target="validate">Validé</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="pending">En Attente</button>
-                <button type="button" class="btn btn-danger btn-filter" data-target="declined">Décliné</button>
-                <button type="button" class="btn btn-default btn-filter" data-target="all">UTILISATEURS</button>
+                <button type="button" class="btn btn-success btn-filter" data-target="validate">{{ "Validé" |trans }}</button>
+                <button type="button" class="btn btn-warning btn-filter" data-target="pending">{{ "En Attente"|trans }}</button>
+                <button type="button" class="btn btn-danger btn-filter" data-target="declined">{{ "Décliné"|trans }}</button>
+                <button type="button" class="btn btn-default btn-filter" data-target="all">{{ "UTILISATEURS"|trans }}</button>
               </div>
             </div>
             <div class="table-container">
@@ -33,23 +33,23 @@
                         <div class="ckbox">
                           {% if user.naturalistPromote == 'pending' %}
                             <a href="{{ path('ornito_user_naturalist_promote_validation', { 'userId': user.id} ) }}">
-                              <button class="btn btn-success btn-sm">Certifier</button>
+                              <button class="btn btn-success btn-sm">{{ "Certifier"|trans }}</button>
                             </a>
                             <hr/>
                             <a href="{{ path('ornito_user_naturalist_promote_declination', { 'userId': user.id} )}}">
-                              <button class="btn btn-danger btn-sm">Décliner</button>
+                              <button class="btn btn-danger btn-sm">{{ "Décliner"|trans }}</button>
                             </a>
                           {% endif %}
                         </div>
                       </td>
                       <td>
-                        <a title="Voir le profil" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}">
+                        <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}">
                           <i class="fa fa-eye"></i>
                         </a>
-                        <a title="Modifier" href="">
+                        <a title="{{"Modifier"|trans }}" href="">
                           <i class="fa fa-edit"></i>
                         </a>
-                        <a title="Supprimer" href="{{ (path('ornito_user_admin_delete', { userId : user.id })) }}">
+                        <a title="{{ "Supprimer"|trans }}" href="{{ (path('ornito_user_admin_delete', { userId : user.id })) }}">
                           <i class="fa fa-trash"></i>
                         </a>
                       </td>
@@ -61,7 +61,7 @@
                                 {% if user.avatar == null %}
                                   <a href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
                                 {% else %}
-                                <a title="Voir le profil" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
+                                <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
                                 {% endif %}
                               </span>
                             </a>
@@ -71,7 +71,7 @@
                               <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username|e }}</span>
                               <span class="pull-right valid">(
                                 {% if user.naturalistPromote == null %}
-                                  Aucune Demande
+                                  {{ "Aucune Demande"|trans }}
                                 {% else %}
                                   {{ user.naturalistPromote }}
                                 {% endif %}
@@ -99,35 +99,6 @@
   </div>
 </div>
 <!-- END Tab panes -->
-<div id="myModal" class="modal fade in">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <a class="btn btn-default" data-dismiss="modal">
-          <span class="glyphicon glyphicon-remove"></span></a>
-        <h4 class="modal-title">Modal Heading</h4>
-      </div>
-      <div class="modal-body">
-        <h4>Text in a modal</h4>
-        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-      </div>
-      <div class="modal-footer">
-        <div class="btn-group">
-          <button class="btn btn-danger" data-dismiss="modal">
-            <span class="glyphicon glyphicon-remove"></span>
-            Cancel</button>
-          <button class="btn btn-primary">
-            <span class="glyphicon glyphicon-check"></span>
-            Save</button>
-        </div>
-      </div>
-
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dalog -->
-</div>
 <!-- END CONTENT -->
 {% endblock %}
 {% block javascripts %}{{ parent() }}
