@@ -61,7 +61,7 @@
                           {% if app.user.avatar == null %}
                             <i class="fa fa-user shadowed" aria-hidden="true"></i>
                           {% else %}
-                          <a title="Voir le profil" href="{{ (path('fos_user_profile_show')) }}"><img title="{{ app.user.username }}" class="profil-picture shadowed" src="/{{ app.user.avatar.webPath }}" alt="User Picture"></a>
+                          <img title="{{ app.user.username }}" class="profil-picture shadowed" src="/{{ app.user.avatar.webPath }}" alt="User Picture">
                           {% endif %}
                         </span>
                       </div>
