@@ -1,46 +1,61 @@
-$(document).ready(function () {
-  
+$(document).ready(function() {
 
-/* JS SIDEBAR AND HAMBURGER MENU */
+
+  /* JS SIDEBAR AND HAMBURGER MENU */
 
   var trigger = $('.hamburger'),
-      overlay = $('.overlay'),
-     isClosed = false;
+    overlay = $('.overlay'),
+    isClosed = false;
 
-    trigger.click(function () {
-      hamburger_cross();      
-    });
+  trigger.click(function() {
+    hamburger_cross();
+  });
 
-    function hamburger_cross() {
+  function hamburger_cross() {
 
-      if (isClosed == true) {          
-        overlay.hide();
-        trigger.removeClass('is-open');
-        trigger.addClass('is-closed');
-        isClosed = false;
-      } else {   
-        overlay.show();
-        trigger.removeClass('is-closed');
-        trigger.addClass('is-open');
-        isClosed = true;
-      }
+    if (isClosed == true) {
+      overlay.hide();
+      trigger.removeClass('is-open');
+      trigger.addClass('is-closed');
+      isClosed = false;
+    } else {
+      overlay.show();
+      trigger.removeClass('is-closed');
+      trigger.addClass('is-open');
+      isClosed = true;
     }
-  
-  $('[data-toggle="offcanvas"]').click(function () {
-        $('#wrapper').toggleClass('toggled');
+  }
+
+  $('[data-toggle="offcanvas"]').click(function() {
+    $('#wrapper').toggleClass('toggled');
   });
 
 
+  /* delete windows avert */
+  var deleteLinks = document.querySelectorAll('.delete');
+
+  for (var i = 0; i < deleteLinks.length; i++) {
+    deleteLinks[i].addEventListener('click', function(event) {
+      event.preventDefault();
+
+      var choice = confirm(this.getAttribute('data-confirm'));
+
+      if (choice) {
+        window.location.href = this.getAttribute('href');
+      }
+    });
+  }
+
   /* OBS COMMENT DISPLAY INTERFACE */
 
-  var obsCommentContentElt        =  $("#obsCommentContent");
-  var obsCommentBadgeElt          =  $("#obsCommentBadge");  
-  var obsCommentButtonDisplayElt  =  $("#obsCommentButton");
-  var obsCommentButtonElt  =  document.getElementById("obsCommentButton");
-  var display  =  false;
+  var obsCommentContentElt = $("#obsCommentContent");
+  var obsCommentBadgeElt = $("#obsCommentBadge");
+  var obsCommentButtonDisplayElt = $("#obsCommentButton");
+  var obsCommentButtonElt = document.getElementById("obsCommentButton");
+  var display = false;
 
-  $( "#obsCommentButton" ).click(function(){
-      obsComment_display();
+  $("#obsCommentButton").click(function() {
+    obsComment_display();
   });
 
   function obsComment_display() {
@@ -54,13 +69,13 @@ $(document).ready(function () {
       display = false;
       obsCommentContentElt.hide();
       obsCommentBadgeElt.hide();
-      obsCommentButtonElt.innerHTML  =  'Voir le Commentaire  <i class="fa fa-eye"></i>';
-      }
+      obsCommentButtonElt.innerHTML = 'Voir le Commentaire  <i class="fa fa-eye"></i>';
     }
+  }
 
-  $( window ).resize(function() {
+  $(window).resize(function() {
 
-    screenSize  =  $( window ).width();
+    screenSize = $(window).width();
 
     if (screenSize >= 750) {
       obsCommentContentElt.show();
@@ -74,36 +89,36 @@ $(document).ready(function () {
 
   /* JS PROFILE FILTER PANEL OPTION */
 
-  $('.star').on('click', function () {
-      $(this).toggleClass('star-checked');
-    });
+  $('.star').on('click', function() {
+    $(this).toggleClass('star-checked');
+  });
 
-    $('.ckbox label').on('click', function () {
-      $(this).parents('tr').toggleClass('selected');
-    });
+  $('.ckbox label').on('click', function() {
+    $(this).parents('tr').toggleClass('selected');
+  });
 
-    $('.btn-filter').on('click', function () {
-      var $target = $(this).data('target');
-      if ($target != 'all') {
-        $('.table tr').css('display', 'none');
-        $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
-      } else {
-        $('.table tr').css('display', 'none').fadeIn('slow');
-      }
-    });
-  
+  $('.btn-filter').on('click', function() {
+    var $target = $(this).data('target');
+    if ($target != 'all') {
+      $('.table tr').css('display', 'none');
+      $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
+    } else {
+      $('.table tr').css('display', 'none').fadeIn('slow');
+    }
+  });
+
 
 
   /* JS  MAP */
-  $("#mapPanelButtonControl").click(function(){
+  $("#mapPanelButtonControl").click(function() {
     $("#mapPanelContainer").slideUp();
     $("#mapPanelButtonControl").fadeOut();
   });
-  $("#mapPanelButtonSearch").click(function(){
+  $("#mapPanelButtonSearch").click(function() {
     $("#mapPanelContainer").fadeIn();
     $("#mapPanelButtonControl").fadeIn();
   });
-  $("#mapPanelButtonList").click(function(){
+  $("#mapPanelButtonList").click(function() {
     $("#mapPanelContainer").fadeIn();
     $("#mapPanelButtonControl").fadeIn();
   });
@@ -120,16 +135,16 @@ $(document).ready(function () {
     id: 'mapbox.streets'
   }).addTo(mymap);
 
-/*  mymap.locate({setView: true, maxZoom: 18});*/
+  /*  mymap.locate({setView: true, maxZoom: 18});*/
 
   function onLocationFound(e) {
     var radius = e.accuracy / 2;
-    
+
     myLatitude.val(e.latlng.lat);
     myLongitude.val(e.latlng.lng);
 
     L.marker(e.latlng).addTo(mymap)
-        .bindPopup("Vous êtes dans un périmètre de " + radius + " metres de ce point").openPopup();
+      .bindPopup("Vous êtes dans un périmètre de " + radius + " metres de ce point").openPopup();
 
     L.circle(e.latlng, radius).addTo(mymap);
   }
@@ -145,9 +160,9 @@ $(document).ready(function () {
 
   function onMapClick(e) {
     popupLocation
-        .setLatLng(e.latlng)
-        .setContent("Vous avez cliqué aux coordonnées suivante: Latitude " + e.latlng.lat.toString() + " - Longitude " + e.latlng.lng.toString() )
-        .openOn(mymap);
+      .setLatLng(e.latlng)
+      .setContent("Vous avez cliqué aux coordonnées suivante: Latitude " + e.latlng.lat.toString() + " - Longitude " + e.latlng.lng.toString())
+      .openOn(mymap);
   }
 
   mymap.on('click', onMapClick);
@@ -161,9 +176,9 @@ $(document).ready(function () {
 
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-/* JS NEW OBS MAP */
+  /* JS NEW OBS MAP */
 
   var myNewObsLat = $('#newObsBirdLat');
   var myNewObsLng = $('#newObsBirdLng');
@@ -177,16 +192,16 @@ $(document).ready(function () {
     id: 'mapbox.streets'
   }).addTo(myObsMap);
 
-/*  myObsMap.locate({setView: true, maxZoom: 18});*/
+  /*  myObsMap.locate({setView: true, maxZoom: 18});*/
 
   function newObsOnLocationFound(e) {
     var myObsMapRadius = e.accuracy / 2;
-    
+
     myNewObsLat.val(e.latlng.lat);
     myNewObsLng.val(e.latlng.lng);
 
     L.marker(e.latlng).addTo(myObsMap)
-        .bindPopup("<center>Vous êtes dans un périmètre de </br>" + myObsMapRadius + " metres de ce point </center>").openPopup();
+      .bindPopup("<center>Vous êtes dans un périmètre de </br>" + myObsMapRadius + " metres de ce point </center>").openPopup();
 
     L.circle(e.latlng, myObsMapRadius).addTo(myObsMap);
   }
@@ -202,9 +217,9 @@ $(document).ready(function () {
 
   function newObsOnMapClick(e) {
     newObsPopupLocation
-        .setLatLng(e.latlng)
-        .setContent("<center>Vous avez cliqué</br>aux coordonnées suivantes :</center></br>-Latitude " + e.latlng.lat.toString() + "</br>- Longitude " + e.latlng.lng.toString() )
-        .openOn(myObsMap);
+      .setLatLng(e.latlng)
+      .setContent("<center>Vous avez cliqué</br>aux coordonnées suivantes :</center></br>-Latitude " + e.latlng.lat.toString() + "</br>- Longitude " + e.latlng.lng.toString())
+      .openOn(myObsMap);
   }
 
   myObsMap.on('click', newObsOnMapClick);
@@ -215,22 +230,28 @@ $(document).ready(function () {
   });
 
 
-  $( "#newObsGeolocalisatorButtonForm" ).click(function() {
-    myObsMap.locate({setView: true, maxZoom: 18});
+  $("#newObsGeolocalisatorButtonForm").click(function() {
+    myObsMap.locate({
+      setView: true,
+      maxZoom: 18
+    });
     myNewObsLat.val(e.latlng.lat);
     myNewObsLng.val(e.latlng.lng);
   });
 
-  $( "#newObsUseGeolocalisationButton" ).click(function() {
-    myObsMap.locate({setView: true, maxZoom: 18});
+  $("#newObsUseGeolocalisationButton").click(function() {
+    myObsMap.locate({
+      setView: true,
+      maxZoom: 18
+    });
     myNewObsLat.val(e.latlng.lat);
     myNewObsLng.val(e.latlng.lng);
   });
 
 
 
-  function centerMap (e) {
-  map.panTo(e.latlng);
+  function centerMap(e) {
+    map.panTo(e.latlng);
   }
 });
 
@@ -242,7 +263,7 @@ $(document).ready(function(ev) {
   var toggle = $('#ss_toggle');
   var menu = $('#ss_menu');
   var rot;
-  
+
   $('#ss_toggle').on('click', function(ev) {
     rot = parseInt($(this).data('rot')) - 180;
     menu.css('transform', 'rotate(' + rot + 'deg)');
@@ -266,5 +287,5 @@ $(document).ready(function(ev) {
       $('#ss_menu div a').removeClass('ss_animate');
     }
   });
-  
+
 });

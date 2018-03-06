@@ -17,27 +17,47 @@ use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Ornito\UserBundle\Services\UsersManager;
 
 class ProfileController extends Controller
 {
 
+  public function showUserProfileAction($username, $userId)
+  {
+    $FOSuserManager = $this->get('fos_user.user_manager');
+    $user = $FOSuserManager->finduserBy(array('id' => $userId));
+    return $this->render('OrnitoUserBundle:Profile:show.html.twig', array('user' => $user));
+  }
+
+
   /**
-   * Edit the user.
+   *  Ask to be Promote  as Naturalist.
    *
    * @param Request $request
    *
-   * @return Response
+   * @return Redirection
    */
-  public function editAction(Request $request)
+  public function NaturalistPromoteRequestAction($userId)
   {
-      $user = $this->getUser();
-      if (!is_object($user) || !$user instanceof UserInterface) {
-          throw new AccessDeniedException('This user does not have access to this section.');
-      }
+    $user = $this->getUser();
+    $user_id = $user->getId();
+    if ( (null === $user) | ($user_id != $userId) ) {
+      // Ici, l'utilisateur est anonyme ou l'URL n'est pas derrière un pare-feu
+      throw new AccessDeniedException('Accès Refusé. Confirmation Identité Requise');
+    } else {
+      // Ici, $user est une instance de notre classe User
+      $usersManager = $this->get('ornito_users_manager');
+      $usersManager->promoteNaturalistRequestPending($user);
 
-
-      return $this->render('@FOSUser/Profile/profile_edit.html.twig'
+      $this->addFlash(
+            'success',
+            'Votre demande à bien été transmise. Nous Vous remercions et la traitons au plus tôt.'
       );
+
+      return $this->redirectToRoute('fos_user_profile_show');
+    }
+
+
   }
 
 
