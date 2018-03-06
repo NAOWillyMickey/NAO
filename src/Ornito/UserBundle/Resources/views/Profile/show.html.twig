@@ -12,8 +12,11 @@
   <!-- PAGE TITLE -->
   <h1 class="band_title deepshd">
     <span class="profil_img">
-      <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="User Picture {{ user.username }}">
-      <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+      {% if user.avatar == null %}
+        <i class="fa fa-user fa-4x shadowed" aria-hidden="true"></i>
+      {% else %}
+      <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="/{{ user.avatar.webPath }}" alt="User Picture {{ user.username }}">
+      {% endif %}
     </span>
     {{ user.username }}
     <div class="float-right">
@@ -89,8 +92,11 @@
                       <section>
                         <div class="float-left">
                           <span>
-                            <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="User Picture {{ user.username }}">
-                            <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                            {% if user.avatar == null %}
+                              <i class="fa fa-user fa-4x shadowed" aria-hidden="true"></i>
+                            {% else %}
+                            <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="/{{ user.avatar.webPath }}" alt="User Picture {{ user.username }}">
+                            {% endif %}
                           </span>
                           <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                           <hr>
@@ -226,7 +232,7 @@
                         <div class="col-md-12">
                           <div class="panel panel-default">
                             <div class="panel-body">
-                              {% if is_granted("ROLE_NATURALIST") and user.id == app.user.id %}
+                              {% if is_granted("ROLE_NATURALIST")and user.id == app.user.id %}
                                 <div class="pull-right">
                                   <div class="btn-group">
                                     <button type="button" class="btn btn-success btn-filter" data-target="attested">J'ai validé</button>
@@ -262,10 +268,10 @@
                                             <div class="media">
                                               <a href="#" class="pull-left">
                                                 <span class="profil-img">
-                                                  <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="User Picture"></a>
+                                                  <a title="Voir le profil" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="" alt="User Picture"></a>
                                                   <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
                                                 </span>
-                                                <span class="margin-left-10  badge badge-success dropdown-name">John D.</span>
+                                                <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                                               </a>
                                               <div class="media-body">
                                                 <span class="media-meta pull-right">{{ watching.date }}</span>
@@ -365,10 +371,13 @@
                                             <div class="media">
                                               <a href="#" class="pull-left">
                                                 <span class="profil-img">
-                                                  <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="User Picture"></a>
-                                                  <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                                                  {% if user.avatar == null %}
+                                                    <i class="fa fa-user fa-lg shadowed" aria-hidden="true"></i>
+                                                  {% else %}
+                                                  <a title="Voir le profil" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
+                                                  {% endif %}
                                                 </span>
-                                                <span class="margin-left-10  badge badge-success dropdown-name">John D.</span>
+                                                <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                                               </a>
                                               <div class="media-body">
                                                 <span class="media-meta pull-right">{{ watching.date }}</span>

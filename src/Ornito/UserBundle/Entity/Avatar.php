@@ -99,7 +99,7 @@ class Avatar
 
         $image = new ImageResize($this->file);
         $image->resizeToWidth(200);
-        if ($this->extension = "png") {
+        if ($this->extension == "png") {
             $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_PNG);
         } else {
             $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_JPEG);
@@ -204,6 +204,11 @@ class Avatar
     public function getAlt()
     {
         return $this->alt;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**

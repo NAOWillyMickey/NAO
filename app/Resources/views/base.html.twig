@@ -58,8 +58,11 @@
                       <div class="userMenuItem">
                         <span class="dropdown-name">{{ app.user.username }}</span>
                         <span class="profil-img">
-                          <img class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="">
-                          <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                          {% if app.user.avatar == null %}
+                            <i class="fa fa-user shadowed" aria-hidden="true"></i>
+                          {% else %}
+                          <a title="Voir le profil" href=""><img title="{{ app.user.username }}" class="profil-picture shadowed" src="/{{ app.user.avatar.webPath }}" alt="User Picture"></a>
+                          {% endif %}
                         </span>
                       </div>
                     </a>
