@@ -180,8 +180,8 @@ $(document).ready(function() {
 
   /* JS NEW OBS MAP */
 
-  var myNewObsLat = $('#newObsBirdLat');
-  var myNewObsLng = $('#newObsBirdLng');
+  var myNewObsLat = $('#ornito_observationbundle_watching_latitude');
+  var myNewObsLng = $('#ornito_observationbundle_watching_longitude');
   var myObsMap = L.map('newObsMap').setView([46.780, 3.001], 5);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {

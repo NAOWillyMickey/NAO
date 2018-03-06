@@ -1,58 +1,55 @@
 {# The add observation form #}
 
-<div id="birdNewObsSearhForm" class="col-md-12">
-    {{ form_start(form, {'attr': {'id': 'birdNewObsSearhForm', 'name': 'birdNewObsSearhForm', 'class': 'form-inline'}}) }}
-    {{ form_errors(form) }}
-    <div class="marginAuto">
-        <label for="newObsBirdSciName" class="input-group-addon">{{ "Nom Scientifique"|trans }}</label>
-        {{ form_errors(form.species) }}
-        {{ form_widget(form.species, {'attr': {'id': 'newObsBirdSciName', 'class': 'custom-select' }}) }}
-        </select>
-    </div>
-    <div id="localisation-card" class="col-xs-12 col-sm-12 col-md-12 card card-body margin-top-10">
-        <button id="newObsGeolocalisatorButtonForm" type="button" class="btn btn-primary btn-xs marginAuto">
-            {{ "Géolocaliser"|trans }}
-        </button>
-        <div class="marginAuto">
-            <label for="newObsBirdLng" class="input-group-addon">{{ "Longitude"|trans }}</label>
-            {{ form_errors(form.longitude) }}
-            {{ form_widget(form.longitude, {'attr': {'id': 'newObsBirdLng', 'placeholder': 'Longitude', 'class':'form-control', 'name': 'newObsBirdLng', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
-        </div>
-        <div class="marginAuto">
-            <label for="newObsBirdLat" class="input-group-addon">{{ "Latitude"|trans }}</label>
-            {{ form_errors(form.latitude) }}
-            {{ form_widget(form.latitude, {'attr': {'id': 'newObsBirdLat', 'placeholder': 'Latitude', 'class':'form-control', 'name': 'newObsBirdLat', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
-        </div>
-        <!-- Button trigger modal -->
-        <hr>
-        <div class="col-md-12">
-            <h5 class="font-size-12 modal-title" id="mapModalVerticalLabel">{{ "Selectionnez un point sur la Map ou Utilisez la Géolocalisation"|trans }}</h5>
-            <h6 class="font-size-12 modal-title" id="mapModalVerticalLabel">{{ "Appuyez sur OK, Les coordonnées sont récupérées automatiquement"|trans }}</h6>
-            <div id="newObsMap"></div>
-        </div>
-    </div>
-    <div class="marginAuto margin-top-10 col-md-12">
-        <label for="newObsBirdTitle" class="input-group-addon">{{ 'Titre'|trans }}</label>
-        {{ form_errors(form.title) }}
-        {{ form_widget(form.title, {'attr': {'id': 'newObsBirdTitle', 'name': 'newObsBirdTitle', 'class': 'form-control', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm', 'placeholder': 'Titre' }}) }}
-    </div>
-    <div class="marginAuto margin-top-10 col-md-12">
-        <label for="newObsBirdComment" class="marginAuto input-group-addon">{{ 'Commentaire'|trans }}</label>
-        {{ form_errors(form.description) }}
-        {{ form_widget(form.description, {'attr': {'id': 'newObsBirdComment', 'name': 'newObsBirdComment', 'class': 'form-control', 'rows': '5', 'cols': '50', 'placeholder': 'Mon Commentaire' }}) }}
-    </div>
-    <div class="marginAuto margin-top-10 col-md-12 text-centercustom-file">
-        <label class="custom-file-label" for="customFile">{{ 'Charger une photo'|trans }}</label>
-        {{ form_errors(form.image) }}
-        {{ form_widget(form.image, {'attr': {'id': 'newObsPicture', 'class': 'custom-file-input text-center center-block well well-sm' }}) }}
-    </div>
-    <div class="marginAuto">
-        <img src="{{ asset('assets/img/obs/test/moineau.jpg') }}" class="margin-top-10 avatar img-circle img-fluid img-max-size-1" alt="Obs Picture">
-    </div>
-    <div class="col-md-12 margin-top-10  ">
-        <input id="newObsBirdFormSubmit" value={{ 'Valider'|trans }} type="submit" name="newObsBirdFormSubmit" class="float-right btn  btn-success"/>
-    </div>
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
+<div id="birdNewObsSearhForm" class="">
+  {{ form_start(form, {'attr': {'id': 'birdNewObsSearhForm', 'name': 'birdNewObsSearhForm', 'class': 'form-inline'}}) }}
+  {{ form_errors(form) }}
+  <div class="center margin-top-10 col-md-4">
+    <label for="newObsBirdTitle" class="input-group-addon">{{ 'Titre'|trans }}</label>
+    {{ form_errors(form.title) }}
+    {{ form_widget(form.title, {'attr': {'id': 'newObsBirdTitle', 'name': 'newObsBirdTitle', 'class': 'form-control', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm', 'placeholder': 'Titre' }}) }}
+  </div>
+</br>
+<div class="center margin-top-10 col-md-8">
+  <label for="newObsBirdComment" class="marginAuto input-group-addon">{{ 'Commentaire'|trans }}</label>
+  {{ form_errors(form.description) }}
+  {{ form_widget(form.description, {'attr': {'id': 'newObsBirdComment', 'name': 'newObsBirdComment', 'class': 'form-control', 'rows': '8', 'cols': '45', 'placeholder': 'Mon Commentaire' }}) }}
 </div>
-
+<hr>
+<div id="localisation-card" class="col-md-12 container margin-top-25">
+  <div class="col-md-6 center marginAuto float-left">
+    <div class="marginAuto">
+      <label for="newObsBirdSciName" class="input-group-addon">{{ "Nom Scientifique"|trans }}</label>
+      {{ form_errors(form.species) }}
+      {{ form_widget(form.species, {'attr': {'id': 'newObsBirdSciName', 'class': 'custom-select' }}) }}
+    </select>
+    <label for="newObsBirdLng" class="margin-top-25 input-group-addon">{{ "Longitude"|trans }}</label>
+    {{ form_errors(form.longitude) }}
+    {{ form_widget(form.longitude, {'attr': {'id': 'newObsBirdLng', 'placeholder': 'Longitude', 'class':'form-control', 'name': 'newObsBirdLng', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
+    <label for="newObsBirdLat" class="input-group-addon">{{ "Latitude"|trans }}</label>
+    {{ form_errors(form.latitude) }}
+    {{ form_widget(form.latitude, {'attr': {'id': 'newObsBirdLat', 'placeholder': 'Latitude', 'class':'form-control', 'name': 'newObsBirdLat', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
+    <br />
+    <button id="newObsGeolocalisatorButtonForm" type="button" class="margin-top-25 btn btn-primary btn-xs marginAuto">
+      {{ "Géolocaliser"|trans }}
+    </button>
+  </div>
+</div>
+<div class="col-md-6 float-right">
+  <h5 class="font-size-12 modal-title">{{ "Selectionnez un point sur la Map ou Utilisez la Géolocalisation"|trans }}</h5>
+  <h6 class="font-size-12 modal-title">{{ "Appuyez sur OK, Les coordonnées sont récupérées automatiquement"|trans }}</h6>
+  <div id="newObsMap"></div>
+</div>
+</div>
+<hr/>
+<div class="col-md-12 margin-top-25">
+  <label class="custom-file-label" for="customFile">{{ 'Charger une photo'|trans }}</label>
+  {{ form_errors(form.image) }}
+  {{ form_widget(form.image, {'attr': {'id': 'newObsPicture', 'class': 'marginAuto custom-file-input text-center center-block well well-sm' }}) }}
+</div>
+<hr />
+<div class="margin-top-25 marginAuto">
+<input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="float-right btn  btn-success"/>
+</div>
+{{ form_rest(form) }}
+{{ form_end(form) }}
+</div>
