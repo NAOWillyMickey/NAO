@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Ornito\ObservationBundle\Entity\Watching;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -41,6 +42,12 @@ class User extends BaseUser
      * @ORM\Column(name="last_name", type="string", length=64, nullable=true)
      */
     private $lastName;
+
+    /**
+     * @Assert\Valid()
+     * @ORM\OneToOne(targetEntity="Ornito\UserBundle\Entity\Avatar", cascade={"persist", "remove"})
+     */
+    private $avatar;
 
     /**
      * @var string
@@ -389,4 +396,29 @@ class User extends BaseUser
     {
         return $this->registerAt;
     }
+
+    /**
+     * Set avatar.
+     *
+     * @param Avatar|null $avatar
+     *
+     * @return User
+     */
+    public function setAvatar(Avatar $avatar = null)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * Get avatar.
+     *
+     * @return \Ornito\UserBundle\Entity\Avatar|null
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
 }
