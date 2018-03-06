@@ -58,8 +58,11 @@
                           <div class="media-body">
                             <a href="#" class="pull-left">
                               <span class="profil-img">
-                                <a title="Voir le profil" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
-                                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                                {% if user.avatar == null %}
+                                  <a href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
+                                {% else %}
+                                <a title="Voir le profil" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
+                                {% endif %}
                               </span>
                             </a>
                             <span class="media-meta pull-right">Inscit le
