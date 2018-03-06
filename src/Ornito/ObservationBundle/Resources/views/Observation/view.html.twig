@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - Obs'
+  - {{ "Observation"|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -28,108 +28,115 @@
             <article class="timeline">
               <li class="timeline-inverted">
                 <aside class="timeline-badge">
-                  <a title="Voir le profil" href="">
+                  <a title="{# TODO #}" href="{# TODO #}">
                     <span class="profil-img">
-                      <img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="">
+                      {% if watch.user.firstName == true %}
+                        <img title="{# TODO #}" class="profil-picture shadowed" src="{# TODO #}" alt="{# TODO #}">
+                      {% else %}
+                        <img title="{# TODO #}" class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="John D.">
+                      {% endif %}
                       <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
                     </span>
-                    <span class="margin-left-10 badge badge-success dropdown-name">John D.</span>
+                    <span class="margin-left-10 badge badge-success dropdown-name">{# TODO #}</span>
                     <i title="Observation" class="fa fa-binoculars"></i>
                   </a>
                 </aside>
                 <div class="timeline-panel">
                   <div class="obs-status-container">
-                    <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-success">
-                      Validé
-                      <i class="fa fa-certificate  fa-lg"></i>
-                    </span>
+                    {% if watch.validateStatus is same as('untreated') %}
+                      <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-warning">
+                        {{ "En attente"|trans }}
+                        <i class="fa fa-hourglass-half fa-lg"></i>
+                      </span>
+                    {% elseif watch.validateStatus is same as('attested') %}
+                      <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-success">
+                        {{ "Validée"|trans }}
+                        <i class="fa fa-certificate  fa-lg"></i>
+                      </span>
+                    {% else %}
+                      <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-alert">
+                        {{ "Refusée"|trans }}
+                        <i class="fa fa-frown-o fa-lg"></i>
+                      </span>
+                    {% endif %}
                   </div>
                   <div class="timeline-heading">
-                    <div class="panelMenu  float-right  btn-group">
-                      <!--START Option panel Menu -->
-                      <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li>
-                          <a href="#">Action</a>
-                        </li>
-                        <li>
-                          <a href="#">Another action</a>
-                        </li>
-                        <li>
-                          <a href="#">Something else</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                          <a href="#">Separated link</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <!--END Option panel Menu -->
-                    <h4 class="text-uppercase font-size-16 card-title">Ovidus Ovidareus à Lyon</h4>
+                    <h4 class="text-uppercase font-size-16 card-title">{{ watch.species.scientificName }}</h4>
                     <time class="obs-time">
                       <i class="fa fa-calendar"></i>
-                      Le MERCREDI 07 MARS 2018 à 18h30</time>
+                      {{ "Le "|trans }}{{ watch.date|localizeddate('full', 'none') }}{{ " à "|trans }}{{ watch.date|localizeddate('none', 'short') }}</time>
                   </div>
                   <div class="timeline-body">
                     <!-- OBS PANEL -->
                     <div class="obs-panel container">
                       <div class="col-sm-12 col-md-6 row box-shadow">
                         <div class="col-md-12 img-panel-container">
-                          <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-danger">
-                            Protégé
-                            <i class="fa fa-gavel"></i>
-                          </span>
-                          <a href="assets/img/obs/test/moineau.jpg" data-toggle="lightbox">
-                            <img class="img-thumbnail" src="{{ asset('assets/img/obs/test/moineau.jpg') }}">
-                          </a>
+                          {% if watch.species.protectedStatus == true %}
+                            {% if watch.species.protectedStatus starts with 'P' %}
+                              <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-danger">
+                                {{ "Protégé"|trans }}
+                                <i class="fa fa-gavel"></i>
+                              </span>
+                            {% else %}
+                              <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-warning">
+                                {{ "En danger"|trans }}
+                                <i class="fa fa-gavel"></i>
+                              </span>
+                            {% endif %}
+                          {% else %}
+                            <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-success">
+                              {{ "Non menacée"|trans }}
+                              <i class="fa fa-gavel"></i>
+                            </span>
+                          {% endif %}
+                          {% if watch.image == true %}
+                            <a title="{{ "Agrandir l'image"|trans }}" href="{{ asset(watch.image.webPath) }}" data-toggle="lightbox">
+                              <img class="img-thumbnail" src="{{ asset(watch.image.webPath) }}" alt="{{ watch.image.alt }}">
+                            </a>
+                          {% else %}
+                            <a title="{{ "Agrandir l'image"|trans }}" href="{{ asset('assets/img/obs/test/moineau.jpg') }}" data-toggle="lightbox">
+                              <img class="img-thumbnail" src="{{ asset('assets/img/obs/test/moineau.jpg') }}" alt="moineau">
+                            </a>
+                          {% endif %}
                         </div>
                         <div class="col-md-12">
                           <div class="obs-row obs-header">
                             <span class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
-                              Nom Scientifique
+                              {{ "Nom Scientifique"|trans }}
                             </span>
-                            <h3 class="font-size-16 toBbold italic">Ovidus Ovidareus
-                            </h3>
+                            <h3 class="font-size-16 toBbold italic">{{ watch.species.scientificName }}</h3>
                             <div class="obs-header-seperator"></div>
                           </div>
                           <div class="obs-row obs-desc">
                             <div>
                               <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
-                                Nom Vernaculaire
+                                {{ "Nom Vernaculaire"|trans }}
                               </span>
-                              <h4 class="font-size-14 toBold">Oiselo</h4>
+                              {% if watch.species.vernFr == true %}
+                                <h4 class="font-size-14 toBold">{{ watch.species.vernFr }}</h4>
+                              {% else %}
+                                <h4 class="font-size-14 toBold">{{ "Non défini"|trans }}</h4>
+                              {% endif %}
                             </div>
                             <hr>
                             <div>
                               <p>
                                 <button class="font-size-14 badge badge-dark  collapsed" type="button" data-toggle="collapse" data-target="#collapseLocalisation" aria-expanded="false" aria-controls="collapseLocalisation">
-                                  Localisation
+                                  {{ "Localisation"|trans }}
                                   <i class="fa fa-map-marker"></i>
                                 </button>
                               </p>
                               <div class="collapse" id="collapseLocalisation">
                                 <div id="localisation-card" class="card card-body">
                                   <ul class="font-size-12 list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                      LIEU :
-                                    </li>
-                                    <p class="col-xs-12 toBold italic font-size-14">
-                                      Plateau des Hautes Charettes
-                                    </p>
                                     <li class="center list-group-item d-flex justify-content-between align-items-center">
                                       LATITUDE
                                     </li>
-                                    <span class="badge badge-primary badge-pill">44.548448 NE</span>
+                                    <span class="badge badge-primary badge-pill">{{ watch.latitude }}</span>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                       LONGITUDE
                                     </li>
-                                    <span class="badge badge-primary badge-pill">37.548448 NE</span>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                      ALTITUDE
-                                    </li>
-                                    <span class="badge badge-primary badge-pill">+ 224</span>
+                                    <span class="badge badge-primary badge-pill">{{ watch.longitude }}</span>
                                   </ul>
                                   <hr>
                                 </div>
@@ -140,17 +147,20 @@
                       </div>
                       <hr>
                       <div class="obs-comment col-sm-12 col-md-6">
-                        <span id="obsCommentBadge" class="margin-bottom-10 obs-comment-content badge badge-info">Commentaire</span>
+                        <span id="obsCommentBadge" class="margin-bottom-10 obs-comment-content badge badge-info">{{ "Commentaire"|trans }}</span>
                         <p id="obsCommentContent" class="obs-comment-content">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                          {% if watch.description == true %}
+                            {{ watch.description }}
+                          {% else %}
+                            {{ "Cet utilisateur n'a pas laissé de commentaire..."|trans }}
+                          {% endif %}
                         </p>
                         <button type="button" id='obsCommentButton' class="obs-comment-button font-size-12 badge badge-info">
-                          Voir le Commentaire
+                          {{ "Voir le Commentaire"|trans }}
                           <i class="fa fa-eye"></i>
                         </button>
                         <button type="button" class="btn btn-primary btn-lg btn-block">
-                          Voir la Map
+                          {{ "Voir la Map"|trans }}
                           <i class="fa fa-map-pin"></i>
                         </button>
                       </div>
