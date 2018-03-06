@@ -99,7 +99,7 @@ class Image
 
         $image = new ImageResize($this->file);
         $image->resizeToWidth(700);
-        if ($this->extension = "png") {
+        if ($this->extension == "png") {
             $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_PNG);
         } else {
             $image->save($this->getUploadRootDir().'/'.$this->getId().'.'.$this->getExtension(), IMAGETYPE_JPEG);

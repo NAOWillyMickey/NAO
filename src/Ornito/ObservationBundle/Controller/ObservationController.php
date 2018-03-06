@@ -16,7 +16,14 @@ class ObservationController extends Controller
 
     public function viewAction($id)
     {
-        return $this->render('OrnitoObservationBundle:Observation:view.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $watching = $em
+          ->getRepository('OrnitoObservationBundle:Watching')
+          ->findOneById($id);
+          ;
+        return $this->render('OrnitoObservationBundle:Observation:view.html.twig', array(
+            'watching' => $watching,
+        ));
     }
 
     public function addAction(Request $request)
