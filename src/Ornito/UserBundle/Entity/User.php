@@ -15,6 +15,10 @@ use Ornito\ObservationBundle\Entity\Watching;
  */
 class User extends BaseUser
 {
+
+    const CONFIRMED = "confirmed";
+    const PENDING = "pending";
+    const DECLINED = "declined";
     /**
      * @var int
      *
@@ -86,6 +90,20 @@ class User extends BaseUser
     private $watchings;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="naturalistPromote", type="string", length=64, nullable=true)
+     */
+    private $naturalistPromote;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="$registerAt", type="datetime", nullable=true)
+     */
+    private $registerAt;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -93,6 +111,7 @@ class User extends BaseUser
         parent::__construct();
 
         // Add role by default
+        $this->registerAt = new \Datetime();
         $this->addRole("ROLE_MEMBER");
         $this->watchings = new ArrayCollection();
     }
@@ -323,5 +342,51 @@ class User extends BaseUser
     public function getBio()
     {
         return $this->bio;
+    }
+
+    /**
+     * Set naturalistPromote.
+     *
+     * @param string|null $naturalistPromote
+     *
+     * @return User
+     */
+    public function setNaturalistPromote($naturalistPromote = null)
+    {
+        $this->naturalistPromote = $naturalistPromote;
+
+        return $this;
+    }
+
+    /**
+     * Get naturalistPromote.
+     *
+     * @return string|null
+     */
+    public function getNaturalistPromote()
+    {
+        return $this->naturalistPromote;
+    }
+
+    /**
+     * Set registerAt
+     *
+     * @param \DateTime $registerAt
+     *
+     * @return User
+     */
+    public function setRegisterAt($registerAt)
+    {
+        $this->registerAt = $registerAt;
+        return $this;
+    }
+    /**
+     * Get registerAt
+     *
+     * @return \DateTime
+     */
+    public function getRegisterAt()
+    {
+        return $this->registerAt;
     }
 }

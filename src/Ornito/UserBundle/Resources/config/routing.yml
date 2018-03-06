@@ -3,7 +3,32 @@ ornito_user_admin_list:
     defaults:
         _controller: OrnitoUserBundle:Admin:index
 
-#ornito_user_profile_edit:
-#    path:     /profile/edit
-#    defaults:
-#        _controller: OrnitoUserBundle:Profile:edit
+ornito_user_admin_delete:
+    path:     /admin/user/delete/{userId}
+    defaults:
+        _controller: OrnitoUserBundle:Admin:DeleteUser
+
+ornito_user_admin_certification_list:
+    path:     /admin/users/certification
+    defaults:
+        _controller: OrnitoUserBundle:Admin:CertificationIndex
+
+ornito_user_naturalist_promote_validation:
+    path:     /profile/Naturalist_Promote_account_validation/{userId}
+    defaults:
+        _controller: OrnitoUserBundle:Admin:NaturalistPromoteValidation
+
+ornito_user_naturalist_promote_declination:
+    path:     /profile/Naturalist_Promote_account_declination/{userId}
+    defaults:
+        _controller: OrnitoUserBundle:Admin:NaturalistPromoteDeclination
+
+ornito_user_naturalist_promote_request:
+    path:     /profile/Naturalist_Promote_account_Request/{userId}
+    defaults:
+        _controller: OrnitoUserBundle:Profile:NaturalistPromoteRequest
+
+ornito_user_profile_show:
+    path:     /profile/{username}/{userId}
+    defaults:
+        _controller: OrnitoUserBundle:Profile:ShowUserProfile

@@ -44,28 +44,6 @@
           <!-- ARTICLE -->
           <article class="">
             <div id="profileTabMenu">
-              <!--START Option panel Menu -->
-              <div class="margin-top-0 float-right btn-group">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
-                  <i class="fa fa-ellipsis-h"></i>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li>
-                    <a href="#">Action</a>
-                  </li>
-                  <li>
-                    <a href="#">Another action</a>
-                  </li>
-                  <li>
-                    <a href="#">Something else</a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <a href="#">Separated link</a>
-                  </li>
-                </ul>
-              </div>
-              <!--END Option panel Menu -->
               <!-- TAB MENU -->
               <div class="text-uppercase card-title">
                 <ul class="nav nav-tabs justify-content-center" role="tablist">
@@ -73,14 +51,22 @@
                     <a href="#profilePanel" aria-controls="profilePanel" role="tab" data-toggle="tab" class="font-size-14 nav-link">Profil</a>
                   </li>
                   <li role="presentation" class="nav-item">
-                    <a href="#obsProfilePanel" aria-controls="obsProfilePanel" role="tab" data-toggle="tab" class="nav-link">Mes Obs</a>
+                    <a href="#obsProfilePanel" aria-controls="obsProfilePanel" role="tab" data-toggle="tab" class="nav-link">
+                      {% if user.id == app.user.id %}
+                        Mes Obs
+                      {% else %}
+                        Obs'
+                      {% endif %}
+                    </a>
                   </li>
                   <li role="presentation" class="nav-item">
                     <a href="#naturalistProfilePanel" aria-controls="naturalistProfilePanel" role="tab" data-toggle="tab" class="nav-link">Naturaliste</a>
                   </li>
-                  <li role="presentation" class="nav-item">
-                    <a href="{{ (path('fos_user_profile_edit')) }}" class="nav-link">Admin</a>
-                  </li>
+                  {% if user.id == app.user.id %}
+                    <li role="presentation" class="nav-item">
+                      <a href="{{ (path('fos_user_profile_edit')) }}" class="nav-link">Admin</a>
+                    </li>
+                  {% endif %}
                 </ul>
               </div>
             </div>
@@ -109,10 +95,14 @@
                           <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                           <hr>
                           <div>
-                            <h2>{{ user.firstName }}
+                            <h2 class="lead">{{ user.firstName }}
                               {{ user.lastName }}</h2>
+                            <span class="badge badge-light ">Inscit le
+                              {{ user.registerAt|date('d-m-Y') }}</span>
                           </div>
+                          <hr/>
                         </div>
+
                         <div class="col-md-12">
                           <div class="float-left">
                             <ul class="list-group">
@@ -188,12 +178,14 @@
                                           <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                             <i class="fa fa-eye"></i>
                                           </a>
-                                          <a title="Modifier" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
-                                            <i class="fa fa-edit"></i>
-                                          </a>
-                                          <a title="Supprimer" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
-                                            <i class="fa fa-trash"></i>
-                                          </a>
+                                          {% if user.id == app.user.id %}
+                                            <a title="Modifier" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a title="Supprimer" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-trash"></i>
+                                            </a>
+                                          {% endif %}
                                         </td>
                                         <td>
                                           <div class="media">
@@ -217,8 +209,12 @@
                             </div>
                           </div>
                           <div class="content-footer">
-                            <p>
-                              My Obs'
+                            <p class="text-muted">
+                              {% if user.id == app.user.id %}
+                                My Obs'
+                              {% else %}
+                                Obs'
+                              {% endif %}
                             </p>
                           </div>
                         </div>
@@ -230,106 +226,193 @@
                         <div class="col-md-12">
                           <div class="panel panel-default">
                             <div class="panel-body">
-                              <div class="pull-right">
-                                <div class="btn-group">
-                                  <button type="button" class="btn btn-success btn-filter" data-target="attested">J'ai validé</button>
-                                  <button type="button" class="btn btn-danger btn-filter" data-target="rejected">J'ai refusé</button>
-                                  <button type="button" class="btn btn-default btn-filter" data-target="all">Tous</button>
+                              {% if is_granted("ROLE_NATURALIST") and user.id == app.user.id %}
+                                <div class="pull-right">
+                                  <div class="btn-group">
+                                    <button type="button" class="btn btn-success btn-filter" data-target="attested">J'ai validé</button>
+                                    <button type="button" class="btn btn-danger btn-filter" data-target="rejected">J'ai refusé</button>
+                                    <button type="button" class="btn btn-default btn-filter" data-target="all">Tous</button>
+                                  </div>
+                                </div>
+                                <div class="table-container">
+                                  <table class="table table-filter">
+                                    <tbody>
+                                      {% for watching in user.watchings %}
+                                        <tr data-status="{{ watching.validateStatus }}">
+                                          <td>
+                                            <div class="ckbox">
+                                              <input type="checkbox" id="checkbox1">
+                                              <label for="checkbox1"></label>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-eye"></i>
+                                            </a>
+                                            {% if user.id == app.user.id %}
+                                              <a title="Modifier" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                                <i class="fa fa-edit"></i>
+                                              </a>
+                                              <a title="Supprimer" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                                <i class="fa fa-trash"></i>
+                                              </a>
+                                            {% endif %}
+                                          </td>
+                                          <td>
+                                            <div class="media">
+                                              <a href="#" class="pull-left">
+                                                <span class="profil-img">
+                                                  <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="User Picture"></a>
+                                                  <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                                                </span>
+                                                <span class="margin-left-10  badge badge-success dropdown-name">John D.</span>
+                                              </a>
+                                              <div class="media-body">
+                                                <span class="media-meta pull-right">{{ watching.date }}</span>
+                                                <h4 class="title">
+                                                  {% for specie in watching.species %}
+                                                    {{ specie.scientificName }}
+                                                  {% endfor %}
+                                                  <span class="pull-right valid">({{ watching.validateStatus }})</span>
+                                                </h4>
+                                                <p class="summary">{{ watching.title }}</p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
                                 </div>
                               </div>
-                              <div class="table-container">
-                                <table class="table table-filter">
-                                  <tbody>
-                                    <tr data-status="valid">
-                                      <td>
-                                        <div class="ckbox">
-                                          <input type="checkbox" id="checkbox1">
-                                          <label for="checkbox1"></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <a title="Voir l'Obs" href="">
-                                          <i class="fa fa-eye"></i>
-                                        </a>
-                                      </td>
-                                      <td>
-                                        <div class="media">
-                                          <a href="#" class="pull-left">
-                                            <span class="profil-img">
-                                              <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="https://pixnio.com/free-images/2017/02/08/2017-02-08-17-43-06-725x467.jpg" alt=""></a>
-                                              <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
-                                            </span>
-                                            <span class="margin-left-10  badge badge-success dropdown-name">John D.</span>
-                                          </a>
-                                          <div class="media-body">
-                                            <span class="media-meta pull-right">13 Février 2018</span>
-                                            <h4 class="title">
-                                              Héron Cendré
-                                              <span class="pull-right valid">(Validé)</span>
-                                            </h4>
-                                            <p class="summary">Parc de la tête d'Or 69006 LYON</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                    </tr>
-                                    <tr data-status="invalid">
-                                      <td>
-                                        <div class="ckbox">
-                                          <input type="checkbox" id="checkbox2">
-                                          <label for="checkbox2"></label>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <a title="Voir l'Obs" href="">
-                                          <i class="fa fa-eye"></i>
-                                        </a>
-                                      </td>
-                                      <td>
-                                        <div class="media">
-                                          <a href="#" class="pull-left">
-                                            <span class="profil-img">
-                                              <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="https://pixnio.com/free-images/2017/02/08/2017-02-08-17-43-06-725x467.jpg" alt=""></a>
-                                              <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
-                                            </span>
-                                            <span class="margin-left-10 badge badge-success dropdown-name">Benjamin D.</span>
-                                          </a>
-                                          <div class="media-body">
-                                            <span class="media-meta pull-right">13 Février 2018</span>
-                                            <h4 class="title">
-                                              Faucon Pelerin
-                                              <span class="pull-right invalid">(Non validé)</span>
-                                            </h4>
-                                            <p class="summary">La Part Dieu 69006 LYON</p>
-                                          </div>
-                                        </div>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                            {% else %}
+                              {% if user.naturalistPromote == 'pending' and user.id == app.user.id %}
+                                <div class="center alert alert-info">
+                                  <span class="fa fa-certificate fa-3x marginAuto"></span>
+                                  <h2 class="lead center">
+                                    Votre demande est en cours de traitement
+                                  </h2>
+                                </div>
+                              {% endif %}
+                              {% if user.naturalistPromote == 'declined' and user.id == app.user.id %}
+                                <div class="center alert alert-warning">
+                                  <span class="fa fa-exclamation-triangle fa-3x marginAuto"></span>
+                                  <h2 class="lead center">
+                                    Votre demande à malheureusement été déclinée
+                                  </h2>
+                                </div>
+                              {% endif %}
+                              {% if user.id == app.user.id %}
+                                <div class="center">
+                                  <h2>
+                                    Vous n'avez pas encore de Compte Naturaliste ?
+                                  </h2>
+                                  <h3>
+                                    Faites votre demande dès maintenant.</h3>
+                                  <hr/>
+                                  <p class="font-size-14">
+                                    Pour cela vous devez tout de même justifier une certaine expérience en matière d'observations et d'ornithologie.
+                                  </p>
+                                  <a href="{{ (path('ornito_user_naturalist_promote_request', { userId : user.id } )) }}">
+                                    <button class="margin-left-10  btn-success btn">Certification Naturaliste</button>
+                                  </a>
+                                </div>
+                              {% else %}
+                                <div class="pull-right">
+                                  <div class="btn-group">
+                                    <button type="button" class="btn btn-success btn-filter" data-target="attested">
+                                      {% if user.id == app.user.id %}
+                                        J'ai validé
+                                      {% else %}
+                                        Il a validé
+                                      {% endif %}
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-filter" data-target="rejected">
+                                      {% if user.id == app.user.id %}
+                                        J'ai refusé
+                                      {% else %}
+                                        Il a refusé
+                                      {% endif %}
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-filter" data-target="all">Tous</button>
+                                  </div>
+                                </div>
+                                <div class="table-container">
+                                  <table class="table table-filter">
+                                    <tbody>
+                                      {% for watching in user.watchings %}
+                                        <tr data-status="{{ watching.validateStatus }}">
+                                          <td>
+                                            <div class="ckbox">
+                                              <input type="checkbox" id="checkbox1">
+                                              <label for="checkbox1"></label>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-eye"></i>
+                                            </a>
+                                            {% if user.id == app.user.id %}
+                                              <a title="Modifier" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                                <i class="fa fa-edit"></i>
+                                              </a>
+                                              <a title="Supprimer" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                                <i class="fa fa-trash"></i>
+                                              </a>
+                                            {% endif %}
+                                          </td>
+                                          <td>
+                                            <div class="media">
+                                              <a href="#" class="pull-left">
+                                                <span class="profil-img">
+                                                  <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt="User Picture"></a>
+                                                  <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                                                </span>
+                                                <span class="margin-left-10  badge badge-success dropdown-name">John D.</span>
+                                              </a>
+                                              <div class="media-body">
+                                                <span class="media-meta pull-right">{{ watching.date }}</span>
+                                                <h4 class="title">
+                                                  {% for specie in watching.species %}
+                                                    {{ specie.scientificName }}
+                                                  {% endfor %}
+                                                  <span class="pull-right valid">({{ watching.validateStatus }})</span>
+                                                </h4>
+                                                <p class="summary">{{ watching.title }}</p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                          <div class="content-footer">
-                            <p>
-                              Footer
-                            </p>
-                          </div>
+                            {% endif %}
+                          {% endif %}
                         </div>
-                      </section>
-                    </div>
+                        <hr/>
+                        <div class="content-footer">
+                          <p class="text-muted">
+                            Obs' Certification Center
+                          </p>
+                        </div>
+                      </div>
+                    </section>
                   </div>
-                  <!-- END BOX CONTAINER -->
                 </div>
-                <!-- END row -->
+                <!-- END BOX CONTAINER -->
               </div>
-              <!-- END CONTAINER -->
-              <hr>
-            </article>
-          </div>
-          <!-- END CONTENT -->
+              <!-- END row -->
+            </div>
+            <!-- END CONTAINER -->
+            <hr>
+          </article>
         </div>
+        <!-- END CONTENT -->
       </div>
     </div>
-    <!-- /#page-content-wrapper -->
-    <!-- END CONTENT -->
-  {% endblock %}
+  </div>
+  <!-- /#page-content-wrapper -->
+  <!-- END CONTENT -->
+{% endblock %}
