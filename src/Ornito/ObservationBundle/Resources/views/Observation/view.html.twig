@@ -33,17 +33,16 @@
             <article class="timeline">
               <li class="timeline-inverted">
                 <aside class="timeline-badge">
-                  <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}">
-                    <span class="profil-img">
-                      {% if watch.user.avatar == null %}
-                        <a href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
-                      {% else %}
-                      <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}"><img title="{{ watch.user.username }}" class="profil-picture shadowed" src="/{{ watch.user.avatar.webPath }}" alt="User Picture"></a>
-                      {% endif %}
-                    </span>
-                    <span class="margin-left-10 badge badge-success dropdown-name">{{ watch.user.username }}</span>
-                    <i title="Observation" class="fa fa-binoculars"></i>
-                  </a>
+                  <span class="profil-img">
+                    <a href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}"></a>
+                    {% if watch.user.avatar == null %}
+                      <i class="fa fa-user fa-1x shadowed" aria-hidden="true"></i>
+                    {% else %}
+                      <img title="{{ watch.user.username }}" class="profil-picture shadowed" src="{{ asset(watch.user.avatar.webPath) }}" alt="{{ watch.user.avatar.alt }}">
+                    {% endif %}
+                  </span>
+                  <span class="margin-left-10 badge badge-success dropdown-name">{{ watch.user.username }}</span>
+                  <i title="Observation" class="fa fa-binoculars"></i>
                 </aside>
                 <div class="timeline-panel">
                   <div class="obs-status-container">
@@ -68,7 +67,7 @@
                     <h4 class="text-uppercase font-size-16 card-title">{{ watch.species.scientificName }}</h4>
                     <time class="obs-time">
                       <i class="fa fa-calendar"></i>
-                      {{ "Le "|trans }}{{ watch.date|localizeddate('full', 'none') }}{{ " à "|trans }}{{ watch.date|localizeddate('none', 'short') }}</time>
+                      {{ "Le "|trans }}{{ watch.date|localizeddate('full', 'short') }}</time>
                   </div>
                   <div class="timeline-body">
                     <!-- OBS PANEL -->
@@ -187,11 +186,12 @@
   </div>
   <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
+
+
+
 {% endblock %}
 {% block javascripts %}{{ parent() }}
-<script type="text/javascript">
-
-
+  <script type="text/javascript">
   var latitude = {{ watch.latitude }};
   var longitude = {{ watch.longitude }};
   var latiLongi = [latitude, longitude];
@@ -205,10 +205,8 @@
     id: 'mapbox.streets'
   }).addTo(ObsViewMap);
 
-
     L.marker(latiLongi).addTo(ObsViewMap)
-      .bindPopup("<span class='profil-picture-mini'>{% if watch.user.avatar == null %}<a href='{{ (path('ornito_user_profile_show', {username : watch.user.username ,  userId : watch.user.id})) }}'><i class='fa fa-user fa-2x shadowed' aria-hidden='true'></i></a>{% else %}<a title='{{ "Voir le profil"|trans }}' href='{{ (path('ornito_user_profile_show', {username : watch.user.username ,  userId : watch.user.id})) }}'><img title='{{ watch.user.username }}' class='profil-picture-mini shadowed' src='/{{ watch.user.avatar.webPath }}' alt='UserPicture'></a>{% endif %}<span class='margin-left-10  badge badge-success dropdown-name'>{{ watch.user.username }}</span><h2 class='italic font-size-12'>{{ watch.species.scientificName }}</h2><time class='float-right font-size-1em obs-time'><i class='fa fa-calendar'></i></br>date : {{ watch.date|date('d-m-Y H:i:s') }}</time></span><center class='margin-top-10'><hr><h3 class='text-uppercase font-size-12 card-title'>{{ watch.title }}</h3><hr /><a href='/{{ watch.image.webPath }}' data-toggle='lightbox'><img  alt='/{{ watch.image.alt}}' title='/{{ watch.image.alt}}' class='float-right obs-picture-mini' src='/{{ watch.image.webPath }}'></a><hr /></h2</h2 class='float-left'>Observation dans un périmètre </br> de 100 à 200 metres de ce point </center>").openPopup();
-
+    .bindPopup("<div style='width: 120px;'><span class='profil-picture-mini'>{% if watch.user.avatar == null %}<i class='fa fa-user fa-2x shadowed' aria-hidden='true'></i>{% else %}<img title='{{ watch.user.username }}' class='profil-picture-mini shadowed' src='{{ asset(watch.user.avatar.webPath) }}' alt='{{ watch.user.avatar.alt }}'>{% endif %}<span class='float-right badge badge-success dropdown-name'>{{ watch.user.username }}</span></span></div><div style='width: 120px;' align='right'><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>Le {{ watch.date|localizeddate('medium', 'short') }}</time></div><h2 style='width: 120px;' align='center' class='margin-top-10 italic font-size-12'>{{ watch.species.scientificName }}</h2><hr/><h3 style='width: 120px;' align='center' class='text-uppercase font-size-12 card-title'>{{ watch.title }}</h3><div style='width: 120px;' align='center' >{% if watch.image == true %}<img  alt='{{ watch.image.alt}}' title='{{ watch.image.alt}}' class='obs-picture-mini' src='{{ asset(watch.image.webPath) }}'>{% else %}<img class='img-thumbnail' src='{{ asset('assets/img/obs/test/moineau.jpg') }}' alt='moineau'>{% endif %}</div>").openPopup();
     L.circle(latiLongi, 20000).addTo(ObsViewMap);
     L.circle(latiLongi, 200).addTo(ObsViewMap);
 
