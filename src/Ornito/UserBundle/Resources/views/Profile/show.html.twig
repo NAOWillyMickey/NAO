@@ -15,7 +15,7 @@
       {% if user.avatar == null %}
         <i class="fa fa-user fa-4x shadowed" aria-hidden="true"></i>
       {% else %}
-      <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="/{{ user.avatar.webPath }}" alt="User Picture {{ user.username }}">
+      <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="{{ asset(user.avatar.webPath) }}" alt="User Picture {{ user.username }}">
       {% endif %}
     </span>
     {{ user.username }}
@@ -95,7 +95,7 @@
                             {% if user.avatar == null %}
                               <i class="fa fa-user fa-4x shadowed" aria-hidden="true"></i>
                             {% else %}
-                            <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="/{{ user.avatar.webPath }}" alt="User Picture {{ user.username }}">
+                              <img title="{{ user.username }}" class="profil-picture-big shadowed-1" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}">
                             {% endif %}
                           </span>
                           <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
@@ -104,7 +104,7 @@
                             <h2 class="lead">{{ user.firstName }}
                               {{ user.lastName }}</h2>
                             <span class="badge badge-light ">{{ "Inscit le"|trans }}
-                              {{ user.registerAt|date('d-m-Y') }}</span>
+                              {{ user.registerAt|localizeddate('long', 'none') }}</span>
                           </div>
                           <hr/>
                         </div>
@@ -162,7 +162,7 @@
                           <div class="panel panel-default">
                             <div class="panel-body">
                               <div class="pull-left">
-                                <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_observation_add')}}" class="badge badge-info"><button class="btn btn-dark btn-sm">Ajouter une Observation</button></a>
+                                <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_observation_add')}}" class="badge badge-info"><button class="btn btn-dark btn-sm">{{ 'Ajouter une Observation'|trans }}</button></a>
                               </div>
                               <div class="pull-right">
                                 <div class="btn-group">
@@ -199,7 +199,7 @@
                                         <td>
                                           <div class="media">
                                             <div class="media-body">
-                                              <span class="media-meta pull-right">{{ watching.date|date('d-m-Y H:i:s') }}</span>
+                                              <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
                                               <h4 class="title">
                                                 {% for specie in watching.species %}
                                                   {{ specie.scientificName }}
@@ -238,9 +238,9 @@
                               {% if is_granted("ROLE_NATURALIST")and user.id == app.user.id %}
                                 <div class="pull-right">
                                   <div class="btn-group">
-                                    <button type="button" class="btn btn-success btn-filter" data-target="attested">J'ai validé</button>
-                                    <button type="button" class="btn btn-danger btn-filter" data-target="rejected">J'ai refusé</button>
-                                    <button type="button" class="btn btn-default btn-filter" data-target="all">Tous</button>
+                                    <button type="button" class="btn btn-success btn-filter" data-target="attested">{{ "J'ai validé"|trans }}</button>
+                                    <button type="button" class="btn btn-danger btn-filter" data-target="rejected">{{ "J'ai refusé"|trans }}</button>
+                                    <button type="button" class="btn btn-default btn-filter" data-target="all">{{ "Tous"|trans }}</button>
                                   </div>
                                 </div>
                                 <div class="table-container">
@@ -255,14 +255,14 @@
                                             </div>
                                           </td>
                                           <td>
-                                            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
+                                            <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                               <i class="fa fa-eye"></i>
                                             </a>
                                             {% if user.id == app.user.id %}
-                                              <a title="Modifier" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                              <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-edit"></i>
                                               </a>
-                                              <a title="Supprimer" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <a title="{{ "Supprimer"|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-trash"></i>
                                               </a>
                                             {% endif %}
@@ -274,13 +274,13 @@
                                                   {% if user.avatar == null %}
                                                     <a href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
                                                   {% else %}
-                                                  <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
+                                                  <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
                                                   {% endif %}
                                                 </span>
                                                 <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                                               </a>
                                               <div class="media-body">
-                                                <span class="media-meta pull-right">{{ watching.date|date('d-m-Y H:i:s') }}</span>
+                                                <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
                                                 <h4 class="title">
                                                   {% for specie in watching.species %}
                                                     {{ specie.scientificName }}
@@ -361,14 +361,14 @@
                                             </div>
                                           </td>
                                           <td>
-                                            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
+                                            <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                               <i class="fa fa-eye"></i>
                                             </a>
                                             {% if user.id == app.user.id %}
-                                              <a title="Modifier" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                              <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-edit"></i>
                                               </a>
-                                              <a title="Supprimer" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <a title="{{ "Supprimer"|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-trash"></i>
                                               </a>
                                             {% endif %}
@@ -380,13 +380,13 @@
                                                   {% if user.avatar == null %}
                                                     <i class="fa fa-user fa-lg shadowed" aria-hidden="true"></i>
                                                   {% else %}
-                                                  <a title="{{ "Voir le profil"|trans }}" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
+                                                  <a title="{{ "Voir le profil"|trans }}" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
                                                   {% endif %}
                                                 </span>
                                                 <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
                                               </a>
                                               <div class="media-body">
-                                                <span class="media-meta pull-right">{{ watching.date }}</span>
+                                                <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
                                                 <h4 class="title">
                                                   {% for specie in watching.species %}
                                                     {{ specie.scientificName }}
