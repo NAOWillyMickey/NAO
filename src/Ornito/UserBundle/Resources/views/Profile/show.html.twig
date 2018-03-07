@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - Profile
+  - {{ "Profile"|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -191,7 +191,7 @@
                                             <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                               <i class="fa fa-edit"></i>
                                             </a>
-                                            <a title="{{ "Supprimer"|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                            <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
                                               <i class="fa fa-trash"></i>
                                             </a>
                                           {% endif %}
@@ -262,7 +262,7 @@
                                               <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-edit"></i>
                                               </a>
-                                              <a title="{{ "Supprimer"|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-trash"></i>
                                               </a>
                                             {% endif %}
@@ -368,7 +368,7 @@
                                               <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-edit"></i>
                                               </a>
-                                              <a title="{{ "Supprimer"|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
                                                 <i class="fa fa-trash"></i>
                                               </a>
                                             {% endif %}
@@ -430,4 +430,6 @@
   </div>
   <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
+{% endblock %}
+{% block javascripts %}{{ parent() }}
 {% endblock %}
