@@ -24,7 +24,7 @@
               </div>
             {% endif %}
             <div class="logoLoginPage">
-              <img src="{{asset('assets/img/logo/logo-ornithotequeLD.png') }}" alt="Logo Ornithotheque"/>
+              <img src="{{ asset('assets/img/logo/logo-ornithotequeLD.png') }}" alt="Logo Ornithotheque"/>
             </div>
             <form class="form-signin" action="{{ path('fos_user_security_check') }}" method="post">
               {% if csrf_token %}
@@ -60,7 +60,7 @@
               <div class="or-box row-block">
                 <div class="row">
                   <div class="col-md-12 row-block">
-                    <a href="" class="btn btn-primary btn-block">{{ "Créer Mon Compte"|trans }}</a>
+                    <a href="{{ (path("fos_user_registration_register")) }}" class="btn btn-primary btn-block">{{ "Créer Mon Compte"|trans }}</a>
                   </div>
                 </div>
               </div>
