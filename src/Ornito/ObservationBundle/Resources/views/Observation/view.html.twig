@@ -34,12 +34,13 @@
               <li class="timeline-inverted">
                 <aside class="timeline-badge">
                   <span class="profil-img">
-                    <a href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}"></a>
-                    {% if watch.user.avatar == null %}
-                      <i class="fa fa-user fa-1x shadowed" aria-hidden="true"></i>
-                    {% else %}
-                      <img title="{{ watch.user.username }}" class="profil-picture shadowed" src="{{ asset(watch.user.avatar.webPath) }}" alt="{{ watch.user.avatar.alt }}">
-                    {% endif %}
+                    <a href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}">
+                      {% if watch.user.avatar == null %}
+                        <i class="fa fa-user fa-1x shadowed" aria-hidden="true"></i>
+                      {% else %}
+                        <img title="{{ watch.user.username }}" class="profil-picture shadowed" src="{{ asset(watch.user.avatar.webPath) }}" alt="{{ watch.user.avatar.alt }}">
+                      {% endif %}
+                    </a>
                   </span>
                   <span class="margin-left-10 badge badge-success dropdown-name">{{ watch.user.username }}</span>
                   <i title="Observation" class="fa fa-binoculars"></i>
