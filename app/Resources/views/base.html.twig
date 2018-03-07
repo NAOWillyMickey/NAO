@@ -192,18 +192,26 @@
         <h4 class="center lead">{{ 'FOLLOW US'|trans }}</h4>
         <div class="text-center center-block">
           <hr/>
-          <a href="https://www.facebook.com/">
-            <i id="social-fb" class="fa fa-facebook-square fa-3x social"></i>
-          </a>
-          <a href="https://twitter.com/">
-            <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
-          </a>
-          <a href="https://plus.google.com/">
-            <i id="social-gp" class="fa fa-pinterest-square fa-3x social"></i>
-          </a>
-          <a href="mailto:contact@ornithoteque.avrr.fr">
-            <i id="social-em" class="fa fa-envelope-square fa-3x social"></i>
-          </a>
+            {% if facebook is defined %}
+              <a href="{{ facebook }}">
+                <i id="social-fb" class="fa fa-facebook-square fa-3x social"></i>
+              </a>
+            {% endif %}
+            {% if twitter is defined %}
+              <a href="{{ twitter }}">
+                <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
+              </a>
+            {% endif %}
+            {% if pinterest is defined %}
+              <a href="{{ pinterest }}">
+                <i id="social-gp" class="fa fa-pinterest-square fa-3x social"></i>
+              </a>
+            {% endif %}
+            {% if contactMail is defined %}
+              <a href="mailto:{{  contactMail }}">
+                <i id="social-em" class="fa fa-envelope-square fa-3x social"></i>
+              </a>
+            {% endif %}
           <hr>
           <p class="text-muted font-weight-bold font-italic center">CopyRight
             <span class="badge badge-light">© 2018</span>

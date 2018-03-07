@@ -37,6 +37,11 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        contactMail: "%contactMail%"
+        twitter: "%twitter%"
+        facebook: "%facebook%"
+        pinterest: "%pinterest%"
 
 # Doctrine Configuration
 doctrine:
