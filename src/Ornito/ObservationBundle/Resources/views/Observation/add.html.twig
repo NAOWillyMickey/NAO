@@ -12,7 +12,7 @@
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
   <!-- PAGE TITLE -->
-  <h1 class="band_title elegantshd">Nouvelle Obs'
+  <h1 class="band_title elegantshd">{{ "Nouvelle Obs'"|trans }}
     <a href="#content" class="btn">
       <i class="fa fa-angle-double-down fa-2x"></i>
     </a>
@@ -26,15 +26,15 @@
         <article class="timeline">
           <li class="timeline-inverted">
             <aside class="timeline-badge">
-              <a title="Voir le profil" href="{{ (path('fos_user_profile_show')) }}">
+              <a title={{ "Profil"|trans }} href="{{ (path('fos_user_profile_show')) }}">
                 <span class="profil-img">
                   {% if app.user.avatar == null %}
                     <i class="fa fa-user shadowed" aria-hidden="true"></i>
                   {% else %}
-                  <img title="{{ app.user.username }}" class="profil-picture shadowed" src="/{{ app.user.avatar.webPath }}" alt="User Picture">
+                    <img title="{{ app.user.username }}" class="profil-picture shadowed" src="{{ asset(app.user.avatar.webPath) }}" alt="{{ app.user.avatar.alt }}">
                   {% endif %}
                 </span>
-                <span class="margin-left-10 badge badge-success dropdown-name">{{ app.user.username}}.</span>
+                <span class="margin-left-10 badge badge-success dropdown-name">{{ app.user.username}}</span>
                 <i title="Observation" class="fa fa-binoculars"></i>
               </a>
             </aside>
