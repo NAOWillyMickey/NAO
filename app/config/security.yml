@@ -22,7 +22,7 @@ security:
             security: false
 
         main:
-            pattern: ^
+            pattern: ^/
             anonymous: true
             provider: main
             form_login:
@@ -36,3 +36,7 @@ security:
                 secret: "%secret%"
                 lifetime: 604800
                 # 1 week in seconds
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/observation/, roles: ROLE_MEMBER }
