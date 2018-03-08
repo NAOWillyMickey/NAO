@@ -1,7 +1,10 @@
 ornito_observation_homepage:
-    path: /
+    path: /{page}
     defaults:
         _controller: OrnitoObservationBundle:Observation:index
+        page: 1
+    requirements:
+        page: \d+
 
 ornito_observation_add:
     path: /add

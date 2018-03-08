@@ -2,3 +2,7 @@ services:
 #    ornito_observation.example:
 #        class: Ornito\ObservationBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+parameters:
+# Parameter for pagination
+    nb_per_page: 10

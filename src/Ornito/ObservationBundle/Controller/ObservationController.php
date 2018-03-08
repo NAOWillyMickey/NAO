@@ -10,9 +10,30 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ObservationController extends Controller
 {
-    public function indexAction()
+    public function indexAction($page)
     {
-        return $this->render('OrnitoObservationBundle:Observation:index.html.twig');
+        if ($page < 1) {
+            throw new NotFoundHttpException('Timeline Actu "'.$page.'" indisponible pour le moment.');
+        }
+
+        $nbPerPage = $this->container->getParameter('nb_per_page');
+        $listWatching = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('OrnitoObservationBundle:Watching')
+            ->getObs($page, $nbPerPage)
+        ;
+
+        $nbPages = ceil(count($listWatching) / $nbPerPage);
+
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
+
+        return $this->render('OrnitoObservationBundle:Observation:index.html.twig', array(
+            'listWatching' => $listWatching,
+            'page' => $page,
+            'nbPages' => $nbPages,
+        ));
     }
 
     public function viewAction($id)
@@ -75,9 +96,17 @@ class ObservationController extends Controller
             throw new NotFoundHttpException('L\'observation d\'id ' . $id . ' n\'existe pas!');
         }
 
-        $em->remove($watching);
-        $em->flush();
-        $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été supprimée.');
+        $watchingUserId = $watching->getUser()->getId();
+        $currentUser = $this->getUser();
+
+        // Available delete observation by the user who add the obs only or by super admin
+        if ($watchingUserId === $currentUser->getId() || $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            $em->remove($watching);
+            $em->flush();
+            $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été supprimée.');
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
+        $request->getSession()->getFlashBag()->add('warning', 'Vous n\'avez pas les droits nécessaires pour supprimer cette annonce!');
         return $this->redirectToRoute('fos_user_profile_show');
     }
 }
