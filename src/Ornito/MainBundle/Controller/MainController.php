@@ -2,17 +2,25 @@
 
 namespace Ornito\MainBundle\Controller;
 
+use Ornito\ObservationBundle\Entity\Watching;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MainController extends Controller
 {
-    public function indexAction($page)
+    public function indexAction()
     {
-        if ($page < 1) {
-            throw new NotFoundHttpException('Timeline Actu "'.$page.'" indisponible pour le moment.');
-        }
-        return $this->render('OrnitoMainBundle:Main:index.html.twig');
+        $repo = $this->getDoctrine()->getManager()->getRepository('OrnitoObservationBundle:Watching');
+        $lastWatching = $repo->findBy(
+            array('validateStatus' => Watching::ATTESTED),
+            array('date' => 'desc'),
+            5,
+            0
+        );
+
+        return $this->render('OrnitoMainBundle:Main:index.html.twig', array(
+            'lastWatching' => $lastWatching,
+        ));
     }
 
     public function legalAction()

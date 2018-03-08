@@ -1,10 +1,7 @@
 ornito_main_homepage:
-    path:     /{page}
+    path:     /
     defaults:
         _controller: OrnitoMainBundle:Main:index
-        page: 1
-    requirements:
-        page: \d*
 
 ornito_main_legal:
     path: /legal
