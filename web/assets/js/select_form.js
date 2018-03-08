@@ -3,7 +3,7 @@
  */
 $(function () {
     var ordreElt = $('#ref-ordre');
-    var familyElt = $('#ref-famille');
+    var familyElt = $('#ref-family');
     var scientElt = $('#ref-nomScientifique');
     var vernElt = $('#ref-nomVernaculaire');
     var pathElt = $('#path');

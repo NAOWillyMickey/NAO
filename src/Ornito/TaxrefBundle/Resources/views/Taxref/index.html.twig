@@ -27,8 +27,8 @@
           </select>
         </div>
         <div class="marginAuto form-group col-md-3">
-          <label for="ref-famille" class="input-group-addon">{{ "Famille"|trans }}</label>
-          <select id="ref-famille" class="custom-select" name="family">
+          <label for="ref-family" class="input-group-addon">{{ "Famille"|trans }}</label>
+          <select id="ref-family" class="custom-select" name="family">
             <option disabled="disabled" selected="selected" value="emptyFamily"></option>
             {% for item in familyList %}
               <option value="{{ item.family }}">{{ item.family }}</option>
