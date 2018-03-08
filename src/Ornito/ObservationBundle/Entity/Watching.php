@@ -102,7 +102,7 @@ class Watching
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ornito\TaxrefBundle\Entity\Species")
+     * @ORM\ManyToOne(targetEntity="Ornito\TaxrefBundle\Entity\Species", inversedBy="watchings")
      * @ORM\JoinColumn(nullable=false)
      */
     private $species;

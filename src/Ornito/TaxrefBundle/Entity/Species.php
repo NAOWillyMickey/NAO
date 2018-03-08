@@ -2,7 +2,9 @@
 
 namespace Ornito\TaxrefBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Ornito\ObservationBundle\Entity\Watching;
 
 /**
  * Species
@@ -78,6 +80,11 @@ class Species
     private $url;
 
     /**
+     * @ORM\OneToMany(targetEntity="Ornito\ObservationBundle\Entity\Watching", mappedBy="species", cascade={"persist", "remove"})
+     */
+    private $watchings;
+
+    /**
      * Species constructor.
      *
      * @param string $ordre
@@ -99,6 +106,7 @@ class Species
         $this->vernEn = $vernEn;
         $this->protectedStatus = $protectedStatus;
         $this->url = $url;
+        $this->watchings = new ArrayCollection();
     }
 
     /**
@@ -301,5 +309,41 @@ class Species
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Add watching.
+     *
+     * @param \Ornito\ObservationBundle\Entity\Watching $watching
+     *
+     * @return Species
+     */
+    public function addWatching(Watching $watching)
+    {
+        $this->watchings[] = $watching;
+        $watching->setSpecies($this);
+        return $this;
+    }
+
+    /**
+     * Remove watching.
+     *
+     * @param \Ornito\ObservationBundle\Entity\Watching $watching
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeWatching(Watching $watching)
+    {
+        return $this->watchings->removeElement($watching);
+    }
+
+    /**
+     * Get watchings.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getWatchings()
+    {
+        return $this->watchings;
     }
 }
