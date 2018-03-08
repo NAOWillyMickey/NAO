@@ -2,6 +2,7 @@
 
 namespace Ornito\ObservationBundle\Form;
 
+use Ornito\TaxrefBundle\Repository\SpeciesRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -31,6 +32,9 @@ class WatchingType extends AbstractType
             ->add('species', EntityType::class, array(
                 'class'         => 'OrnitoTaxrefBundle:Species',
                 'choice_label' => 'scientificName',
+                'query_builder' => function (SpeciesRepository $repository) {
+                    return $repository->getScientificNameByAlpha();
+                }
             ))
         ;
     }

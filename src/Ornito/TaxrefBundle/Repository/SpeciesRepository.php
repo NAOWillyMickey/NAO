@@ -22,7 +22,8 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
         ;
         $result = $qb
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
         sort($result);
         return $result;
     }
@@ -42,7 +43,8 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
         ;
         return $qb
             ->getQuery()
-            ->getArrayResult();
+            ->getArrayResult()
+        ;
     }
 
     /**
@@ -55,5 +57,18 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
         $query = $queryBuilder->getQuery();
         $results = $query->getScalarResult();
         return $results;
+    }
+
+
+    /**
+     * Get the list of species by scientific name alphabetical order
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getScientificNameByAlpha()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->orderBy('s.scientificName', 'ASC')
+            ;
     }
 }
