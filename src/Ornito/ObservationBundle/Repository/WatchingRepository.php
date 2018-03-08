@@ -27,6 +27,8 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('user')
             ->leftJoin('w.image', 'img')
             ->addSelect('img')
+            ->leftJoin('w.species', 'species')
+            ->addSelect('species')
             ->where('w.validateStatus = :validateStatus')
             ->setParameter('validateStatus', Watching::ATTESTED)
             ->orderBy('w.date', 'DESC')
