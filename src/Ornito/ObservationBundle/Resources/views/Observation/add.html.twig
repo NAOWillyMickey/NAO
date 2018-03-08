@@ -58,3 +58,6 @@
   <!-- /#page-content-wrapper -->
   <!-- END CONTENT -->
 {% endblock %}
+{% block javascripts %}{{ parent() }}
+<script src="{{ asset('assets/js/new_obs.js') }}"></script>
+{% endblock %}
