@@ -189,7 +189,7 @@
                                           <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                             <i class="fa fa-eye"></i>
                                           </a>
-                                          {% if user.id == app.user.id %}
+                                          {% if user.id == app.user.id or is_granted("ROLE_SUPER_ADMIN") %}
                                             <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                               <i class="fa fa-edit"></i>
                                             </a>
