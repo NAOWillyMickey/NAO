@@ -61,7 +61,7 @@
                           {% if app.user.avatar == null %}
                             <i class="fa fa-user shadowed" aria-hidden="true"></i>
                           {% else %}
-                          <img title="{{ app.user.username }}" class="profil-picture shadowed" src="/{{ app.user.avatar.webPath }}" alt="User Picture">
+                          <img title="{{ app.user.username }}" class="profil-picture shadowed" src="{{ asset(app.user.avatar.webPath) }}" alt="User Picture">
                           {% endif %}
                         </span>
                       </div>
@@ -240,6 +240,7 @@
         $(this).ekkoLightbox();
       });
     </script>
+    <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
   {% endblock %}
 </body>
 </html>

@@ -161,9 +161,11 @@
                         <div class="col-md-12">
                           <div class="panel panel-default">
                             <div class="panel-body">
+                              {% if user.id == app.user.id %}
                               <div class="pull-left">
                                 <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_observation_add')}}" class="badge badge-info"><button class="btn btn-dark btn-sm">{{ 'Ajouter une Observation'|trans }}</button></a>
                               </div>
+                              {% endif %}
                               <div class="pull-right">
                                 <div class="btn-group">
                                   <button type="button" class="btn btn-success btn-filter" data-target="attested">{{ "Validé"|trans }}</button>

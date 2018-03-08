@@ -52,11 +52,11 @@
                                 {% if user.avatar == null %}
                                   <a href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
                                 {% else %}
-                                <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="/{{ user.avatar.webPath }}" alt="User Picture"></a>
+                                <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(app.user.avatar.webPath) }}" alt="User Picture"></a>
                                 {% endif %}
                               </span>
                             </a>
-                            <span class="media-meta pull-right">{{ "Inscit le"|trans }} {{ user.registerAt|date('d-m-Y') }}</span>
+                            <span class="media-meta pull-right">{{ "Inscit le"|trans }} {{ user.registerAt||localizeddate('full', 'short') }}</span>
                             <h4 class="title">
                               <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username|e }}</span>
                               <span class="pull-right valid">(

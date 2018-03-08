@@ -3,7 +3,8 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - {{ "Inventaire"|trans }}
+  -
+  {{ "Inventaire"|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -14,52 +15,53 @@
   <div id="option-menu" class="d-flex justify-content-center row">
     <!-- END PAGINATION OPTION FORM -->
     <!-- BIRD SEARCH FORM -->
-    <div id="birdCardSearh" class="input-group">
-      <form id="birdCardSearhForm" name="birdCardSearhForm" class="col-md-12 d-flex justify-content-center align-items-end flex-wrap" method="post" action="{{ url('ornito_inventory_homepage') }}">
-        <div class="margin-5  form-group ">
+    <div id="birdCardSearh" class=" card col-md-11 ">
+      <form id="birdCardSearhForm" name="birdCardSearhForm" class="form-inline" method="post" action="{{ url('ornito_inventory_homepage') }}">
+        <div class="marginAuto form-group col-md-3">
           <label for="ref-ordre" class="input-group-addon">{{ "Ordre"|trans }}</label>
-          <select id="ref-ordre" class="form-control" name="ordre" required>
-            <option disabled selected value="emptyOrdre"></option>
-              {% for item in ordreList %}
-                <option value="{{ item.ordre }}">{{ item.ordre }}</option>
-              {% endfor %}
+          <select id="ref-ordre" class="custom-select" name="ordre" required="required">
+            <option disabled="disabled" selected="selected" value="emptyOrdre"></option>
+            {% for item in ordreList %}
+              <option value="{{ item.ordre }}">{{ item.ordre }}</option>
+            {% endfor %}
           </select>
         </div>
-        <div class="margin-5  form-group ">
+        <div class="marginAuto form-group col-md-3">
           <label for="ref-famille" class="input-group-addon">{{ "Famille"|trans }}</label>
-          <select id="ref-famille" class="form-control" name="family">
-            <option disabled selected value="emptyFamily"></option>
-              {% for item in familyList %}
-                <option value="{{ item.family }}">{{ item.family }}</option>
-              {% endfor %}
+          <select id="ref-famille" class="custom-select" name="family">
+            <option disabled="disabled" selected="selected" value="emptyFamily"></option>
+            {% for item in familyList %}
+              <option value="{{ item.family }}">{{ item.family }}</option>
+            {% endfor %}
           </select>
         </div>
-        <div class="margin-5  form-group ">
+        <div class="marginAuto form-group col-md-3">
           <label for="ref-nomScientifique" class="input-group-addon">{{ "Nom Scientifique"|trans }}</label>
-          <select id="ref-nomScientifique" class="form-control" name="scientificName">
-            <option disabled selected value="emptyScientific"></option>
-              {% for item in scientificList %}
-                <option value="{{ item.scientificName }}">{{ item.scientificName }}</option>
-              {% endfor %}
+          <select id="ref-nomScientifique" class="custom-select" name="scientificName">
+            <option disabled="disabled" selected="selected" value="emptyScientific"></option>
+            {% for item in scientificList %}
+              <option value="{{ item.scientificName }}">{{ item.scientificName }}</option>
+            {% endfor %}
           </select>
         </div>
-        <div class="margin-5  form-group ">
+        <div class="marginAuto form-group col-md-3">
           <label for="ref-nomVernaculaire" class="input-group-addon">{{ "Nom Vernaculaire"|trans }}</label>
-          <select id="ref-nomVernaculaire" class="form-control" name="vernFr">
-            <option disabled selected value="emptyVern"></option>
-              {% for item in vernList %}
-                <option value="{{ item.vernFr }}">{{ item.vernFr }}</option>
-              {% endfor %}
+          <select id="ref-nomVernaculaire" class="custom-select" name="vernFr">
+            <option disabled="disabled" selected="selected" value="emptyVern"></option>
+            {% for item in vernList %}
+              <option value="{{ item.vernFr }}">{{ item.vernFr }}</option>
+            {% endfor %}
           </select>
         </div>
-        <div>
-          <input id="birdCardSearchFormSubmit" value="{{ "Rechercher"|trans }}" type="submit" name="birdCardSearchFormSubmit" class="btn btn-lg btn-success"/>
-          <i class="fa fa-check"></i>
+        <div class="center marginAuto form-group col-md-6">
+          <hr/>
+          <input id="birdCardSearchFormSubmit" value="{{ " rechercher"|trans }}"="Rechercher" |trans="|trans" }}""="}}""" type="submit" name="birdCardSearchFormSubmit" class="btn btn-lg btn-success"/>
         </div>
-        <div>
-          <input id="resetButton" value="{{ "Reset"|trans }}" type="button" class="btn btn-lg btn-success"/>
+        <div class="center marginAuto form-group col-md-6">
+          <hr/>
+          <input id="resetButton" value="{{ " reset"|trans }}"="Reset" |trans="|trans" }}""="}}""" type="button" class="btn btn-lg btn-success"/>
         </div>
-        <a hidden id="path" href="{{ url('ornito_inventory_search') }}"></a>
+        <a hidden="hidden" id="path" href="{{ url('ornito_inventory_search') }}"></a>
       </form>
     </div>
     <!-- BIRD SEARCH FORM -->
@@ -73,105 +75,96 @@
         <!-- CONTENT -->
         <div class="container">
           <div class="">
-            <h1 class="text-uppercase page-title">{{ "Résultat de la recherche"|trans }}</h1>
+            <h1 class="center text-uppercase page-title">{{ "Résultat de la recherche"|trans }}</h1>
           </div>
           <ul class="timeline">
             <!-- TIMELINE ARTICLE -->
-              {% if birds %}
-                {% for bird in birds %}
-                  <article class="timeline">
-                    <li class="timeline-inverted">
-                      <aside class="timeline-badge">
-                          <span class="letter-badge-container">
-                            <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">{{ bird.scientificName|first|upper }}</i>
-                          </span>
-                        {% if bird.vernFr == true %}
-                          <span class="margin-left-10 badge badge-info dropdown-name">{{ bird.vernFr }}</span>
-                        {% endif %}
-                        <i class="fa fa-book"></i>
-                      </aside>
-                      <div class="timeline-panel">
-                        <div class="timeline-heading">
-                          <div class="margin-top-0  float-right  btn-group">
-                            <!--START Option panel Menu -->
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
-                              <i class="fa fa-ellipsis-h"></i>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                              <li>
-                                <a href="#">Action</a>
-                              </li>
-                              <li>
-                                <a href="#">Another action</a>
-                              </li>
-                              <li>
-                                <a href="#">Something else</a>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                <a href="#">Separated link</a>
-                              </li>
-                            </ul>
-                          </div>
-                          <!--END Option panel Menu -->
-                          <h4 class="text-uppercase font-size-16 card-title">{{ bird.scientificName }}</h4>
+            {% if birds %}
+              {% for bird in birds %}
+                <article class="timeline">
+                  <li class="timeline-inverted">
+                    <aside class="timeline-badge">
+                      <span class="letter-badge-container">
+                        <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">{{ bird.scientificName|first|upper }}</i>
+                      </span>
+                      {% if bird.vernFr == true %}
+                        <span class="margin-left-10 badge badge-info dropdown-name">{{ bird.vernFr }}</span>
+                      {% endif %}
+                      <i class="fa fa-book"></i>
+                    </aside>
+                    <div class="timeline-panel">
+                      <div class="timeline-heading">
+                        <div class="margin-top-0  float-right  btn-group">
+                          <!--START Option panel Menu -->
+                          <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
+                            <i class="fa fa-ellipsis-h"></i>
+                          </button>
+                          <ul class="dropdown-menu" role="menu">
+                            <li>
+                              <a class="nav-link" target="_blank" href="{{ bird.url }}">{{ 'Fiche  Site INPN'|trans }}</a>
+                            </li>
+                            <li>
+                              <a name="fb_share" type="icon_link" share_url="{{ path('ornito_inventory_find', {id : bird.id} ) }}">Share</a>
+                            </li>
+                          </ul>
                         </div>
-                        <div class="timeline-body">
-                          <!-- Presult PANEL -->
-                          <div class="container">
-                            <span class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
-                                {{ "Nom Scientifique"|trans }}
-                            </span>
-                            <span class="font-size-16 toBbold italic">
-                                {{ bird.scientificName }}
-                            </span>
-                            <span class="margin-bottom-5 font-size-12 badge badge-pill badge-dark">
-                                {{ "DESCRIPTEUR"|trans }}
-                            </span>
-                            <span class="font-size-14 toBold">
-                                {{ bird.author }}
-                            </span>
-                            <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
-                                {{ "Nom Vernaculaire"|trans }}
-                            </span>
-                            {% if bird.vernFr == true %}
-                              <span class="font-size-14 toBold">
-                                  {{ bird.vernFr }}
-                              </span>
-                            {% else %}
-                              <span class="font-size-14 toBold">
-                                  {{ "Non défini"|trans }}
-                              </span>
-                            {% endif %}
-                            <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
-                                {{ "Nom Vernaculaire Anglais"|trans }}
-                            </span>
-                            {% if bird.vernEn == true %}
-                              <span class="font-size-14 toBold">
-                                {{ bird.vernEn }}
-                            </span>
-                            {% else %}
-                              <span class="font-size-14 toBold">
-                                {{ "Non défini"|trans }}
-                            </span>
-                            {% endif %}
-                            <a title="Voir la Fiche" href="{{ path('ornito_inventory_find', {id : bird.id} ) }}">
-                              <button type="button" class="btn btn-primary btn-lg btn-block">
-                                {{ "FICHE"|trans }}
-                                <i class="fa fa-info-circle"></i>
-                              </button>
-                            </a>
-                          </div>
-                          <hr>
-                        </div>
+                        <!--END Option panel Menu -->
+                        <h4 class="text-uppercase font-size-16 card-title">{{ bird.scientificName }}</h4>
                       </div>
-                    </li>
-                  </article>
-                {% endfor %}
-              {% endif %}
-            <!--
-            END ARTICLE TIMELINE
-            -->
+                      <div class="timeline-body">
+                        <!-- Presult PANEL -->
+                        <div class="container">
+                          <span class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
+                            {{ "Nom Scientifique"|trans }}
+                          </span>
+                          <span class="font-size-16 toBbold italic">
+                            {{ bird.scientificName }}
+                          </span>
+                          <span class="margin-bottom-5 font-size-12 badge badge-pill badge-dark">
+                            {{ "DESCRIPTEUR"|trans }}
+                          </span>
+                          <span class="font-size-14 toBold">
+                            {{ bird.author }}
+                          </span>
+                          <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                            {{ "Nom Vernaculaire"|trans }}
+                          </span>
+                          {% if bird.vernFr == true %}
+                            <span class="font-size-14 toBold">
+                              {{ bird.vernFr }}
+                            </span>
+                          {% else %}
+                            <span class="font-size-14 toBold">
+                              {{ "Non défini"|trans }}
+                            </span>
+                          {% endif %}
+                          <span class="margin-bottom-5 font-size-12 badge badge-pill badge-warning">
+                            {{ "Nom Vernaculaire Anglais"|trans }}
+                          </span>
+                          {% if bird.vernEn == true %}
+                            <span class="font-size-14 toBold">
+                              {{ bird.vernEn }}
+                            </span>
+                          {% else %}
+                            <span class="font-size-14 toBold">
+                              {{ "Non défini"|trans }}
+                            </span>
+                          {% endif %}
+                          <a title="Voir la Fiche" href="{{ path('ornito_inventory_find', {id : bird.id} ) }}">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">
+                              {{ "FICHE"|trans }}
+                              <i class="fa fa-info-circle"></i>
+                            </button>
+                          </a>
+                        </div>
+                        <hr>
+                      </div>
+                    </div>
+                  </li>
+                </article>
+              {% endfor %}
+            {% endif %}
+            <!-- END ARTICLE TIMELINE -->
           </ul>
         </div>
         <!-- END CONTENT -->
@@ -182,5 +175,5 @@
   <!-- END CONTENT -->
 {% endblock %}
 {% block javascripts %}{{ parent() }}
-<script src="{{ asset('assets/js/select_form.js') }}"></script>
+  <script src="{{ asset('assets/js/select_form.js') }}"></script>
 {% endblock %}
