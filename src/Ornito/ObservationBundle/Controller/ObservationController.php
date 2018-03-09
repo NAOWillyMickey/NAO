@@ -53,33 +53,38 @@ class ObservationController extends Controller
 
     public function addAction(Request $request)
     {
-        $user = $this->getUser();
-        if (null === $user) {
-            $request->getSession()->getFlashBag()->add('info', 'Connectez-vous ou créez un compte pour ajouter une observation');
-            return $this->redirectToRoute('fos_user_registration_register');
+        $watching = new Watching($this->getUser());
+        $form = $this->createForm(WatchingType::class, $watching);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($watching);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'Annonce bien enregistrée.');
+
+            return $this->redirectToRoute('ornito_observation_view', array(
+                'id' => $watching->getId(),
+            ));
+
         } else {
-            $watching = new Watching($this->getUser());
-            $form = $this->createForm(WatchingType::class, $watching);
 
-            if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($watching);
-                $em->flush();
-
-                $request->getSession()->getFlashBag()->add('success', 'Annonce bien enregistrée.');
-
-                return $this->redirectToRoute('ornito_observation_view', array(
-                    'id' => $watching->getId(),
-                ));
-
-            } else {
-
-                return $this->render('OrnitoObservationBundle:Observation:add.html.twig', array(
-                    'form' => $form->createView(),
-                ));
+            $repository = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
+            $list = $repository->getVernList();
+            $vernList = [];
+            // Get the id with each vern name and store it into an array
+            foreach ($list as $item) {
+                foreach ($item as $bird) {
+                    $value = explode("=>", $bird);
+                    $vernList[$value[0]] = $value[1];
+                }
             }
-        }
 
+            return $this->render('OrnitoObservationBundle:Observation:add.html.twig', array(
+                'form' => $form->createView(),
+                'vernList' => $vernList,
+            ));
+        }
     }
 
     public function editAction(Request $request, $id)
