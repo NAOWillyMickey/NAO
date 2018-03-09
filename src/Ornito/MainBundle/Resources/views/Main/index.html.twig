@@ -69,10 +69,13 @@
                   Fil d'Actu
                 </h1>
                 <!-- PAGE OPTION MENU -->
-                <div id="option-menu" class="d-flex justify-content-center row">
-                  <div class="fb-share-button"
-                    data-href="https://www.nao.nao"
-                    data-layout="button_count">
+                <div id="option-menu" class="margin-top-25 d-flex justify-content-center row">
+                  <div class="col-md-3 margin-top-10 fb-share-button" data-href="https://www.nao.nao" data-layout="button_count">
+                  </div>
+                  <div class="col-md-3 margin-top-10 ">
+                    <a class="badge badge-lg badge-primary" href="{{ path('ornito_observation_homepage')}}">
+                    <i class="fa fa-arrow-circle-down fa-lg float-left"></i><span class="text-uppercase">TOUTES LES OBS<br><small>Index Générale</small></span>
+                  </a>
                   </div>
                 </div>
                 <!-- END PAGE OPTION MENU -->
@@ -128,28 +131,6 @@
                                 {% endif %}
                               </div>
                               <div class="timeline-heading">
-                                <div class="panelMenu  float-right  btn-group">
-                                  <!--START Option panel Menu -->
-                                  <button type="button" class="btn btn-primary btn-sm" data-toggle="dropdown">
-                                    <i class="fa fa-ellipsis-h"></i>
-                                  </button>
-                                  <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                      <a href="#">Action</a>
-                                    </li>
-                                    <li>
-                                      <a href="#">Another action</a>
-                                    </li>
-                                    <li>
-                                      <a href="#">Something else</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                      <a href="#">Separated link</a>
-                                    </li>
-                                  </ul>
-                                </div>
-                                <!-- END Option panel Menu -->
                                 <h4 class="text-uppercase font-size-16 card-title">{{ watch.title }}</h4>
                                 <time class="obs-time">
                                   <i class="fa fa-calendar"></i>
@@ -159,6 +140,35 @@
                               <div class="timeline-body">
                                 <!-- OBS PANEL -->
                                 <div class="row">
+                                  <div class=" col-sm-12 col-md-4 img-panel-container">
+                                    {% if watch.species.protectedStatus == true %}
+                                      {% if watch.species.protectedStatus starts with 'P' %}
+                                        <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-danger">
+                                          {{ "Protégé"|trans }}
+                                          <i class="fa fa-gavel"></i>
+                                        </span>
+                                      {% else %}
+                                        <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-warning">
+                                          {{ "En danger"|trans }}
+                                          <i class="fa fa-gavel"></i>
+                                        </span>
+                                      {% endif %}
+                                    {% else %}
+                                      <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-success">
+                                        {{ "Non menacée"|trans }}
+                                        <i class="fa fa-gavel"></i>
+                                      </span>
+                                    {% endif %}
+                                    {% if watch.image == true %}
+                                      <a title="{{ "Agrandir l'image"|trans }}" href="{{ asset(watch.image.webPath) }}" data-toggle="lightbox">
+                                        <img class="img-mini img-thumbnail" src="{{ asset(watch.image.webPath) }}" alt="{{ watch.image.alt }}">
+                                      </a>
+                                    {% else %}
+                                      <a title="{{ "Agrandir l'image"|trans }}" href="{{ asset('assets/img/obs/test/moineau.jpg') }}" data-toggle="lightbox">
+                                        <img class="img-mini img-thumbnail" src="{{ asset('assets/img/obs/test/moineau.jpg') }}" alt="moineau">
+                                      </a>
+                                    {% endif %}
+                                  </div>
                                   <div class="obs-comment float-left col-sm-12 col-md-4">
                                     <div class="obs-row obs-header">
                                       <span class="margin-bottom-5 font-size-14 italic badge badge-pill badge-success">
@@ -176,38 +186,9 @@
                                       {% endif %}
                                     </div>
                                   </div>
-                                    <div class=" col-sm-12 col-md-4 img-panel-container">
-                                      {% if watch.species.protectedStatus == true %}
-                                        {% if watch.species.protectedStatus starts with 'P' %}
-                                          <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-danger">
-                                            {{ "Protégé"|trans }}
-                                            <i class="fa fa-gavel"></i>
-                                          </span>
-                                        {% else %}
-                                          <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-warning">
-                                            {{ "En danger"|trans }}
-                                            <i class="fa fa-gavel"></i>
-                                          </span>
-                                        {% endif %}
-                                      {% else %}
-                                        <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-success">
-                                          {{ "Non menacée"|trans }}
-                                          <i class="fa fa-gavel"></i>
-                                        </span>
-                                      {% endif %}
-                                      {% if watch.image == true %}
-                                        <a title="{{ "Agrandir l'image"|trans }}" href="{{ asset(watch.image.webPath) }}" data-toggle="lightbox">
-                                          <img class="img-mini img-thumbnail" src="{{ asset(watch.image.webPath) }}" alt="{{ watch.image.alt }}">
-                                        </a>
-                                      {% else %}
-                                        <a title="{{ "Agrandir l'image"|trans }}" href="{{ asset('assets/img/obs/test/moineau.jpg') }}" data-toggle="lightbox">
-                                          <img class="img-mini img-thumbnail" src="{{ asset('assets/img/obs/test/moineau.jpg') }}" alt="moineau">
-                                        </a>
-                                      {% endif %}
-                                    </div>
-                                    <div class=" col-sm-12 col-md-4">
-                                      <span id="obsCommentBadge" class="margin-bottom-10 obs-comment-content badge badge-info">{{ "Commentaire"|trans }}</span>
-                                    <div id="obsCommentContent" class="obsCommentContent scrolltype">
+                                    <div class="margin-top-25 col-sm-12 col-md-4">
+                                      <span class="margin-bottom-10 obs-comment-content badge badge-info">{{ "Commentaire"|trans }}</span>
+                                    <div class="obsCommentContent scrolltype">
                                       <p class="obs-comment-content">
                                         {% if watch.description == true %}
                                           {{ watch.description }}
@@ -216,10 +197,6 @@
                                         {% endif %}
                                       </p>
                                       </div>
-                                      <button type="button" id='obsCommentButton' class="obs-comment-button font-size-12 badge badge-info">
-                                        {{ "Voir le Commentaire"|trans }}
-                                        <i class="fa fa-eye"></i>
-                                      </button>
                                     </div>
                                 </div>
                               </div>
