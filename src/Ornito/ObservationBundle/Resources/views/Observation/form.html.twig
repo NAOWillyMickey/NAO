@@ -21,24 +21,30 @@
       <label for="newObsBirdSciName" class="input-group-addon">{{ "Nom Scientifique"|trans }}</label>
       {{ form_errors(form.species) }}
       {{ form_widget(form.species, {'attr': {'id': 'newObsBirdSciName', 'class': 'custom-select' }}) }}
-    </select>
-    <label for="newObsBirdLng" class="margin-top-25 input-group-addon">{{ "Longitude"|trans }}</label>
-    {{ form_errors(form.longitude) }}
-    {{ form_widget(form.longitude, {'attr': {'id': 'newObsBirdLng', 'placeholder': 'Longitude', 'class':'form-control', 'name': 'newObsBirdLng', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
-    <label for="newObsBirdLat" class="input-group-addon">{{ "Latitude"|trans }}</label>
-    {{ form_errors(form.latitude) }}
-    {{ form_widget(form.latitude, {'attr': {'id': 'newObsBirdLat', 'placeholder': 'Latitude', 'class':'form-control', 'name': 'newObsBirdLat', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
-    <br />
-    <button id="newObsGeolocalisatorButtonForm" type="button" class="margin-top-25 btn btn-primary btn-xs marginAuto">
-      {{ "Géolocaliser"|trans }}
-    </button>
+      <label for="ref-nomVernaculaire" class="input-group-addon">{{ "Nom Vernaculaire"|trans }}</label>
+      <select id="ref-nomVernaculaire" class="custom-select" name="vernFr">
+        <option disabled="disabled" selected="selected" value="emptyVern"></option>
+          {% for key, value in vernList %}
+            <option value="{{ key }}">{{ value }}</option>
+          {% endfor %}
+      </select>
+      <label for="newObsBirdLng" class="margin-top-25 input-group-addon">{{ "Longitude"|trans }}</label>
+      {{ form_errors(form.longitude) }}
+      {{ form_widget(form.longitude, {'attr': {'id': 'newObsBirdLng', 'placeholder': 'Longitude', 'class':'form-control', 'name': 'newObsBirdLng', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
+      <label for="newObsBirdLat" class="input-group-addon">{{ "Latitude"|trans }}</label>
+      {{ form_errors(form.latitude) }}
+      {{ form_widget(form.latitude, {'attr': {'id': 'newObsBirdLat', 'placeholder': 'Latitude', 'class':'form-control', 'name': 'newObsBirdLat', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
+      <br />
+      <button id="newObsGeolocalisatorButtonForm" type="button" class="margin-top-25 btn btn-primary btn-xs marginAuto">
+        {{ "Géolocaliser"|trans }}
+      </button>
+    </div>
   </div>
-</div>
-<div class="col-md-6 float-right">
-  <h5 class="font-size-12 modal-title">{{ "Selectionnez un point sur la Map ou Utilisez la Géolocalisation"|trans }}</h5>
-  <h6 class="font-size-12 modal-title">{{ "Appuyez sur OK, Les coordonnées sont récupérées automatiquement"|trans }}</h6>
-  <div id="newObsMap"></div>
-</div>
+  <div class="col-md-6 float-right">
+    <h5 class="font-size-12 modal-title">{{ "Selectionnez un point sur la Map ou Utilisez la Géolocalisation"|trans }}</h5>
+    <h6 class="font-size-12 modal-title">{{ "Appuyez sur OK, Les coordonnées sont récupérées automatiquement"|trans }}</h6>
+    <div id="newObsMap"></div>
+  </div>
 </div>
 <hr/>
 <div class="col-md-12 margin-top-25">
@@ -48,7 +54,7 @@
 </div>
 <hr />
 <div class="margin-top-25 marginAuto">
-<input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="float-right btn  btn-success"/>
+  <input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="float-right btn  btn-success"/>
 </div>
 {{ form_rest(form) }}
 {{ form_end(form) }}
