@@ -61,7 +61,7 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
 
 
     /**
-     * Get the list of species by scientific name alphabetical order
+     * Get the list of species by scientific name by alphabetical order
      * @return \Doctrine\ORM\QueryBuilder
      */
     public function getScientificNameByAlpha()
@@ -69,6 +69,24 @@ class SpeciesRepository extends \Doctrine\ORM\EntityRepository
         return $this
             ->createQueryBuilder('s')
             ->orderBy('s.scientificName', 'ASC')
+            ;
+    }
+
+
+    /**
+     * Get the list of species by vernFr name by alphabetical order without empty field
+     * @return mixed
+     */
+    public function getVernList()
+    {
+        return $this
+            ->createQueryBuilder('s')
+            ->where('s.vernFr != :vide')
+            ->setParameter('vide', '')
+            ->orderBy('s.vernFr', 'ASC')
+            ->select("CONCAT(s.id, '=>', s.vernFr)")
+            ->getQuery()
+            ->getArrayResult()
             ;
     }
 }
