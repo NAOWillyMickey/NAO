@@ -35,6 +35,11 @@
       {{ form_errors(form.latitude) }}
       {{ form_widget(form.latitude, {'attr': {'id': 'newObsBirdLat', 'placeholder': 'Latitude', 'class':'form-control', 'name': 'newObsBirdLat', 'aria-label': 'Large', 'aria-describedby': 'inputGroup-sizing-sm' }}) }}
       <br />
+      {% if watching is defined %}
+        <button id="newObsGeolocalisatorReset" type="button" class="margin-top-25 btn btn-warning btn-xs marginAuto">
+            {{ "Annuler"|trans }}
+        </button>
+      {% endif %}
       <button id="newObsGeolocalisatorButtonForm" type="button" class="margin-top-25 btn btn-primary btn-xs marginAuto">
         {{ "Géolocaliser"|trans }}
       </button>
@@ -54,7 +59,10 @@
 </div>
 <hr />
 <div class="margin-top-25 marginAuto">
-  <input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="float-right btn  btn-success"/>
+  {% if watching is defined %}
+    <a class="btn btn-outline-info" role="button" href="{{ path('ornito_observation_view', { 'id' : watching.id }) }}">{{ "Revenir à L'observation"|trans }}</a>
+  {% endif %}
+  <input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="float-right btn  btn-outline-success"/>
 </div>
 {{ form_rest(form) }}
 {{ form_end(form) }}
