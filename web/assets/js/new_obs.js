@@ -59,4 +59,29 @@ $(document).ready(function() {
     // Events called on map & button click
     myObsMap.on('click', newObsOnMapClick);
     geoButtonElt.on('click', getLocationLeaflet);
+
+    /* SELECT LIST */
+
+    var vernList = [];
+
+    var a = $('#ornito_observationbundle_watching_species option:first').val();
+    $('option[value='+ a +']').prop('selected', true);
+
+    $('#ref-nomVernaculaire option').each(function() {
+        vernList.push($(this).val());
+    });
+
+    $('select').change(function () {
+        var name = $(this).attr('name');
+        var value = $(this).val();
+        if (name === 'ornito_observationbundle_watching[species]') {
+            if (jQuery.inArray(value, vernList) === -1) {
+                $('option[value="emptyVern"]').prop('selected', true);
+            } else {
+                $('option[value="' + value + '"]').prop('selected', true);
+            }
+        } else {
+            $('option[value="' + value + '"]').prop('selected', true);
+        }
+    });
 });
