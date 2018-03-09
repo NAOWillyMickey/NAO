@@ -55,11 +55,11 @@
         </div>
         <div class="center marginAuto form-group col-md-6">
           <hr/>
-          <input id="birdCardSearchFormSubmit" value="{{ " rechercher"|trans }}"="Rechercher" |trans="|trans" }}""="}}""" type="submit" name="birdCardSearchFormSubmit" class="btn btn-lg btn-success"/>
+          <input id="resetButton" value="{{ "reset"|trans }}" type="button" class="btn btn-lg btn-success"/>
         </div>
         <div class="center marginAuto form-group col-md-6">
           <hr/>
-          <input id="resetButton" value="{{ " reset"|trans }}"="Reset" |trans="|trans" }}""="}}""" type="button" class="btn btn-lg btn-success"/>
+          <input id="birdCardSearchFormSubmit" value="{{ " rechercher"|trans }}" type="submit" name="birdCardSearchFormSubmit" class="btn btn-lg btn-success"/>
         </div>
         <a hidden="hidden" id="path" href="{{ url('ornito_inventory_search') }}"></a>
       </form>
@@ -82,9 +82,15 @@
             {% if birds %}
               {% for bird in birds %}
                 <article class="timeline">
-                  <aside class="float-left">
+                  <aside class="timeline-badge float-left">
                     {% if bird.vernFr == true %}
-                      <span class="float-left badge badge-info dropdown-name">{{ bird.vernFr }}</span>
+                      <span class="float-left badge badge-info dropdown-name">
+                        {% if bird.vernFr|length > 30 %}
+                        {{ bird.vernFr|striptags|slice(0,30) }}...
+                        {% else %}
+                        {{ bird.vernFr }}
+                        {% endif %}
+                        </span>
                     {% endif %}
                   </aside>
                   <li class="timeline-inverted">
