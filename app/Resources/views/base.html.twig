@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" content="ornithoteque">
     <meta name="author" content="surikat-studio">
+    <meta property="og:url"           content="https://www.ornithotheque.avrr.fr" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="ORNITHOTHEQUE" />
+    <meta property="og:description"   content="L'ORNITHOTHEQUE, observez, découvrez, partagez..." />
+    <meta property="og:image"         content="{{ asset('assets/img/logo/iconApp-XS-shadowed.png') }}" />
     <title>
       {% block title %}{{ 'L\'Ornithothèque'|trans }}!{% endblock %}
     </title>
@@ -134,6 +139,15 @@
       {% endif %}
       <!-- Page Content -->
       <div id="page-content-wrapper">
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.12&appId=2163755417186085&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+        </script>
         {% if is_granted("ROLE_SUPER_ADMIN") %}
         <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
           <span class="hamb-top"></span>

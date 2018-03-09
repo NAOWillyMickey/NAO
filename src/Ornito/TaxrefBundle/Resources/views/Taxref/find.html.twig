@@ -27,14 +27,22 @@
           <ul class="timeline">
             <!-- TIMELINE ARTICLE -->
             <article id="birdCard" class="timeline">
+              <aside class="timeline-badge float-left">
+                {% if bird.vernFr == true %}
+                  <span class="float-left badge badge-info dropdown-name">
+                    {% if bird.vernFr|length > 30 %}
+                    {{ bird.vernFr|striptags|slice(0,30) }}...
+                    {% else %}
+                    {{ bird.vernFr }}
+                    {% endif %}
+                    </span>
+                {% endif %}
+              </aside>
               <li class="timeline-inverted">
                 <aside class="timeline-badge">
                   <span class="letter-badge-container">
                     <i class="letter-badge fa fa-b fa-2x shadowed" aria-hidden="true">{{ bird.scientificName|first|upper }}</i>
                   </span>
-                  {% if bird.vernFr == true %}
-                    <span class="margin-left-10 badge badge-info dropdown-name">{{ bird.vernFr }}</span>
-                  {% endif %}
                   <i class="fa fa-book"></i>
                 </aside>
                 <div class="timeline-panel">

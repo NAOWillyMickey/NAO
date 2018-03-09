@@ -68,7 +68,8 @@
                     <h4 class="text-uppercase font-size-16 card-title">{{ watch.title }}</h4>
                     <time class="obs-time">
                       <i class="fa fa-calendar"></i>
-                      {{ "Le "|trans }}{{ watch.date|localizeddate('full', 'short') }}</time>
+                      {{ "Le "|trans }}{{ watch.date|localizeddate('full', 'short') }}
+                    </time>
                   </div>
                   <div class="timeline-body">
                     <!-- OBS PANEL -->
@@ -152,22 +153,26 @@
                       <hr>
                       <div class="obs-comment col-sm-12 col-md-6">
                         <span id="obsCommentBadge" class="margin-bottom-10 obs-comment-content badge badge-info">{{ "Commentaire"|trans }}</span>
-                        <p id="obsCommentContent" class="obs-comment-content">
+                      <div id="obsCommentContent" class="scrolltype">
+                        <p class="obs-comment-content">
                           {% if watch.description == true %}
                             {{ watch.description }}
                           {% else %}
                             {{ "Cet utilisateur n'a pas laissé de commentaire..."|trans }}
                           {% endif %}
                         </p>
+                        </div>
                         <button type="button" id='obsCommentButton' class="obs-comment-button font-size-12 badge badge-info">
                           {{ "Voir le Commentaire"|trans }}
                           <i class="fa fa-eye"></i>
                         </button>
                         <div id="ObsViewMap"></div>
-                        <button type="button" class="btn btn-primary btn-lg btn-block">
-                          {{ "Voir la Map"|trans }}
-                          <i class="fa fa-map-pin"></i>
-                        </button>
+                        <a href="{{ path('ornito_inventory_find', {id : watch.species.id} ) }}">
+                          <button type="button" class="btn btn-primary btn-lg btn-block">
+                          {{ "Fiche Inventaire"|trans }}
+                            <i class="fa fa-list-ul"></i>
+                          </button>
+                        </a>
                       </div>
                       <hr>
                     </div>
