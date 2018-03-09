@@ -1,0 +1,29 @@
+{# app/Resources/TwigBundle/views/Exception/error403.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}
+  -
+  {{ 'Erreur'|trans }}
+  {{ status_code }}
+{% endblock %}
+
+{% block content %}
+  <div id="error_container">
+    <section id="not-found">
+      <div id="title">{{ status_code }}</div>
+      <div class="circles">
+        <p>{{ status_code }}<br>
+          <small class="center">{{ 'Accès Restreint'|trans }} - {{ status_text }}</small>
+        </p>
+        <span class="circle big"></span>
+        <span class="circle med"></span>
+        <span class="circle small"></span>
+      </div>
+    </section>
+  </div>
+  <div class="center">
+    <a class="nav-link"  href="javascript:window.history.back()">Retour</a>
+    <a class="nav-link" href="{{ path('ornito_main_homepage')}}">{{ 'FIL D\'ACTU'|trans }}</a>
+  </div>
+
+ {% endblock %}
