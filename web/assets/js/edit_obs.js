@@ -1,20 +1,26 @@
 /**
- * Created by wilfriedcottineau on 08/03/2018.
+ * Created by wilfriedcottineau on 09/03/2018.
  */
 
-/* JS NEW OBS MAP */
+/* JS EDIT OBS MAP */
 
 $(document).ready(function() {
 
     var myNewObsLat = $('#ornito_observationbundle_watching_latitude');
     var myNewObsLng = $('#ornito_observationbundle_watching_longitude');
+    var lat = document.getElementById("ornito_observationbundle_watching_latitude").value;
+    var lon = document.getElementById("ornito_observationbundle_watching_longitude").value;
     var geoButtonElt = $('#newObsGeolocalisatorButtonForm');
+    var resetButtonElt = $('#newObsGeolocalisatorReset');
+    // Replace comma by a dot in latitude and longitude for leaflet
+    var latitude = lat.replace(/,/g, '.');
+    var longitude = lon.replace(/,/g, '.');
 
-    var myObsMap = L.map('newObsMap').setView([46.780, 3.001], 5);
+    var myObsMap = L.map('newObsMap').setView([latitude, longitude], 16);
 
     // Display map
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 25,
+        maxZoom: 20,
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
         '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
         'Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -22,8 +28,19 @@ $(document).ready(function() {
     }).addTo(myObsMap);
     myObsMap.attributionControl.setPrefix('NAO');
 
+    // Create a marker object and add one at the position where a bird was seen
     var marker = L.marker();
     var circle = L.circle();
+    marker.setLatLng([latitude, longitude]).addTo(myObsMap).bindPopup("<center>Vous étiez là!</center><center>You were here!</center>").openPopup();
+
+    // Reset location with the first latitude & longitude
+    function resetLocation() {
+        marker.setLatLng([latitude, longitude]).addTo(myObsMap)
+            .bindPopup("<center>Vous étiez là!</center><center>You were here!</center>").openPopup();
+        myNewObsLat.val(latitude);
+        myNewObsLng.val(longitude);
+        myObsMap.removeLayer(newObsPopupLocation);
+    }
 
     // Set Lat + Lon fields form & display a marker on map when you are found
     function newObsOnLocationFound(e) {
@@ -65,4 +82,5 @@ $(document).ready(function() {
     // Events called on map & button click
     myObsMap.on('click', newObsOnMapClick);
     geoButtonElt.on('click', getLocationLeaflet);
+    resetButtonElt.on('click', resetLocation);
 });
