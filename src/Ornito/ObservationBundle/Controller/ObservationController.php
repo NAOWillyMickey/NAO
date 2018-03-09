@@ -3,6 +3,7 @@
 namespace Ornito\ObservationBundle\Controller;
 
 use Ornito\ObservationBundle\Entity\Watching;
+use Ornito\ObservationBundle\Form\WatchingEditType;
 use Ornito\ObservationBundle\Form\WatchingType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -89,7 +90,29 @@ class ObservationController extends Controller
 
     public function editAction(Request $request, $id)
     {
-        return $this->render('OrnitoObservationBundle:Observation:edit.html.twig');
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('OrnitoObservationBundle:Watching');
+        $watching = $repository->find($id);
+
+        $form = $this->createForm(WatchingEditType::class, $watching);
+
+        $repository = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
+        $list = $repository->getVernList();
+        $vernList = [];
+        // Get the id with each vern name and store it into an array
+        foreach ($list as $item) {
+            foreach ($item as $bird) {
+                $value = explode("=>", $bird);
+                $vernList[$value[0]] = $value[1];
+            }
+        }
+
+        return $this->render('OrnitoObservationBundle:Observation:edit.html.twig', array(
+            'form' => $form->createView(),
+            'watching' => $watching,
+            'vernList' => $vernList,
+        ));
     }
 
     public function deleteAction(Request $request, $id)
