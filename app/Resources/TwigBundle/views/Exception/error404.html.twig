@@ -1,0 +1,39 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}
+  -
+  {{ 'Erreur'|trans }}
+  {{ status_code }}
+{% endblock %}
+
+{% block content %}
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+  <video autoplay="autoplay" loop="loop" poster="poster" class="bg" src="https://static.videezy.com/system/resources/previews/000/011/589/original/Birds_12_-_4K_res.mp4"></video>
+  <div class="bg-filter"></div>
+
+  <div class="intro-text">
+    <h1 class="center">{{ 'Page Inconnue'|trans }}</h1>
+    <h2 class="center">{{ 'Le serveur à retourné une erreur de type '|trans }}
+      "{{ status_code }}
+      {{ status_text }}".</h2>
+    <div class="center row">
+      <div class="col-md-4">
+        <a class="badge btn-danger font-size-14 nav-link" href="javascript:window.history.back()">Retour</a>
+      </div>
+      <div class="col-md-4">
+        <a class="badge badge-success font-size-14  nav-link" href="{{ path('ornito_observation_homepage')}}">{{ 'Toutes Les Obs'|trans }}</a>
+      </div>
+      <div class="col-md-4">
+        <a class="badge btn-warning font-size-14 nav-link" href="{{ path('ornito_main_homepage')}}">{{ 'FIL D\'ACTU'|trans }}</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block javascripts %}{{ parent() }}
+<script type="text/javascript">
+/* FOOTER HIDDEN */
+$('#section_footer').hide();
+</script>
+{% endblock %}
