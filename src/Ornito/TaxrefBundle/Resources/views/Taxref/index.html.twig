@@ -158,9 +158,9 @@
                               {{ "Non défini"|trans }}
                             </span>
                           {% endif %}
-                          <a title="Voir la Fiche" href="{{ path('ornito_inventory_find', {id : bird.id} ) }}">
+                          <a title="{{ "Voir la Fiche"|trans }}" href="{{ path('ornito_inventory_find', {id : bird.id} ) }}">
                             <button type="button" class="btn btn-primary btn-lg btn-block">
-                              {{ "FICHE"|trans }}
+                              {{ "FICHE INVENTAIRE"|trans }}
                               <i class="fa fa-info-circle"></i>
                             </button>
                           </a>
