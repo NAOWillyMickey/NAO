@@ -41,16 +41,28 @@
           <div class="collapse navbar-collapse center justify-content-center" id="navbarprincipal">
             <ul class="align-items-center navbar-nav">
               <li class="nav-item">
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <a href="{{ path('ornito_observation_homepage')}}" class="nav-link fa fa-binoculars">
+                  {{ 'OBS\''|trans }}
+                </a>
+                {% else %}
                 <a class="nav-link" href="{{ path('ornito_main_homepage')}}">{{ 'FIL D\'ACTU'|trans }}</a>
+                {% endif %}
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('ornito_map_homepage')}}">{{ 'MAP'|trans }}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ path('ornito_inventory_homepage')}}">{{ 'L\'INVENTAIRE'|trans }}</a>
+                <a class="nav-link" href="{{ path('ornito_inventory_homepage')}}">{{ 'INVENTAIRE'|trans }}</a>
               </li>
               <li class="nav-item">
+                {% if is_granted("ROLE_NATURALIST") %}
+                <a title="{{ 'Observations à Validées'|trans }}" href="{{ path('ornito_observation_homepage')}}" class="nav-link fa fa-certificate">
+                  {{ 'VALIDATION'|trans|upper }}
+                </a>
+                {% else %}
                 <a class="nav-link" href="{{ path('ornito_main_join')}}">{{ 'PARTICIPER'|trans }}</a>
+                {% endif %}
               </li>
             </ul>
           </div>
@@ -182,10 +194,18 @@
           <a title="{{ 'Communauté Facebook'|trans }}" href="" class="fa fa-facebook-square"></a>
         </div>
         <div>
-          <a title="{{ 'Observations à Valider'|trans }}" href="{{ path('ornito_observation_waiting') }}" class="fa fa-certificate"></a>
+          {% if is_granted('ROLE_NATURALIST') %}
+            <a title="{{ 'Observations à Validées'|trans }}" href="{{ path('ornito_observation_homepage')}}" class="fa fa-certificate"></a>
+          {% else %}
+            <a title="{{ 'Observations à Validées'|trans }}" href="{{ path('ornito_main_join')}}" class="fa fa-certificate"></a>
+          {% endif %}
         </div>
         <div>
-          <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_observation_add')}}" class="fa fa-binoculars"></a>
+          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_observation_add')}}" class="fa fa-binoculars"></a>
+          {% else %}
+            <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_main_join')}}" class="fa fa-binoculars"></a>
+          {% endif %}
         </div>
         <div>
           <a title="{{ 'Communauté Pinterest'|trans }}" href="" class="fa fa-pinterest-square"></a>
@@ -235,6 +255,8 @@
             <a href="{{ path('ornito_main_legal')}}">{{ 'Mentions Légales'|trans }}</a>
             -
             <a href="{{ path('ornito_main_cgu')}}">{{ 'CGU'|trans }}</a>
+            -
+            <a href="{{ path('ornito_main_join')}}">{{ 'Participer'|trans }}</a>
           </p>
         </div>
       </footer>
