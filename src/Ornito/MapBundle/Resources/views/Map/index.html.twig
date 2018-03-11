@@ -34,41 +34,49 @@
 </div>
 <div id="mapPanelContainer" class="col-md-4 col-xs-11">
   <div id="mapPanelSearchArea">
-    <form id="mymapBirdSearhForm" name="mymapBirdSearhForm" class="col-xs-10 offset-1 form">
+    <form id="birdCardSearhForm" name="birdCardSearhForm" method="post" action="{{ url('ornito_map_homepage') }}" class="col-xs-10 offset-1 form">
       <div class="marginAuto">
-        <label for="mymapBirdOrder" class="input-group-addon">Ordre</label>
-        <select name="mymapBirdOrder" class="custom-select" placeholder="Ordre" id="mymapBirdOrder">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
+        <label for="ref-ordre" class="input-group-addon">{{ "Ordre"|trans }}</label>
+        <select id="ref-ordre" class="custom-select" name="ordre" required="required">
+          <option disabled="disabled" selected="selected" value="emptyOrdre"></option>
+          {% for item in ordreList %}
+            <option value="{{ item.ordre }}">{{ item.ordre }}</option>
+          {% endfor %}
         </select>
       </div>
       <div class="marginAuto">
-        <label for="mymapBirdFamily" class="input-group-addon">Famille</label>
-        <select name="mymapBirdFamily" class="custom-select" placeholder="Famille" id="mymapBirdFamily">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
+        <label for="ref-family" class="input-group-addon">{{ "Famille"|trans }}</label>
+        <select id="ref-family" class="custom-select" name="family">
+          <option disabled="disabled" selected="selected" value="emptyFamily"></option>
+          {% for item in familyList %}
+            <option value="{{ item.family }}">{{ item.family }}</option>
+          {% endfor %}
         </select>
       </div>
       <div class="marginAuto">
-        <label for="mymapBirdSciName" class="input-group-addon">Nom Scientifique</label>
-        <select name="mymapBirdSciName" class="custom-select" placeholder="Nom Scientifique" id="mymapBirdSciName">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
+        <label for="ref-nomScientifique" class="input-group-addon">{{ "Nom Scientifique"|trans }}</label>
+        <select id="ref-nomScientifique" class="custom-select" name="scientificName">
+          <option disabled="disabled" selected="selected" value="emptyScientific"></option>
+          {% for item in scientificList %}
+            <option value="{{ item.scientificName }}">{{ item.scientificName }}</option>
+          {% endfor %}
         </select>
       </div>
       <div class="marginAuto">
-        <label for="mymapBirdVerName" class="input-group-addon">Nom Vernaculaire</label>
-        <select name="mymapBirdVerName" class="custom-select" placeholder="Nom Scientifique" id="mymapBirdVerName">
-          <option value="valeur1">Valeur 1</option>
-          <option value="valeur2">Valeur 2</option>
-          <option value="valeur3">Valeur 3</option>
+        <label for="ref-nomVernaculaire" class="input-group-addon">{{ "Nom Vernaculaire"|trans }}</label>
+        <select id="ref-nomVernaculaire" class="custom-select" name="vernFr">
+          <option disabled="disabled" selected="selected" value="emptyVern"></option>
+          {% for item in vernList %}
+            <option value="{{ item.vernFr }}">{{ item.vernFr }}</option>
+          {% endfor %}
         </select>
       </div>
-      <div class="col-md-12 margin-top-10  ">
-        <input id="mymapFormSubmit" value="Valider" form="mymapBirdSearhForm" type="submit" name="mymapFormSubmit" class="float-right btn  btn-success"/>
+      <div class="margin-top-10 float-left">
+        <input id="resetButton" value="{{ "reset"|trans }}" type="button" class="float-left btn btn-warning"/>
+      </div>
+      <a hidden="hidden" id="path" href="{{ url('ornito_inventory_search') }}"></a>
+      <div class="margin-top-10  float-right">
+        <input id="birdCardSearchFormSubmit" value="{{ " Valider"|trans }}" type="submit" name="birdCardSearchFormSubmit" class="float-right btn  btn-success"/>
       </div>
     </form>
   </div>
@@ -78,93 +86,93 @@
   <div class="table-container">
     <table class="table table-filter">
       <tbody>
+        {% if watchingsList == 1  %}
+        <tr >
+          <td>
+            <p class="center lead text-uppercase">
+              Aucun Résultats à Afficher
+            </p>
+          </td>
+        </tr>
+        {% endif %}
+      {% if watchingsList  and watchingsList != 1 %}
+        {% for watchings in watchingsList %}
+        {% for watch in watchings %}
         <tr >
           <td>
             <a href="#" class="pull-left">
               <span class="profil-img">
-                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
-                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
+                <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}">
+                  {% if watch.user.avatar == null %}
+                    <i class="profil-picture shadowed fa fa-user fa-1x shadowed" aria-hidden="true"></i>
+                  {% else %}
+                    <img title="{{ watch.user.username }}" class="profil-picture shadowed" src="{{ asset(watch.user.avatar.webPath) }}" alt="{{ watch.user.avatar.alt }}">
+                  {% endif %}
+                </a>
               </span>
-              <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
+              <span class="margin-left-10 font-size-10 badge badge-success ">{{ watch.user.username }}</span>
             </a>
             <hr>
-            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {id : 2}) }}">
+            <a class="float-right" title="{{ "Voir l\'Obs"|trans }}" href="{{ path('ornito_observation_view', {id : watch.id}) }}">
               <i class="fa fa-eye fa-lg"></i>
             </a>
-            <a title="Voir sur la Map" href="">
+            <a class="float-right" title="{{ "Voir sur la Map"|trans }}" href="{{ path('ornito_map_homepage') }}">
               <i class="fa fa-map fa-lg"></i>
             </a>
           </td>
           <td>
             <div class="media">
               <div class="media-body">
-                <span class="media-meta pull-right">13 Février 2018</span>
-                <a href="{{ path('ornito_observation_view', {id : 2}) }}">
-                  <h4 class="title">Héron Cendré<span class="pull-right">(.)</span></h4>
+                <span class="media-meta pull-right">{{ watch.date|localizeddate('long', 'none') }}</span>
+                <a title="{{ "Voir la Fiche"|trans }}" href="{{ path('ornito_inventory_find', { id: watch.species.id}) }}">
+                  <h4 class="title">
+                    {% if watch.species.vernFr == true %}
+                      {{ watch.species.vernFr }}
+                    {% else %}
+                      {{ watch.species.scientificName }}
+                    {% endif %}
+                  </h4>
                 </a>
-                <p class="summary">Parc de la tête d'Or 69006 LYON</p>
+                <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watch.id } ) }}">
+                  <p class="summary">{{ watch.title }}</p>
+                </a>
+                <span class="pull-right">
+                  {% if watch.species.protectedStatus == true %}
+                    {% if watch.species.protectedStatus starts with 'P' %}
+                      <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-danger">
+                        {{ "Protégé"|trans }}
+                        <i class="fa fa-gavel"></i>
+                      </span>
+                    {% else %}
+                      <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-warning">
+                        {{ "En danger"|trans }}
+                        <i class="fa fa-gavel"></i>
+                      </span>
+                    {% endif %}
+                  {% else %}
+                    <span class="badge-status text-uppercase float-right font-size-12 badge shadowed badge-success">
+                      {{ "Non menacée"|trans }}
+                      <i class="fa fa-gavel"></i>
+                    </span>
+                  {% endif %}
+                </span>
               </div>
             </div>
           </td>
         </tr>
+        {% endfor %}
+        {% endfor %}
+        {% else %}
         <tr >
           <td>
-            <a href="#" class="pull-left">
-              <span class="profil-img">
-                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
-                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
-              </span>
-              <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
-            </a>
-            <hr>
-            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {id : 2}) }}">
-              <i class="fa fa-eye fa-lg"></i>
-            </a>
-            <a title="Voir sur la Map" href="">
-              <i class="fa fa-map fa-lg"></i>
-            </a>
-          </td>
-          <td>
-            <div class="media">
-              <div class="media-body">
-                <span class="media-meta pull-right">17 Février 2018</span>
-                <a href="{{ path('ornito_observation_view', {id : 2}) }}">
-                  <h4 class="title">Aigle Royale<span class="pull-right">(Protégé)</span></h4>
-                </a>
-                <p class="summary">Route des SAPIN 69009 LYON.</p>
-              </div>
-            </div>
+            <p class="center lead text-uppercase">
+              {% if watchingsList != 1  %}
+              La Recherche n'a donné aucun Résultat
+              {% endif %}
+            </p>
           </td>
         </tr>
-        <tr>
-          <td>
-            <a href="#" class="pull-left">
-              <span class="profil-img">
-                <a title="Voir le profil" href=""><img title="John D." class="profil-picture shadowed" src="{{ asset('assets/uploads/users/userPic.jpg') }}" alt=""></a>
-                <!-- <i class="fa fa-user shadowed" aria-hidden="true"></i> -->
-              </span>
-              <span class="margin-left-10 font-size-10 badge badge-success ">John D.</span>
-            </a>
-            <hr>
-            <a title="Voir l'Obs" href="{{ path('ornito_observation_view', {id : 2}) }}">
-              <i class="fa fa-eye fa-lg"></i>
-            </a>
-            <a title="Voir sur la Map" href="">
-              <i class="fa fa-map fa-lg"></i>
-            </a>
-          </td>
-          <td>
-            <div class="media">
-              <div class="media-body">
-                <span class="media-meta pull-right">13 Février 2018</span>
-                <a href="{{ path('ornito_observation_view', {id : 2}) }}">
-                  <h4 class="title">Faucon Pelerin<span class="pull-right">(Protégé)</span></h4>
-                </a>
-                <p class="summary">La Part Dieu 69006 LYON</p>
-              </div>
-            </div>
-          </td>
-        </tr>
+      {% endif %}
       </tbody>
     </table>
   </div>
@@ -178,6 +186,8 @@
 {% endblock %}
 
 {% block javascripts %}{{ parent() }}
+<script src="{{ asset('assets/js/select_form.js') }}"></script>
+<script src="{{ asset('assets/js/obsApi.js') }}"></script>
 <script type="text/javascript">
 /* FOOTER HIDDEN */
 $('#section_footer').hide();
