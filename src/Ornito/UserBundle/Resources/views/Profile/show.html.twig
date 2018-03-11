@@ -62,9 +62,13 @@
                       {% endif %}
                     </a>
                   </li>
-                  <li role="presentation" class="nav-item">
-                    <a href="#naturalistProfilePanel" aria-controls="naturalistProfilePanel" role="tab" data-toggle="tab" class="nav-link">{{ "Naturaliste"|trans }}</a>
-                  </li>
+                  {% for role in  user.roles %}
+                      {% if role == 'ROLE_NATURALIST' %}
+                      <li role="presentation" class="nav-item">
+                        <a href="#naturalistProfilePanel" aria-controls="naturalistProfilePanel" role="tab" data-toggle="tab" class="nav-link">{{ "Naturaliste"|trans }}</a>
+                      </li>
+                      {% endif %}
+                  {% endfor %}
                   {% if user.id == app.user.id %}
                     <li role="presentation" class="nav-item">
                       <a href="{{ (path('fos_user_profile_edit')) }}" class="nav-link">{{ "Admin"|trans }}</a>
@@ -200,15 +204,43 @@
                                         </td>
                                         <td>
                                           <div class="media">
+                                            <a href="#" class="pull-left">
+                                              <span>
+                                                {% if watching.image == null %}
+                                                  <i class="fa fa-camera-retro fa-4x shadowed" aria-hidden="true"></i>
+                                                {% else %}
+                                                <a title="{{ "Agrandir l'image"|trans }}" href="{{ asset(watching.image.webPath) }}" data-toggle="lightbox">
+                                                  <img class="img-thumbnail img-max-size-2" src="{{ asset(watching.image.webPath) }}" alt="{{ watching.image.alt }}">
+                                                </a>
+                                                {% endif %}
+                                              </span>
+                                            </a>
                                             <div class="media-body">
                                               <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
-                                              <h4 class="title">
-                                                {% for specie in watching.species %}
-                                                  {{ specie.scientificName }}
-                                                {% endfor %}
-                                                <span class="pull-right valid">({{ watching.validateStatus }})</span>
-                                              </h4>
-                                              <p class="summary">{{ watching.title }}</p>
+                                                <a href="{{ path('ornito_inventory_find', { id: watching.species.id}) }}">
+                                                  <h4 class="title">
+                                                    {% if watching.species.vernFr == true %}
+                                                      {{ watching.species.vernFr }}
+                                                    {% else %}
+                                                        {{ watching.species.scientificName }}
+                                                    {% endif %}
+                                                    <span class="pull-right">(
+                                                      {% if watching.species.protectedStatus == true %}
+                                                        {% if watching.species.protectedStatus starts with 'P' %}
+                                                          {{ "Protégé"|trans }}
+                                                        {% else %}
+                                                          {{ "En danger"|trans }}
+                                                        {% endif %}
+                                                      {% else %}
+                                                          {{ "Non menacée"|trans }}
+                                                      {% endif %})
+                                                    </span>
+                                                  </h4>
+                                                </a>
+                                                <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
+                                                  <p class="summary">{{ watching.title }}</p>
+                                                </a>
+                                              <span class="pull-right badge badge-light">({{ watching.validateStatus }})</span>
                                             </div>
                                           </div>
                                         </td>
@@ -237,67 +269,78 @@
                         <div class="col-md-12">
                           <div class="panel panel-default">
                             <div class="panel-body">
-                              {% if is_granted("ROLE_NATURALIST")and user.id == app.user.id %}
-                                <div class="pull-right">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-success btn-filter" data-target="attested">{{ "J'ai validé"|trans }}</button>
-                                    <button type="button" class="btn btn-danger btn-filter" data-target="rejected">{{ "J'ai refusé"|trans }}</button>
-                                    <button type="button" class="btn btn-default btn-filter" data-target="all">{{ "Tous"|trans }}</button>
-                                  </div>
+                              {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                              <div class="pull-right">
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-success btn-filter" data-target="attested">
+                                    {% if user.id == app.user.id %}
+                                      {{ "J'ai validé"|trans }}
+                                    {% else %}
+                                      {{ "Il a validé"|trans }}
+                                    {% endif %}
+                                  </button>
+                                  <button type="button" class="btn btn-danger btn-filter" data-target="rejected">
+                                    {% if user.id == app.user.id %}
+                                      {{ "J'ai refusé"|trans }}
+                                    {% else %}
+                                      {{ "Il a refusé"|trans }}
+                                    {% endif %}
+                                  </button>
+                                  <button type="button" class="btn btn-default btn-filter" data-target="all">{{ "Tous"|trans }}</button>
                                 </div>
-                                <div class="table-container">
-                                  <table class="table table-filter">
-                                    <tbody>
-                                      {% for watching in user.watchings %}
-                                        <tr data-status="{{ watching.validateStatus }}">
-                                          <td>
-                                            <div class="ckbox">
-                                              <input type="checkbox" id="checkbox1">
-                                              <label for="checkbox1"></label>
-                                            </div>
-                                          </td>
-                                          <td>
-                                            <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
-                                              <i class="fa fa-eye"></i>
+                              </div>
+                              <div class="table-container">
+                                <table class="table table-filter">
+                                  <tbody>
+                                    {% for watching in user.watchings %}
+                                      <tr data-status="{{ watching.validateStatus }}">
+                                        <td>
+                                          <div class="ckbox">
+                                            <input type="checkbox" id="checkbox1">
+                                            <label for="checkbox1"></label>
+                                          </div>
+                                        </td>
+                                        <td>
+                                          <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
+                                            <i class="fa fa-eye"></i>
+                                          </a>
+                                          {% if user.id == app.user.id %}
+                                            <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-edit"></i>
                                             </a>
-                                            {% if user.id == app.user.id %}
-                                              <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
-                                                <i class="fa fa-edit"></i>
-                                              </a>
-                                              <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
-                                                <i class="fa fa-trash"></i>
-                                              </a>
-                                            {% endif %}
-                                          </td>
-                                          <td>
-                                            <div class="media">
-                                              <a href="#" class="pull-left">
-                                                <span class="profil-img">
-                                                  {% if user.avatar == null %}
-                                                    <a href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><i class="fa fa-user fa-2x shadowed" aria-hidden="true"></i></a>
-                                                  {% else %}
-                                                  <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}"><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
-                                                  {% endif %}
-                                                </span>
-                                                <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
-                                              </a>
-                                              <div class="media-body">
-                                                <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
-                                                <h4 class="title">
-                                                  {% for specie in watching.species %}
-                                                    {{ specie.scientificName }}
-                                                  {% endfor %}
-                                                  <span class="pull-right valid">({{ watching.validateStatus }})</span>
-                                                </h4>
-                                                <p class="summary">{{ watching.title }}</p>
-                                              </div>
+                                            <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-trash"></i>
+                                            </a>
+                                          {% endif %}
+                                        </td>
+                                        <td>
+                                          <div class="media">
+                                            <a href="#" class="pull-left">
+                                              <span class="profil-img">
+                                                {% if user.avatar == null %}
+                                                  <i class="fa fa-user fa-lg shadowed" aria-hidden="true"></i>
+                                                {% else %}
+                                                <a title="{{ "Voir le profil"|trans }}" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
+                                                {% endif %}
+                                              </span>
+                                              <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
+                                            </a>
+                                            <div class="media-body">
+                                              <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
+                                              <h4 class="title">
+                                                {% for specie in watching.species %}
+                                                  {{ specie.scientificName }}
+                                                {% endfor %}
+                                                <span class="pull-right valid">({{ watching.validateStatus }})</span>
+                                              </h4>
+                                              <p class="summary">{{ watching.title }}</p>
                                             </div>
-                                          </td>
-                                        </tr>
-                                      {% endfor %}
-                                    </tbody>
-                                  </table>
-                                </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    {% endfor %}
+                                  </tbody>
+                                </table>
                               </div>
                             {% else %}
                               {% if user.naturalistPromote == 'pending' and user.id == app.user.id %}
@@ -332,81 +375,12 @@
                                   </a>
                                 </div>
                               {% else %}
-                                <div class="pull-right">
-                                  <div class="btn-group">
-                                    <button type="button" class="btn btn-success btn-filter" data-target="attested">
-                                      {% if user.id == app.user.id %}
-                                        {{ "J'ai validé"|trans }}
-                                      {% else %}
-                                        {{ "Il a validé"|trans }}
-                                      {% endif %}
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-filter" data-target="rejected">
-                                      {% if user.id == app.user.id %}
-                                        {{ "J'ai refusé"|trans }}
-                                      {% else %}
-                                        {{ "Il a refusé"|trans }}
-                                      {% endif %}
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-filter" data-target="all">{{ "Tous"|trans }}</button>
-                                  </div>
-                                </div>
-                                <div class="table-container">
-                                  <table class="table table-filter">
-                                    <tbody>
-                                      {% for watching in user.watchings %}
-                                        <tr data-status="{{ watching.validateStatus }}">
-                                          <td>
-                                            <div class="ckbox">
-                                              <input type="checkbox" id="checkbox1">
-                                              <label for="checkbox1"></label>
-                                            </div>
-                                          </td>
-                                          <td>
-                                            <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
-                                              <i class="fa fa-eye"></i>
-                                            </a>
-                                            {% if user.id == app.user.id %}
-                                              <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
-                                                <i class="fa fa-edit"></i>
-                                              </a>
-                                              <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
-                                                <i class="fa fa-trash"></i>
-                                              </a>
-                                            {% endif %}
-                                          </td>
-                                          <td>
-                                            <div class="media">
-                                              <a href="#" class="pull-left">
-                                                <span class="profil-img">
-                                                  {% if user.avatar == null %}
-                                                    <i class="fa fa-user fa-lg shadowed" aria-hidden="true"></i>
-                                                  {% else %}
-                                                  <a title="{{ "Voir le profil"|trans }}" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
-                                                  {% endif %}
-                                                </span>
-                                                <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
-                                              </a>
-                                              <div class="media-body">
-                                                <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
-                                                <h4 class="title">
-                                                  {% for specie in watching.species %}
-                                                    {{ specie.scientificName }}
-                                                  {% endfor %}
-                                                  <span class="pull-right valid">({{ watching.validateStatus }})</span>
-                                                </h4>
-                                                <p class="summary">{{ watching.title }}</p>
-                                              </div>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      {% endfor %}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
+
+
                             {% endif %}
                           {% endif %}
+                            </div>
+                          </div>
                         </div>
                         <hr/>
                         <div class="content-footer">

@@ -49,6 +49,11 @@ i {
 .img-max-size-1 {
   max-height: 250px;
 }
+.img-max-size-2 {
+  max-height: 72px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 .font-size-30 {
   font-size: 30px;
