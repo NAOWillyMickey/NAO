@@ -170,7 +170,7 @@
         {% if app.request.hasPreviousSession %}
             {% for type, messages in app.session.flashbag.all() %}
                 {% for message in messages %}
-                <div class="alert alert-{{ type }} alert-dismissable">
+                <div id='alert_container' class="alert alert-{{ type }} alert-dismissable">
                   <a class="panel-close close" data-dismiss="alert">×</a>
                   <i class="fa fa-exclamation-triangle"></i>
                   <strong>{{ message }}</strong>

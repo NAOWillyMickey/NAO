@@ -27,7 +27,9 @@ body {
 body, html {
   height: 100%;
 }
-
+#alert_container {
+  z-index: 10000; !important;
+}
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
   background-color: transparent;
 }
@@ -2589,6 +2591,7 @@ i.box-circle-solid {
   opacity: 0.8;
   position: absolute;
   z-index: 22;
+  min-height: 80vh;
   max-height: 80vh;
 }
 
