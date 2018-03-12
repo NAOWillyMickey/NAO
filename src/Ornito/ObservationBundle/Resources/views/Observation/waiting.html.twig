@@ -8,7 +8,13 @@
 
 {% block content %}{{ parent() }}
     <!-- CONTENT HERE -->
-    <div id="mapPanelListArea" class="col-xs-10 offset-1">
+    <h1 class="band_title elegantshd">{{ "En attente de validation"|trans }}
+        <span>
+            <i class="fa fa-angle-double-down fa-1x"></i>
+        </span>
+    </h1>
+    <hr />
+    <div id="mapPanelListArea" class="col-xs-10 offset-1 margin-top-25">
         <div class="table-container">
             <table class="table table-filter">
                 <tbody>
@@ -28,18 +34,15 @@
                             <span class="margin-left-10 font-size-10 badge badge-success ">{{ watch.user.username }}</span>
                             </span>
                             <hr>
-                            <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {id : watch.id}) }}">
-                                <i class="fa fa-eye fa-lg"></i>
-                            </a>
-                            <a title="{{ "Voir sur la Map"|trans }}" href="{{ path('ornito_map_homepage') }}">
-                                <i class="fa fa-map fa-lg"></i>
+                            <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_validate', {id : watch.id}) }}">
+                                <i class="fa fa-eye fa-lg"></i>{{ "Sélectionner"|trans }}
                             </a>
                         </td>
                         <td>
                             <div class="media">
                                 <div class="media-body">
                                     <span class="media-meta pull-right">{{ watch.date|localizeddate('long', 'none') }}</span>
-                                    <a href="{{ path('ornito_inventory_find', { id: watch.species.id}) }}">
+                                    <span>
                                         <h4 class="title">
                                             {% if watch.species.vernFr == true %}
                                                 {{ watch.species.vernFr }}
@@ -58,7 +61,7 @@
                                                 {% endif %})
                                             </span>
                                         </h4>
-                                    </a>
+                                    </span>
                                     <p class="summary">{{ watch.title }}</p>
                                 </div>
                             </div>
