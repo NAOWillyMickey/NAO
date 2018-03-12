@@ -51,7 +51,6 @@ class MapController extends Controller
           // User override the required field and send an empty form
           $request->getSession()->getFlashBag()->add('danger', 'You should select a bird in the select form before find it...');
         }
-
         $watchingsListJson = Json_encode($watchingsListJson);
         $ordreList = $repository->getList('ordre');
         $familyList = $repository->getList('family');

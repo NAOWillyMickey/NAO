@@ -96,6 +96,7 @@
         </tr>
         {% endif %}
       {% if watchingsList  and watchingsList != 1 %}
+      {{ dump(watchingsListJson) }}
         {% for watchings in watchingsList %}
         {% for watch in watchings %}
         <tr id="{{ watch.id }}" >
@@ -190,7 +191,7 @@
 {% if watchingsList  and watchingsList != 1 %}
 var myItems = {{ watchingsListJson|json_encode()|raw }};
 {% else %}
-var myItems = [];
+var myItems = 1;
 {% endif %}
 /* FOOTER HIDDEN */
 $('#section_footer').hide();

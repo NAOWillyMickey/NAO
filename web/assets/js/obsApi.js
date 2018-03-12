@@ -2,11 +2,19 @@
  * Created by Mickey on 09/03/2018.
  */
 
-/* JS NEW OBS MAP */
+/*******************************************************************************************************************************************
+********************************************************************************************************************************************
+
+                                           JS  OBS' DISLPAYER MAP
+
+*********************************************************************************************************************************************
+*********************************************************************************************************************************************/
 
 $(document).ready(function() {
 
-  /* JS  MAP */
+  /*********************************************************************
+                 SEARH PANEL CONTROLLER (RIGHT SIDEBAR)
+  ************************************************************************/
   $("#mapPanelButtonControl").click(function() {
     $("#mapPanelContainer").slideUp();
     $("#mapPanelButtonControl").fadeOut();
@@ -20,10 +28,17 @@ $(document).ready(function() {
     $("#mapPanelButtonControl").fadeIn();
   });
 
+  /*********************************************************************
+                 GENERAL VAR AND CONTROL FOR THE MAP
+  ************************************************************************/
   var myLatitude = $('#myLatInput');
   var myLongitude = $('#myLongInput');
   var mymap = L.map('mapContainer').setView([46.780, 3.001], 6);
 
+  /*********************************************************************
+                 LAYERS FOR THE MAP - MARKER AND BACKGROUND MAP
+  ************************************************************************/
+  var markers = new L.layerGroup();
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -32,6 +47,10 @@ $(document).ready(function() {
     id: 'mapbox.streets'
   }).addTo(mymap);
 
+
+  /*********************************************************************
+                  GEOLOCALISATION FUNCTIONALITIES
+  ************************************************************************/
   /*  mymap.locate({setView: true, maxZoom: 18});*/
 
   function onLocationFound(e) {
@@ -64,9 +83,15 @@ $(document).ready(function() {
     myLongitude.val(e.latlng.lng);
   });
 
+/*******************************************************************************************************************************************
+********************************************************************************************************************************************
+
+                                          TOOLTIP CONSTRUCTOR SERVICE
+
+*********************************************************************************************************************************************
+*********************************************************************************************************************************************/
 
   /* VARIABLE FOR THE CONSTRUCTOR */
-
   var myTooltipContent = '';
   var myTooltipUserPicture = null;
   var myTooltipUserPicWebPath = '';
@@ -78,7 +103,6 @@ $(document).ready(function() {
   var myTooltipObsPic = '';
   var myTooltipObsPicWebPath = '';
   var myTooltipObsPicAlt = '';
-
   /* CSS STYLE */
   var myTooltipContainerStyle = "style='width: 120px;'";
   var myTooltipUserStyle = "style='margin-left: -25px;margin-top: -25px;'";
@@ -87,67 +111,77 @@ $(document).ready(function() {
   var myTooltipObsTitleStyle = "style='width: 120px;' align='center' class='text-uppercase font-size-12 card-title'";
   var myTootipObsPicContainerStyle = "style='width: 120px;' align='center'";
 
+/* CONSTRUCTOR FUNCTION */
+function constuctMyTooltip() {
 
-  function constuctMyTooltip() {
-
-    if (myTooltipUserPicture == null) {
-      myTooltipUserPicture = "<i class='fa fa-user shadowed' aria-hidden='true'></i>";
-    } else {
+  if (myTooltipUserPicture == null) {
+    myTooltipUserPicture = "<i class='fa fa-user shadowed' aria-hidden='true'></i>";
+  }
+  else {
       myTooltipUserPicture = "<img title='" + myTooltipUsername + "' class='float-left profil-picture-mini shadowed' src='" + myTooltipUserPicWebPath + "' alt='" + myTooltipUserPicAlt + "'>";
     }
 
-    if (myTooltipObsPic == true) {
-      myTooltipObsPic = "<img  alt='" + myTooltipObsPicAlt + "' title='" + myTooltipObsPicAlt + "' class='obs-picture-mini' src='" + myTooltipObsPicWebPath + "'>";
-    } else {
+  if (myTooltipObsPic != null) {
+    myTooltipObsPic = "<img  alt='" + myTooltipObsPicAlt + "' title='" + myTooltipObsPicAlt + "' class='obs-picture-mini' src='" + myTooltipObsPicWebPath + "'>";
+  }
+  else {
       myTooltipObsPic = "<i class='fa fa-twitter-square fa-2x')></i>";
     }
+  /* CONSTRUCTOR */
+  var myTooltipUserContent = "<span class='profil-picture-mini'>" + myTooltipUserPicture + " <span class='font-size-10 badge badge-success'>" + myTooltipUsername + "</span></span>";
+  var myTooltipUser = "<div " + myTooltipUserStyle + " >" + myTooltipUserContent + "</div>";
+  myTooltipContent = myTooltipContent + myTooltipUser;
+  var myTooltipDateContainer = "<div " + myTooltipDateStyle + " ><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>" + myTooltipObsDate + "</time></div>";
+  myTooltipContent = myTooltipContent + myTooltipDateContainer;
+  var myTooltipObsContent = "<h2 " + myTooltipObsSciNameStyle + " > " + myTooltipObsSciName + " </h2><hr/><h3 " + myTooltipObsTitleStyle + " >" + myTooltipObsTitle + "</h3><div " + myTootipObsPicContainerStyle + " >" + myTooltipObsPic + "<hr /><h2 class='font-size-10'>Périmètre Observation - 100 m à 200 m de ce point / Around 100 m à 200 m of ths point</h2></div>";
+  myTooltipContent = myTooltipContent + myTooltipObsContent;
+  var myTooltipContainer = "<div " + myTooltipContainerStyle + " >" + myTooltipContent + "</div>";
 
-    var myTooltipUserContent = "<span class='profil-picture-mini'>" + myTooltipUserPicture + " <span class='font-size-10 badge badge-success'>" + myTooltipUsername + "</span></span>";
-    var myTooltipUser = "<div " + myTooltipUserStyle + " >" + myTooltipUserContent + "</div>";
-    myTooltipContent = myTooltipContent + myTooltipUser;
-    var myTooltipDateContainer = "<div " + myTooltipDateStyle + " ><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>" + myTooltipObsDate + "</time></div>";
-    myTooltipContent = myTooltipContent + myTooltipDateContainer;
-    var myTooltipObsContent = "<h2 " + myTooltipObsSciNameStyle + " > " + myTooltipObsSciName + " </h2><hr/><h3 " + myTooltipObsTitleStyle + " >" + myTooltipObsTitle + "</h3><div " + myTootipObsPicContainerStyle + " >" + myTooltipObsPic + "<hr /><h2 class='font-size-10'>Périmètre Observation - 100 m à 200 m de ce point / Around 100 m à 200 m of ths point</h2></div>";
-    myTooltipContent = myTooltipContent + myTooltipObsContent;
-    var myTooltipContainer = "<div " + myTooltipContainerStyle + " >" + myTooltipContent + "</div>";
+  return myTooltipContainer;
+}
 
-    return myTooltipContainer;
-  }
+function resetMyTooltip() {
+  myTooltipContent = '';
+  myTooltipUserPicture = '';
+  myTooltipUserPicWebPath = '';
+  myTooltipUserPicAlt = '';
+  myTooltipUsername = '';
+  myTooltipObsDate = '';
+  myTooltipObsSciName = '';
+  myTooltipObsTitle = '';
+  myTooltipObsPic = '';
+  myTooltipObsPicWebPath = '';
+  myTooltipObsPicAlt = '';
+}
 
-  function resetMyTooltip() {
-    myTooltipContent = '';
-    myTooltipUserPicture = '';
-    myTooltipUserPicWebPath = '';
-    myTooltipUserPicAlt = '';
-    myTooltipUsername = '';
-    myTooltipObsDate = '';
-    myTooltipObsSciName = '';
-    myTooltipObsTitle = '';
-    myTooltipObsPic = '';
-    myTooltipObsPicWebPath = '';
-    myTooltipObsPicAlt = '';
-  }
-
-  var markers = new L.layerGroup();
+/*********************************************************************
+                TOOLTIP LOADER SERVICE
+************************************************************************/
+if (myItems != 1 ) {
 
   myItems = jQuery.parseJSON(myItems);
 
   $.each(myItems, function(key, item) {
     for (var i = 0; i < item.length; i++) {
-      myTooltipUserPicture = null;
+
+      myTooltipUserPicture = 1;
+
       if (myTooltipUserPicture != null) {
-        myTooltipUserPicAlt = item[i].user.avatar.alt;
-        myTooltipUserPicWebPath = '';
+        myTooltipUserPicAlt = item[i].user.username;
+        myTooltipUserPicWebPath = '/uploads/avatar/' + item[i].user.id  + ".jpeg";
       }
+
       myTooltipUsername = item[i].user.username;
       myTooltipObsDate = item[i].date.date;
       myTooltipObsSciName = item[i].species.scientificName;
       myTooltipObsTitle = item[i].title;
       myTooltipObsPic = item[i].image;
+
       if (myTooltipObsPic != null) {
         myTooltipObsPicAlt = item[i].image.alt;
-        myTooltipObsPicWebPath = '';
+        myTooltipObsPicWebPath = '/uploads/photos/' + item[i].image.id + "." + item[i].image.extension;
       }
+
       myTooltip = constuctMyTooltip();
       marker = new L.marker([item[i].latitude, item[i].longitude]).bindPopup(myTooltip);
       L.circle([item[i].latitude, item[i].longitude], 200).addTo(mymap);
@@ -158,6 +192,13 @@ $(document).ready(function() {
       resetMyTooltip();
     }
   });
+
+}
+console.log(myItems);
+
+/*********************************************************************
+                TOOLTIP REACTOR SERVICE
+************************************************************************/
 
   function onMarkerClick(id) {
     $('tr').removeClass('active');
