@@ -51,7 +51,7 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
      * @param $nbPerPage
      * @return
      */
-    function findObsByBirdSelector($birdId)
+    function findObsByBirdSelector($birdId, $format = 'html')
     {
         $qb = $this->createQueryBuilder('w')
             ->leftJoin('w.user', 'user')
@@ -65,12 +65,22 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('w.validateStatus = :validateStatus')
             ->setParameter('validateStatus', Watching::ATTESTED)
             ->orderBy('w.date', 'DESC')
-            ->getQuery()
         ;
+        if ($format == 'json') {
+          $result = $qb
+              ->getQuery()
+              ->getArrayResult()
+          ;
+        } else {
+          $result = $qb
+              ->getQuery()
+              ->getResult()
+          ;
+        }
 
+        sort($result);
 
-        return $qb
-            ->getResult()
+        return $result;
   ;
 
     }

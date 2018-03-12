@@ -198,6 +198,62 @@
 {% endblock %}
 {% block javascripts %}{{ parent() }}
   <script type="text/javascript">
+
+  /* VARIABLE FOR THE CONSTRUCTOR */
+  var myTooltipContent = '';
+  {% if watch.user.avatar == null %}
+  var myTooltipUserPicture = null;
+  {% else %}
+  var myTooltipUserPicture = true ;
+  {% endif %}
+  var myTooltipUserPicWebPath = "{{ asset(watch.user.avatar.webPath) }}";
+  var myTooltipUserPicAlt = '{{ watch.user.avatar.alt }}';
+  var myTooltipUsername = '{{ watch.user.username }}';
+  var myTooltipObsDate = '{{ watch.date|localizeddate('medium', 'short') }}';
+  var myTooltipObsSciName = '{{ watch.species.scientificName }}';
+  var myTooltipObsTitle = '{{ watch.title }}';
+  {% if watch.image == true %}
+  var myTooltipObsPic = true;
+  var myTooltipObsPicWebPath =  '{{ asset(watch.image.webPath) }}';
+  var myTooltipObsPicAlt = '{{ watch.image.alt}}';
+  {% else %}
+  var myTooltipObsPic = false;
+  var myTooltipObsPicWebPath =  '';
+  var myTooltipObsPicAlt = '';
+  {% endif %}
+
+  /* CSS STYLE */
+  var myTooltipContainerStyle = "style='width: 120px;'";
+  var myTooltipUserStyle = "style='margin-left: -25px;margin-top: -25px;'";
+  var myTooltipDateStyle = "style='width: 120px;' align='right'";
+  var myTooltipObsSciNameStyle = "style='width: 120px;' align='center' class='margin-top-10 italic font-size-12'";
+  var myTooltipObsTitleStyle = "style='width: 120px;' align='center' class='text-uppercase font-size-12 card-title'";
+  var myTootipObsPicContainerStyle = "style='width: 120px;' align='center'";
+
+  /* TOOLTIP CONSTRUCTOR */
+    if (myTooltipUserPicture == null) {
+      myTooltipUserPicture = "<i class='fa fa-user shadowed' aria-hidden='true'></i>";
+    } else {
+      myTooltipUserPicture = "<img title='" + myTooltipUsername + "' class='float-left profil-picture-mini shadowed' src='" + myTooltipUserPicWebPath + "' alt='" + myTooltipUserPicAlt + "'>";
+    }
+
+    if (myTooltipObsPic == true) {
+      myTooltipObsPic = "<img  alt='" + myTooltipObsPicAlt + "' title='" + myTooltipObsPicAlt + "' class='obs-picture-mini' src='" + myTooltipObsPicWebPath + "'>";
+    } else {
+      myTooltipObsPic = "<i class='fa fa-twitter-square fa-2x')></i>";
+    }
+
+    var myTooltipUserContent = "<span class='profil-picture-mini'>" + myTooltipUserPicture + " <span class='font-size-10 badge badge-success'>" + myTooltipUsername + "</span></span>";
+    var myTooltipUser = "<div " +  myTooltipUserStyle + " >" + myTooltipUserContent + "</div>";
+    myTooltipContent = myTooltipContent + myTooltipUser;
+    var myTooltipDateContainer = "<div " + myTooltipDateStyle + " ><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>" + myTooltipObsDate + "</time></div>";
+    myTooltipContent = myTooltipContent + myTooltipDateContainer;
+    var myTooltipObsContent = "<h2 " + myTooltipObsSciNameStyle + " > " + myTooltipObsSciName + " </h2><hr/><h3 " + myTooltipObsTitleStyle + " >" + myTooltipObsTitle + "</h3><div " + myTootipObsPicContainerStyle + " >" + myTooltipObsPic + "<hr /><h2 class='font-size-10'>Périmètre Observation - 100 m à 200 m de ce point / Around 100 m à 200 m of ths point</h2></div>";
+    myTooltipContent = myTooltipContent + myTooltipObsContent;
+    var myTooltipContainer = "<div " + myTooltipContainerStyle + " >" + myTooltipContent + "</div>";
+
+
+
   var latitude = {{ watch.latitude }};
   var longitude = {{ watch.longitude }};
   var latiLongi = [latitude, longitude];
@@ -212,7 +268,7 @@
   }).addTo(ObsViewMap);
 
     L.marker(latiLongi).addTo(ObsViewMap)
-    .bindPopup("<div style='width: 120px;'><div style='margin-left: -25px;margin-top: -25px;'><span class='profil-picture-mini'>{% if watch.user.avatar == null %}<i class='fa fa-user shadowed' aria-hidden='true'></i>{% else %}<img title='{{ watch.user.username }}' class='float-left profil-picture-mini shadowed' src='{{ asset(watch.user.avatar.webPath) }}' alt='{{ watch.user.avatar.alt }}'>{% endif %}<span class='font-size-10 badge badge-success'>{{ watch.user.username }}</span></span></div></div><div style='width: 120px;' align='right'><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>Le {{ watch.date|localizeddate('medium', 'short') }}</time></div><h2 style='width: 120px;' align='center' class='margin-top-10 italic font-size-12'>{{ watch.species.scientificName }}</h2><hr/><h3 style='width: 120px;' align='center' class='text-uppercase font-size-12 card-title'>{{ watch.title }}</h3><div style='width: 120px;' align='center' >{% if watch.image == true %}<img  alt='{{ watch.image.alt}}' title='{{ watch.image.alt}}' class='obs-picture-mini' src='{{ asset(watch.image.webPath) }}'>{% else %}<i class='fa fa-twitter-square fa-2x' ') }}></i>{% endif %}<hr /><h2 class='font-size-10'>{{ 'Observation dans un périmètre  de 100 à 200 metres de ce point'|trans }}  </h2></div>").openPopup();
+    .bindPopup(myTooltipContainer).openPopup();
     L.circle(latiLongi, 20000).addTo(ObsViewMap);
     L.circle(latiLongi, 200).addTo(ObsViewMap);
 

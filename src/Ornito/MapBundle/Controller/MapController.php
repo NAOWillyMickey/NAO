@@ -12,12 +12,9 @@ class MapController extends Controller
     public function indexAction(Request $request)
     {
         $watchingsList = 1;
+        $watchingsListJson = [];
         $birds = null;
-        $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('OrnitoTaxrefBundle:Species');
-
+        $repository = $this->getDoctrine()->getManager()->getRepository('OrnitoTaxrefBundle:Species');
         $repo = $this->getDoctrine()->getManager()->getRepository('OrnitoObservationBundle:Watching');
             // The request method is "POST" & a value is selected in the form
         if ($request->isMethod('POST') && count($request->request) > 1) {
@@ -31,18 +28,19 @@ class MapController extends Controller
             $output = array_slice($tab, -4,2);
             $birds = $repository->mySelectList($output[0], $output[1]);
             // If user change values of the select form
-            if ($birds === null) {
-                $request->getSession()->getFlashBag()->add('danger', 'Select a bird in the list please!!!');
-            }
+            if ($birds === null) { $request->getSession()->getFlashBag()->add('danger', 'Select a bird in the list please!!!'); }
             else {
               $watchingsList = [];
+              $watchingsListJson = [];
               foreach ($birds as $bird) {
                 foreach ($bird as $key => $val) {
                   if ($key == 'id') {
                     $watchings_bird_id = $val;
                     $watchings = $repo->findObsByBirdSelector($watchings_bird_id);
+                    $watchingsJson = $repo->findObsByBirdSelector($watchings_bird_id, 'json');
                     if ($watchings != null) {
                       $watchingsList[$val] = $watchings;
+                      $watchingsListJson[$val] = $watchingsJson;
                     }
                   }
                 }
@@ -54,6 +52,7 @@ class MapController extends Controller
           $request->getSession()->getFlashBag()->add('danger', 'You should select a bird in the select form before find it...');
         }
 
+        $watchingsListJson = Json_encode($watchingsListJson);
         $ordreList = $repository->getList('ordre');
         $familyList = $repository->getList('family');
         $scientificList = $repository->getList('scientificName');
@@ -66,6 +65,7 @@ class MapController extends Controller
             'scientificList' => $scientificList,
             'vernList' => $vernList,
             'watchingsList' => $watchingsList,
+            'watchingsListJson' => $watchingsListJson,
             'birds' => $birds,
         ));
     }

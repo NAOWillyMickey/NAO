@@ -2604,7 +2604,10 @@ i.box-circle-solid {
   height: 350px;
   margin-bottom: 20px;
 }
-]
+.activeItem {
+    background-color:rgba(100, 100, 255, 0.9);
+}
+
 /* SCROLLBAR */
 
 /*

@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - Map
+  - {{ "Map"|trans }}
 {% endblock %}
 {% block stylesheets %}{{ parent() }}
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
@@ -90,7 +90,7 @@
         <tr >
           <td>
             <p class="center lead text-uppercase">
-              Aucun Résultats à Afficher
+              {{ "Aucun Résultats à Afficher"|trans }}
             </p>
           </td>
         </tr>
@@ -98,7 +98,7 @@
       {% if watchingsList  and watchingsList != 1 %}
         {% for watchings in watchingsList %}
         {% for watch in watchings %}
-        <tr >
+        <tr id="{{ watch.id }}" >
           <td>
             <a href="#" class="pull-left">
               <span class="profil-img">
@@ -167,7 +167,7 @@
           <td>
             <p class="center lead text-uppercase">
               {% if watchingsList != 1  %}
-              La Recherche n'a donné aucun Résultat
+              {{ "La Recherche n'a donné aucun Résultat"|trans }}
               {% endif %}
             </p>
           </td>
@@ -186,10 +186,15 @@
 {% endblock %}
 
 {% block javascripts %}{{ parent() }}
-<script src="{{ asset('assets/js/select_form.js') }}"></script>
-<script src="{{ asset('assets/js/obsApi.js') }}"></script>
 <script type="text/javascript">
+{% if watchingsList  and watchingsList != 1 %}
+var myItems = {{ watchingsListJson|json_encode()|raw }};
+{% else %}
+var myItems = [];
+{% endif %}
 /* FOOTER HIDDEN */
 $('#section_footer').hide();
 </script>
+<script src="{{ asset('assets/js/select_form.js') }}"></script>
+<script src="{{ asset('assets/js/obsApi.js') }}"></script>
 {% endblock %}
