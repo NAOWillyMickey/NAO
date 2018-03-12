@@ -31,3 +31,19 @@ ornito_observation_delete:
         _controller: OrnitoObservationBundle:Observation:delete
     requirements:
         id: \d+
+
+ornito_observation_waiting:
+    path: /waiting/{page}
+    defaults:
+        _controller: OrnitoObservationBundle:Observation:waiting
+        page: 1
+    requirements:
+        page: \d+
+
+ornito_observation_validate:
+    path: /validate/{id}
+    defaults:
+        _controller: OrnitoObservationBundle:Observation:validate
+    requirements:
+        id: \d+
+
