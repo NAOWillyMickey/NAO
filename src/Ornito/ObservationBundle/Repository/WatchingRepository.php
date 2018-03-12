@@ -15,12 +15,14 @@ use Ornito\ObservationBundle\Entity\Watching;
 class WatchingRepository extends \Doctrine\ORM\EntityRepository
 {
 
+
     /**
      * @param $page
      * @param $nbPerPage
+     * @param $status
      * @return Paginator
      */
-    function getObs($page, $nbPerPage)
+    function getObs($page, $nbPerPage, $status)
     {
         $qb = $this->createQueryBuilder('w')
             ->leftJoin('w.user', 'user')
@@ -30,7 +32,7 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('w.species', 'species')
             ->addSelect('species')
             ->where('w.validateStatus = :validateStatus')
-            ->setParameter('validateStatus', Watching::ATTESTED)
+            ->setParameter('validateStatus', $status)
             ->orderBy('w.date', 'DESC')
             ->getQuery()
         ;
