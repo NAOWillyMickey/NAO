@@ -129,10 +129,10 @@
           <li class="sidebar-brand"><a href="#">ADMIN</a></li>
           <li class="dropdown-divider"></li>
           <li class="dropdown-divider"></li>
-          <li><a href="{{ path('ornito_user_admin_list') }}">GESTION UTILISATEUR</a></li>
+          <li><a href="{{ path('ornito_user_admin_list') }}">{{ "GESTION UTILISATEUR"|trans }}</a></li>
           <li class="dropdown-divider"></li>
-          <li><a href="{{ path('ornito_user_admin_certification_list') }}">CERTIFICATION NATURALISTE</a></li>
-  		    <li><a href="#">CONFIGURATION</a></li>
+          <li><a href="{{ path('ornito_user_admin_certification_list') }}">{{ "CERTIFICATION NATURALISTE"|trans }}</a></li>
+  		    <li><a href="#">{{ "CONFIGURATION"|trans }}</a></li>
         </ul>
       </nav>
       <!-- /#sidebar-wrapper -->
@@ -182,7 +182,7 @@
           <a title="{{ 'Communauté Facebook'|trans }}" href="" class="fa fa-facebook-square"></a>
         </div>
         <div>
-          <a title="{{ 'Observations à Validées'|trans }}" href="{{ path('ornito_observation_view', {'id' : 2})}}" class="fa fa-certificate"></a>
+          <a title="{{ 'Observations à Valider'|trans }}" href="{{ path('ornito_observation_waiting') }}" class="fa fa-certificate"></a>
         </div>
         <div>
           <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_observation_add')}}" class="fa fa-binoculars"></a>
