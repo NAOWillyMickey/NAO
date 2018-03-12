@@ -195,9 +195,9 @@
         </div>
         <div>
           {% if is_granted('ROLE_NATURALIST') %}
-            <a title="{{ 'Observations à Validées'|trans }}" href="{{ path('ornito_observation_homepage')}}" class="fa fa-certificate"></a>
+            <a title="{{ 'Observations à Valider'|trans }}" href="{{ path('ornito_observation_waiting') }}" class="fa fa-certificate"></a>
           {% else %}
-            <a title="{{ 'Observations à Validées'|trans }}" href="{{ path('ornito_main_join')}}" class="fa fa-certificate"></a>
+            <a title="{{ 'Vous devez être naturaliste pour y accéder'|trans }}" href="{{ path('ornito_main_join')}}" class="fa fa-certificate"></a>
           {% endif %}
         </div>
         <div>
