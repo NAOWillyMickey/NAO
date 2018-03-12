@@ -8,6 +8,14 @@
 
 {% block content %}{{ parent() }}
   <!-- CONTENT HERE -->
+{% set userRole = "member" %}
+
+  {% for role in user.roles %}
+    {% if role == 'ROLE_NATURALIST' or role == 'ROLE_SUPER_ADMIN'%}
+      {% set userRole = "naturalist" %}
+    {% endif %}
+  {% endfor %}
+
   {% trans_default_domain 'FOSUserBundle' %}
   <!-- PAGE TITLE -->
   <h1 class="band_title deepshd">
@@ -62,13 +70,11 @@
                       {% endif %}
                     </a>
                   </li>
-                  {% for role in  user.roles %}
-                      {% if role == 'ROLE_NATURALIST' %}
-                      <li role="presentation" class="nav-item">
-                        <a href="#naturalistProfilePanel" aria-controls="naturalistProfilePanel" role="tab" data-toggle="tab" class="nav-link">{{ "Naturaliste"|trans }}</a>
-                      </li>
-                      {% endif %}
-                  {% endfor %}
+                  {% if userRole == 'naturalist'  or user.id == app.user.id %}
+                  <li role="presentation" class="nav-item">
+                    <a href="#naturalistProfilePanel" aria-controls="naturalistProfilePanel" role="tab" data-toggle="tab" class="nav-link">{{ "Naturaliste"|trans }}</a>
+                  </li>
+                  {% endif %}
                   {% if user.id == app.user.id %}
                     <li role="presentation" class="nav-item">
                       <a href="{{ (path('fos_user_profile_edit')) }}" class="nav-link">{{ "Admin"|trans }}</a>
@@ -171,12 +177,20 @@
                               </div>
                               {% endif %}
                               <div class="pull-right">
+                                {% if userRole == 'member' %}
                                 <div class="btn-group">
                                   <button type="button" class="btn btn-success btn-filter" data-target="attested">{{ "Validé"|trans }}</button>
                                   <button type="button" class="btn btn-warning btn-filter" data-target="untreated">{{ "En attente"|trans }}</button>
                                   <button type="button" class="btn btn-danger btn-filter" data-target="rejected">{{ "Invalide"|trans }}</button>
                                   <button type="button" class="btn btn-default btn-filter" data-target="all">{{ "Tous"|trans }}</button>
                                 </div>
+                                {% else %}
+                                {% if user.id == app.user.id %}
+                                <h6>{{ 'Mes Observations'|trans }}</h6>
+                                {% else %}
+                                <h6>{{ 'Ses Observations'|trans }}</h6>
+                                {% endif %}
+                                {% endif %}
                               </div>
                               <div class="table-container">
                                 <table class="table table-filter">
@@ -193,13 +207,25 @@
                                           <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                             <i class="fa fa-eye"></i>
                                           </a>
-                                          {% if user.id == app.user.id or is_granted("ROLE_SUPER_ADMIN") %}
+                                          {% if watching.validateStatus == 'attested' %}
+                                          {% if ( user.id == app.user.id  and is_granted("ROLE_NATURALIST"))  or is_granted("ROLE_SUPER_ADMIN")  %}
                                             <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                               <i class="fa fa-edit"></i>
                                             </a>
                                             <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
                                               <i class="fa fa-trash"></i>
                                             </a>
+                                          {% endif %}
+                                          {% endif %}
+                                          {% if watching.validateStatus != 'attested' %}
+                                          {% if ( user.id == app.user.id )  or is_granted("ROLE_SUPER_ADMIN")  %}
+                                            <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-trash"></i>
+                                            </a>
+                                          {% endif %}
                                           {% endif %}
                                         </td>
                                         <td>
@@ -263,13 +289,14 @@
                         </div>
                       </section>
                     </div>
+
                     <!-- Tab panes 3 NAURALISTE -->
                     <div role="tabpanel" class="tab-pane" id="naturalistProfilePanel">
                       <section class="content">
                         <div class="col-md-12">
                           <div class="panel panel-default">
                             <div class="panel-body">
-                              {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                              {% if userRole == 'naturalist' %}
                               <div class="pull-right">
                                 <div class="btn-group">
                                   <button type="button" class="btn btn-success btn-filter" data-target="attested">
@@ -342,7 +369,10 @@
                                   </tbody>
                                 </table>
                               </div>
-                            {% else %}
+                              {% endif %}
+
+                              {% if userRole == 'member' %}
+
                               {% if user.naturalistPromote == 'pending' and user.id == app.user.id %}
                                 <div class="center alert alert-info">
                                   <span class="fa fa-certificate fa-3x marginAuto"></span>
@@ -375,9 +405,12 @@
                                   </a>
                                 </div>
                               {% else %}
-
-
-                            {% endif %}
+                              <div class="center">
+                                <h2>
+                                  {{ "Ce Compte n'est pas un compte Naturaliste"|trans }} !
+                                </h2>
+                              </div>
+                          {% endif %}
                           {% endif %}
                             </div>
                           </div>
