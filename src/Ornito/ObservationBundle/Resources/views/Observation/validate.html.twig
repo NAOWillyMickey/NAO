@@ -178,27 +178,27 @@
                                 </div>
                             </li>
                         </article>
+                        <!-- FORM -->
+                        <div align="center">
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            <div class="btn-group" data-toggle="buttons">
+                                {% for child in form.validateStatus %}
+                                    <label class="btn btn-outline-info">
+                                        {{ form_widget(child) }}
+                                        {{ child.vars.label }}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div align="center">
+                            <input id="validateFormSubmit" type="submit"  value="{{ "Envoyer"|trans }}"  name="validateFormSubmit" class="btn  btn-outline-success"/>
+                            {{ form_rest(form) }}
+                            {{ form_end(form) }}
+                        </div>
+                        <!-- END FORM -->
                     </ul>
                     <!-- END CONTENT -->
-                    <!-- FORM -->
-                    <div align="center">
-                        {{ form_start(form) }}
-                        {{ form_errors(form) }}
-                        <div class="btn-group" data-toggle="buttons">
-                            {% for child in form.validateStatus %}
-                                <label class="btn btn-info">
-                                    {{ form_widget(child) }}
-                                    {{ child.vars.label }}
-                                </label>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div align="center">
-                        <input id="validateFormSubmit" type="submit"  value="{{ "Envoyer"|trans }}"  name="validateFormSubmit" class="btn  btn-outline-success"/>
-                        {{ form_rest(form) }}
-                        {{ form_end(form) }}
-                    </div>
-                    <!-- END FORM -->
                 </div>
             </div>
         </div>
