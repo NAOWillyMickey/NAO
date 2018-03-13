@@ -58,7 +58,7 @@
                         <i class="fa fa-certificate  fa-lg"></i>
                       </span>
                     {% else %}
-                      <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-alert">
+                      <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-danger">
                         {{ "Refusée"|trans }}
                         <i class="fa fa-frown-o fa-lg"></i>
                       </span>
@@ -203,11 +203,13 @@
   var myTooltipContent = '';
   {% if watch.user.avatar == null %}
   var myTooltipUserPicture = null;
+  var myTooltipUserPicAlt = '';
+  var myTooltipUserPicWebPath = '';
   {% else %}
   var myTooltipUserPicture = true ;
-  {% endif %}
   var myTooltipUserPicWebPath = "{{ asset(watch.user.avatar.webPath) }}";
   var myTooltipUserPicAlt = '{{ watch.user.avatar.alt }}';
+  {% endif %}
   var myTooltipUsername = '{{ watch.user.username }}';
   var myTooltipObsDate = '{{ watch.date|localizeddate('medium', 'short') }}';
   var myTooltipObsSciName = '{{ watch.species.scientificName }}';
