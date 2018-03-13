@@ -230,15 +230,27 @@
               <a href="{{ facebook }}">
                 <i id="social-fb" class="fa fa-facebook-square fa-3x social"></i>
               </a>
+            {% else %}
+              <a href="https://www.facebook.com/">
+                <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
+              </a>
             {% endif %}
             {% if twitter is defined %}
               <a href="{{ twitter }}">
+                <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
+              </a>
+            {% else %}
+              <a href="https://twitter.com/">
                 <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
               </a>
             {% endif %}
             {% if pinterest is defined %}
               <a href="{{ pinterest }}">
                 <i id="social-gp" class="fa fa-pinterest-square fa-3x social"></i>
+              </a>
+            {% else %}
+              <a href="https://www.pinterest.com/">
+                <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
               </a>
             {% endif %}
             {% if contactMail is defined %}
