@@ -2605,9 +2605,19 @@ i.box-circle-solid {
   margin-bottom: 20px;
 }
 .activeItem {
-    background-color:rgba(100, 100, 255, 0.9);
+    background-color:rgba(255, 235, 000, 0.9);
+    border-right: solid 20px #33ff008c;
+    border-left: solid 20px #33ff008c;
+    border-bottom: solid 5px #808080b5
 }
+.visitedItem {
+    background-color:rgba(200, 200, 200, 0.25);
+}
+.itemDisplayInfoMap {
+  visibility: hidden;
 
+
+}
 /* SCROLLBAR */
 
 /*

@@ -68,7 +68,7 @@
                   </span>
                 </span>
                 <hr>
-                {% if  watch.user.id == app.user.id or is_granted("ROLE_SUPER_ADMIN") %}
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
                   <a  title="{{ "Supprimer"|trans }}" class="delete float-right" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' :  watch.id } ) }}">
                     <i class="fa fa-trash"></i>
                   </a>

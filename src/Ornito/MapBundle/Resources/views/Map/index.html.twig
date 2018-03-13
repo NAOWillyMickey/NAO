@@ -96,11 +96,10 @@
         </tr>
         {% endif %}
       {% if watchingsList  and watchingsList != 1 %}
-      {{ dump(watchingsListJson) }}
         {% for watchings in watchingsList %}
         {% for watch in watchings %}
         <tr id="{{ watch.id }}" >
-          <td>
+          <td id="obs-{{ watch.id }}" >
             <a href="#" class="pull-left">
               <span class="profil-img">
                 <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}">
@@ -117,7 +116,7 @@
             <a class="float-right" title="{{ "Voir l\'Obs"|trans }}" href="{{ path('ornito_observation_view', {id : watch.id}) }}">
               <i class="fa fa-eye fa-lg"></i>
             </a>
-            <a class="float-right" title="{{ "Voir sur la Map"|trans }}" href="{{ path('ornito_map_homepage') }}">
+            <a id="maplink-{{ watch.id }}" class="float-right" title="{{ "Voir sur la Map"|trans }}" href="#">
               <i class="fa fa-map fa-lg"></i>
             </a>
           </td>
@@ -158,6 +157,8 @@
                   {% endif %}
                 </span>
               </div>
+              <hr />
+              <span id="displayInfo-{{ watch.id }}" class="font-size-10 margin-top-10 itemDisplayInfoMap badge float-right">Vue</span>
             </div>
           </td>
         </tr>
