@@ -22,7 +22,7 @@ class ObservationController extends Controller
         $listWatching = $this->getDoctrine()
             ->getManager()
             ->getRepository('OrnitoObservationBundle:Watching')
-            ->getObs($page, $nbPerPage, Watching::ATTESTED)
+            ->getObs($page, $nbPerPage, Watching::ATTESTED, 'DESC')
         ;
 
         $nbPages = ceil(count($listWatching) / $nbPerPage);
@@ -164,7 +164,7 @@ class ObservationController extends Controller
         $listWatching = $this->getDoctrine()
             ->getManager()
             ->getRepository('OrnitoObservationBundle:Watching')
-            ->getObs($page, $nbPerPage, Watching::UNTREATED)
+            ->getObs($page, $nbPerPage, Watching::UNTREATED, 'ASC')
         ;
 
         $nbWatching = count($listWatching);

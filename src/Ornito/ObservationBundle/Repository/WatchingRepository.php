@@ -20,9 +20,10 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
      * @param $page
      * @param $nbPerPage
      * @param $status
+     * @param $order
      * @return Paginator
      */
-    function getObs($page, $nbPerPage, $status)
+    function getObs($page, $nbPerPage, $status, $order)
     {
         $qb = $this->createQueryBuilder('w')
             ->leftJoin('w.user', 'user')
@@ -33,7 +34,7 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('species')
             ->where('w.validateStatus = :validateStatus')
             ->setParameter('validateStatus', $status)
-            ->orderBy('w.date', 'DESC')
+            ->orderBy('w.date', $order)
             ->getQuery()
         ;
 
@@ -46,10 +47,11 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+
     /**
-     * @param $page
-     * @param $nbPerPage
-     * @return
+     * @param $birdId
+     * @param string $format
+     * @return array|mixed
      */
     function findObsByBirdSelector($birdId, $format = 'html')
     {
@@ -81,7 +83,5 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
         sort($result);
 
         return $result;
-  ;
-
     }
 }
