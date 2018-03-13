@@ -83,13 +83,13 @@ $(document).ready(function() {
     myLongitude.val(e.latlng.lng);
   });
 
-/*******************************************************************************************************************************************
-********************************************************************************************************************************************
+  /*******************************************************************************************************************************************
+  ********************************************************************************************************************************************
 
-                                          TOOLTIP CONSTRUCTOR SERVICE
+                                            TOOLTIP CONSTRUCTOR SERVICE
 
-*********************************************************************************************************************************************
-*********************************************************************************************************************************************/
+  *********************************************************************************************************************************************
+  *********************************************************************************************************************************************/
 
   /* VARIABLE FOR THE CONSTRUCTOR */
   var myTooltipContent = '';
@@ -103,6 +103,7 @@ $(document).ready(function() {
   var myTooltipObsPic = '';
   var myTooltipObsPicWebPath = '';
   var myTooltipObsPicAlt = '';
+  var listItemLinkFocus = '';
   /* CSS STYLE */
   var myTooltipContainerStyle = "style='width: 120px;'";
   var myTooltipUserStyle = "style='margin-left: -25px;margin-top: -25px;'";
@@ -111,99 +112,147 @@ $(document).ready(function() {
   var myTooltipObsTitleStyle = "style='width: 120px;' align='center' class='text-uppercase font-size-12 card-title'";
   var myTootipObsPicContainerStyle = "style='width: 120px;' align='center'";
 
-/* CONSTRUCTOR FUNCTION */
-function constuctMyTooltip() {
+  /* CONSTRUCTOR FUNCTION */
+  function constuctMyTooltip() {
 
-  if (myTooltipUserPicture == null) {
-    myTooltipUserPicture = "<i class='fa fa-user shadowed' aria-hidden='true'></i>";
-  }
-  else {
+    if (myTooltipUserPicture == null) {
+      myTooltipUserPicture = "<i class='fa fa-user shadowed' aria-hidden='true'></i>";
+    } else {
       myTooltipUserPicture = "<img title='" + myTooltipUsername + "' class='float-left profil-picture-mini shadowed' src='" + myTooltipUserPicWebPath + "' alt='" + myTooltipUserPicAlt + "'>";
     }
 
-  if (myTooltipObsPic != null) {
-    myTooltipObsPic = "<img  alt='" + myTooltipObsPicAlt + "' title='" + myTooltipObsPicAlt + "' class='obs-picture-mini' src='" + myTooltipObsPicWebPath + "'>";
+    if (myTooltipObsPic != null) {
+      myTooltipObsPic = "<img  alt='" + myTooltipObsPicAlt + "' title='" + myTooltipObsPicAlt + "' class='obs-picture-mini' src='" + myTooltipObsPicWebPath + "'>";
+    } else {
+      myTooltipObsPic = "<i title='Pas de photo / No-picture' class='fa fa-camera-retro fa-3x')></i>";
+    }
+    /* CONSTRUCTOR */
+    var myTooltipUserContent = "<span class='profil-picture-mini'>" + myTooltipUserPicture + " <span class='font-size-10 badge badge-success'>" + myTooltipUsername + "</span></span>";
+    var myTooltipUser = "<div " + myTooltipUserStyle + " >" + myTooltipUserContent + "</div>";
+    myTooltipContent = myTooltipContent + myTooltipUser;
+    var myTooltipDateContainer = "<div " + myTooltipDateStyle + " ><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>" + myTooltipObsDate + "</time></div>";
+    myTooltipContent = myTooltipContent + myTooltipDateContainer;
+    var myTooltipObsContent = "<h2 " + myTooltipObsSciNameStyle + " > " + myTooltipObsSciName + " </h2><hr/><h3 " + myTooltipObsTitleStyle + " >" + myTooltipObsTitle + "</h3><div " + myTootipObsPicContainerStyle + " >" + myTooltipObsPic + "<hr /><h2 class='font-size-10'>Périmètre Observation - 100 m à 200 m de ce point / Around 100 m à 200 m of ths point</h2></div>";
+    myTooltipContent = myTooltipContent + myTooltipObsContent;
+    var myTooltipContainer = "<div " + myTooltipContainerStyle + " ><a style='text-decoration: none;' href='#" + listItemLinkFocus + "' id='obsPicker-" + listItemLinkFocus + "'>" + myTooltipContent + "</div></a>";
+
+    return myTooltipContainer;
   }
-  else {
-      myTooltipObsPic = "<i class='fa fa-twitter-square fa-2x')></i>";
-    }
-  /* CONSTRUCTOR */
-  var myTooltipUserContent = "<span class='profil-picture-mini'>" + myTooltipUserPicture + " <span class='font-size-10 badge badge-success'>" + myTooltipUsername + "</span></span>";
-  var myTooltipUser = "<div " + myTooltipUserStyle + " >" + myTooltipUserContent + "</div>";
-  myTooltipContent = myTooltipContent + myTooltipUser;
-  var myTooltipDateContainer = "<div " + myTooltipDateStyle + " ><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>" + myTooltipObsDate + "</time></div>";
-  myTooltipContent = myTooltipContent + myTooltipDateContainer;
-  var myTooltipObsContent = "<h2 " + myTooltipObsSciNameStyle + " > " + myTooltipObsSciName + " </h2><hr/><h3 " + myTooltipObsTitleStyle + " >" + myTooltipObsTitle + "</h3><div " + myTootipObsPicContainerStyle + " >" + myTooltipObsPic + "<hr /><h2 class='font-size-10'>Périmètre Observation - 100 m à 200 m de ce point / Around 100 m à 200 m of ths point</h2></div>";
-  myTooltipContent = myTooltipContent + myTooltipObsContent;
-  var myTooltipContainer = "<div " + myTooltipContainerStyle + " >" + myTooltipContent + "</div>";
 
-  return myTooltipContainer;
+  function resetMyTooltip() {
+    myTooltipContent = '';
+    myTooltipUserPicture = '';
+    myTooltipUserPicWebPath = '';
+    myTooltipUserPicAlt = '';
+    myTooltipUsername = '';
+    myTooltipObsDate = '';
+    myTooltipObsSciName = '';
+    myTooltipObsTitle = '';
+    myTooltipObsPic = '';
+    myTooltipObsPicWebPath = '';
+    myTooltipObsPicAlt = '';
+  }
+
+
+  /*********************************************************************
+                  TOOLTIP REACTOR SERVICE
+  ************************************************************************/
+
+  function onMarkerClick(e) {
+    var itemId = e.target._leaflet_id;
+    listItemsClassSelector(itemId);
+  }
+  function listItemsClassSelector(id) {
+
+    var element = document.getElementsByTagName("tr");
+    var displayInfoElts = document.getElementsByClassName('itemDisplayInfoMap');
+
+    for (var i = 0; i < displayInfoElts.length; i++) {
+      displayInfoElts[i].classList.remove("badge-dark");
+      if (displayInfoElts[i].innerHTML == 'Selected') {
+        displayInfoElts[i].innerHTML = "vue";
+        displayInfoElts[i].classList.add("badge-warning")
+      }
+    }
+
+    for (var i = 0; i < element.length; i++) {
+      if (element[i].classList.value == 'activeItem') {
+        element[i].classList.add("visitedItem")
+      }
+      element[i].classList.remove("activeItem")
+    }
+
+      element = document.getElementById(id);
+      if (element.classList.value == 'visitedItem') {
+        element.classList.remove("visitedItem")
+      }
+      element.classList.add("activeItem")
+      document.getElementById('displayInfo-' + id).style.visibility = "visible";
+      document.getElementById('displayInfo-' + id).innerHTML = "Selected";
+      document.getElementById('displayInfo-' + id).classList.add("badge-dark");
+      document.getElementById('displayInfo-' + id).classList.remove("badge-warning");
+      document.getElementById('displayInfo-' + id).focus();
+
+  }
+  function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
-function resetMyTooltip() {
-  myTooltipContent = '';
-  myTooltipUserPicture = '';
-  myTooltipUserPicWebPath = '';
-  myTooltipUserPicAlt = '';
-  myTooltipUsername = '';
-  myTooltipObsDate = '';
-  myTooltipObsSciName = '';
-  myTooltipObsTitle = '';
-  myTooltipObsPic = '';
-  myTooltipObsPicWebPath = '';
-  myTooltipObsPicAlt = '';
-}
 
-/*********************************************************************
-                TOOLTIP LOADER SERVICE
-************************************************************************/
-if (myItems != 1 ) {
-
-  myItems = jQuery.parseJSON(myItems);
-
-  $.each(myItems, function(key, item) {
-    for (var i = 0; i < item.length; i++) {
-
-      myTooltipUserPicture = 1;
-
-      if (myTooltipUserPicture != null) {
-        myTooltipUserPicAlt = item[i].user.username;
-        myTooltipUserPicWebPath = '/uploads/avatar/' + item[i].user.id  + ".jpeg";
-      }
-
-      myTooltipUsername = item[i].user.username;
-      myTooltipObsDate = item[i].date.date;
-      myTooltipObsSciName = item[i].species.scientificName;
-      myTooltipObsTitle = item[i].title;
-      myTooltipObsPic = item[i].image;
-
-      if (myTooltipObsPic != null) {
-        myTooltipObsPicAlt = item[i].image.alt;
-        myTooltipObsPicWebPath = '/uploads/photos/' + item[i].image.id + "." + item[i].image.extension;
-      }
-
-      myTooltip = constuctMyTooltip();
-      marker = new L.marker([item[i].latitude, item[i].longitude]).bindPopup(myTooltip);
-      L.circle([item[i].latitude, item[i].longitude], 200).addTo(mymap);
-      markers.addLayer(marker);
-      mymap.addLayer(markers);
-      marker.on('click', onMarkerClick(item[i].id));
-      console.log(marker._leaflet_id);
-      resetMyTooltip();
-    }
+  // Open a marker
+  $('tr').on("click", function() {
+    // Remove the marker
+    marker = markers._layers[$(this).attr('id')];
+    marker.openPopup();
+    listItemsClassSelector($(this).attr('id'));
   });
+  /*********************************************************************
+                  TOOLTIP LOADER SERVICE
+  ************************************************************************/
+  if (myItems != 1) {
 
-}
-console.log(myItems);
+    myItems = jQuery.parseJSON(myItems);
 
-/*********************************************************************
-                TOOLTIP REACTOR SERVICE
-************************************************************************/
+    $.each(myItems, function(key, item) {
+      for (var i = 0; i < item.length; i++) {
 
-  function onMarkerClick(id) {
-    $('tr').removeClass('active');
-    $('tr #' + id).addClass('active');
-    console.log('hh')
+        myTooltipUserPicture = null;
+
+        if (myTooltipUserPicture != null) {
+          myTooltipUserPicAlt = item[i].user.username;
+          myTooltipUserPicWebPath = '/uploads/avatar/' + item[i].user.id + ".jpeg";
+        }
+
+        myTooltipUsername = item[i].user.username;
+        myTooltipObsDate = item[i].date.date;
+        myTooltipObsSciName = item[i].species.scientificName;
+        myTooltipObsTitle = item[i].title;
+        myTooltipObsPic = item[i].image;
+        listItemLinkFocus = "obs-" + item[i].id;
+
+        if (myTooltipObsPic != null) {
+          myTooltipObsPicAlt = item[i].image.alt;
+          myTooltipObsPicWebPath = '/uploads/photos/' + item[i].image.id + "." + item[i].image.extension;
+        }
+
+        myTooltip = constuctMyTooltip();
+        marker = new L.marker([item[i].latitude, item[i].longitude]).bindPopup(myTooltip);
+        L.circle([item[i].latitude, item[i].longitude], 200).addTo(mymap);
+        markers.addLayer(marker);
+        mymap.addLayer(markers);
+
+        document.getElementById(item[i].id).id = marker._leaflet_id;
+        document.getElementById('maplink-' + item[i].id).id = 'maplink-' + marker._leaflet_id;
+        document.getElementById('displayInfo-' + item[i].id).id = 'displayInfo-' + marker._leaflet_id;
+        marker.on('click', onMarkerClick);
+        resetMyTooltip();
+      }
+    });
+
+
   }
+
+  var fff = document.getElementById('obsPic-2');
+  console.log(fff);
 
 });

@@ -203,11 +203,13 @@
   var myTooltipContent = '';
   {% if watch.user.avatar == null %}
   var myTooltipUserPicture = null;
+  var myTooltipUserPicWebPath = '';
+  var myTooltipUserPicAlt = '';
   {% else %}
   var myTooltipUserPicture = true ;
-  {% endif %}
   var myTooltipUserPicWebPath = "{{ asset(watch.user.avatar.webPath) }}";
   var myTooltipUserPicAlt = '{{ watch.user.avatar.alt }}';
+  {% endif %}
   var myTooltipUsername = '{{ watch.user.username }}';
   var myTooltipObsDate = '{{ watch.date|localizeddate('medium', 'short') }}';
   var myTooltipObsSciName = '{{ watch.species.scientificName }}';
