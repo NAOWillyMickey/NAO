@@ -90,6 +90,17 @@ class Watching
     private $title;
 
     /**
+     * @var int|null
+     *
+     * @ORM\Column(name="validate_by", type="integer", nullable=true)
+     * @Assert\Type(
+     *     type="integer",
+     *     message="Cette valeur n'est pas un entier."
+     * )
+     */
+    private $validateBy = null;
+
+    /**
      * @Assert\Valid()
      * @ORM\OneToOne(targetEntity="Ornito\ObservationBundle\Entity\Image", cascade={"persist", "remove"})
      */
@@ -295,6 +306,30 @@ class Watching
     }
 
     /**
+     * Set validateBy.
+     *
+     * @param int|null $validateBy
+     *
+     * @return Watching
+     */
+    public function setValidateBy($validateBy = null)
+    {
+        $this->validateBy = $validateBy;
+
+        return $this;
+    }
+
+    /**
+     * Get validateBy.
+     *
+     * @return int|null
+     */
+    public function getValidateBy()
+    {
+        return $this->validateBy;
+    }
+
+    /**
      * Set user.
      *
      * @param \Ornito\UserBundle\Entity\User $user
@@ -351,18 +386,6 @@ class Watching
             $this->setValidateStatus(self::ATTESTED);
         } else {
             $this->setValidateStatus(self::UNTREATED);
-        }
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function amendValidateStatus()
-    {
-        if ($this->getValidateStatus() === Watching::REJECTED) {
-            $this->setValidateStatus(self::UNTREATED);
-        } else {
-            return;
         }
     }
 }

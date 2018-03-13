@@ -100,6 +100,10 @@ class ObservationController extends Controller
             $form = $this->createForm(WatchingType::class, $watching);
 
             if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+                // Change rejected obs status when edit to untreated
+                if ($watching->getValidateStatus() === Watching::REJECTED) {
+                    $watching->setValidateStatus(Watching::UNTREATED);
+                }
                 $em->flush();
 
                 $request->getSession()->getFlashBag()->add('success' , 'Annonce bien modifiée.');
@@ -214,7 +218,11 @@ class ObservationController extends Controller
             if ( $currentStatus != Watching::UNTREATED) {
                 $request->getSession()->getFlashBag()->add('warning', 'L\'observation a déjà été traitée et a reçu le status : ' .$currentStatus);
             } else {
+                // Get value of obs status for the flash message
                 $postStatus = $request->request->get('watching_validate')['validateStatus'];
+                // Set id of naturalist who check obs before flush
+                $currentUser = $this->getUser()->getId();
+                $watching->setValidateBy($currentUser);
                 $em->flush();
                 $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien reçu le status : ' . $postStatus);
             }
