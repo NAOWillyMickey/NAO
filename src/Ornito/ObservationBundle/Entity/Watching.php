@@ -353,4 +353,16 @@ class Watching
             $this->setValidateStatus(self::UNTREATED);
         }
     }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function amendValidateStatus()
+    {
+        if ($this->getValidateStatus() === Watching::REJECTED) {
+            $this->setValidateStatus(self::UNTREATED);
+        } else {
+            return;
+        }
+    }
 }
