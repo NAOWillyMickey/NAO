@@ -57,8 +57,8 @@
               </li>
               <li class="nav-item">
                 {% if is_granted("ROLE_NATURALIST") %}
-                <a title="{{ 'Observations à Validées'|trans }}" href="{{ path('ornito_observation_homepage')}}" class="nav-link fa fa-certificate">
-                  {{ 'VALIDATION'|trans|upper }}
+                <a title="{{ 'Observations à Valider'|trans }}" href="{{ path('ornito_observation_waiting')}}" class="nav-link fa fa-certificate">
+                  {{ 'VALIDATION'|trans }}
                 </a>
                 {% else %}
                 <a class="nav-link" href="{{ path('ornito_main_join')}}">{{ 'PARTICIPER'|trans }}</a>
@@ -191,7 +191,7 @@
     <section id="circular_menu_plus">
       <div id='ss_menu'>
         <div>
-          <a title="{{ 'Communauté Facebook'|trans }}" href="" class="fa fa-facebook-square"></a>
+          <a title="{{ 'Communauté Facebook'|trans }}" href="{% if facebook is defined %}{{ facebook }}{% else %}https://www.facebook.com/{% endif %}" class="fa fa-facebook-square"></a>
         </div>
         <div>
           {% if is_granted('ROLE_NATURALIST') %}
@@ -208,7 +208,7 @@
           {% endif %}
         </div>
         <div>
-          <a title="{{ 'Communauté Pinterest'|trans }}" href="" class="fa fa-pinterest-square"></a>
+          <a title="{{ 'Communauté Pinterest'|trans }}" href="{% if pinterest is defined %}{{ pinterest }}{% else %}https://www.pinterest.com/{% endif %}" class="fa fa-pinterest-square"></a>
         </div>
         <div class='menu'>
           <div class='share' id='ss_toggle' data-rot='180'>
