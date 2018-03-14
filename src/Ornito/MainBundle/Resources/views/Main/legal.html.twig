@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - Legal
+  - {{ 'Legal'|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -16,8 +16,8 @@
         <section class="info-section">
           <div class="container">
             <div class="head-box text-center mb-5">
-              <h2>L'Ornithothèque</h2>
-              <h6 class="text-underline-primary">Mentions Légales</h6>
+              <h2>{{ 'L\'Ornithothèque'|trans }}</h2>
+              <h6 class="text-underline-primary">{{ 'Mentions Légales'|trans }}</h6>
             </div>
           </div>
         </section>
@@ -26,17 +26,43 @@
         <section class="bg-light  py-0">
           <div class="container-fluid">
             <div class="col-md-12 col-lg-12">
-              <h3>L'Association</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <h3>Lorem Ipsum
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+              <h3>{{ 'L\'Association NAO pour l\'Ornithothèque - - Mentions Légales'|trans }}</h3>
+              <hr />
+              <p class='center'>
+                <strong>{% trans %}Merci de lire avec attention les différentes modalités d’utilisation du présent site avant d’y parcourir ses pages.
+                  En utilisant ce site, vous acceptez sans réserves les présentes modalités. Aussi, conformément à l’article n°6 de la Loi n°2004-575 du 21 Juin 2004
+                  pour la confiance dans l’économie numérique, les responsables du présent site internet sont{% endtrans %} :</strong>
+                </p>
+                </br>
+                <div class="col-md-12 col-lg-12">
+
+                    <h4>{{ 'Editeur du Site'|trans }}</h4>
+                    <p>SURIKAT STUDIO</p>
+
+                    <h4>{{ 'Responsable éditorial'|trans }}</h4>
+                    <p>{{ 'Association NAO'|trans }}</p>
+
+                    <h4>{{ 'Adresse'|trans }}</h4>
+                    <p>6 Faubourg du Pélican</p>
+                    <p>69000 Lyon Cedex 6041</p>
+
+                    <h4>{{ 'Telephone'|trans }}</h4>
+                    <p>+33 00 00 00 00 00 00</p>
+
+                    <h4>{{ 'Mail'|trans }}</h4>
+                    <p>contact@ornithotheque.surikatstudio.com</p>
+
+                    <h4>{{ 'Site Web'|trans }}</h4>
+                    <p>www.ornithotheque.surikatstudio.com</p>
+
+                    <h4>{{ 'Hebergeur'|trans }}</h4>
+                    <p>02 SWITCH</p>
+                    <p>222 Boulevard Gustave Flaubert,</p>
+                    <p> 63000 Clermont-Ferrand</p>
+
+                    <h4>{{ 'Développement'|trans }}</h4>
+                    <p>Surikat Studio</p>
+                  </div>
             </div>
           </div>
         </section>
@@ -46,25 +72,16 @@
             <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
           </div>
           <div class="container-fluid">
-            <div class="col-md-12 col-lg-12  mt-md-0 pl-5 pt-4 row">
-              <h3>L'Association</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <h3>Lorem Ipsum
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-
-          </div>
           <hr>
-          <a class="btn btn-block " href="">Créer Mon Compte</a>
-          <hr>
-          <a class="btn btn-block " href="">Me Connecter</a>
+          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a class="btn btn-block " href="{{ (path("ornito_observation_add")) }}">{{ 'Ajouter une Observation'|trans }}</a>
+            <hr>
+            <a class="btn btn-block " href="{{ (path("fos_user_profile_show")) }}">{{ 'Mon Profil'|trans }}</a>
+            {% else %}
+            <a class="btn btn-block " href="{{ (path("fos_user_registration_register")) }}">{{ 'Créer Mon Compte'|trans }}</a>
+            <hr>
+            <a class="btn btn-block " href="{{ (path("fos_user_security_login")) }}">{{ 'Me Connecter'|trans }}</a>
+          {% endif %}
         </div>
       </section>
     </div>

@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - CGU
+  - {{ 'CGU'|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -16,8 +16,8 @@
         <section class="info-section">
           <div class="container">
             <div class="head-box text-center mb-5">
-              <h2>L'Ornithothèque</h2>
-              <h6 class="text-underline-primary">Conditions Générales d'Utilisation</h6>
+              <h2>{{ 'L\'Ornithothèque'|trans }}</h2>
+              <h6 class="text-underline-primary">{{ 'Conditions Générales d\'Utilisation'|trans }}</h6>
             </div>
           </div>
         </section>
@@ -25,18 +25,88 @@
         <!-- Info block 1 -->
         <section class="bg-light  py-0">
           <div class="container-fluid">
-            <div class="col-md-12 col-lg-12">
-              <h3>L'Association</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <h3>Lorem Ipsum
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="CGU">
+            <div class="col-md-10">
+                </br>
+                <h4>{{ 'Conditions d’utilisation'|trans }}</h4>
+                <p>{% trans %}Ce site est proposé en différents langages web (HTML, HTML5, Javascript, CSS, etc…)
+                  pour un meilleur confort d’utilisation et un graphisme plus agréable, nous vous recommandons
+                   de recourir à des navigateurs modernes comme Internet explorer, Safari, Firefox, Google Chrome, etc…{% endtrans %}<p>
+
+                <h4>{{ 'Cookies'|trans }}</h4>
+                <p>{% trans %}Ce site www.ornithotheque.surikatstudio.com peut-être amené à vous demander
+                  l’acceptation des cookies pour des besoins de statistiques et d’affichage.
+                  Un cookies est une information déposée sur votre disque dur par le serveur du site que vous visitez.
+                  Il contient plusieurs données qui sont stockées sur votre ordinateur dans un simple fichier texte
+                  auquel un serveur accède pour lire et enregistrer des informations .
+                  Certaines parties de ce site ne peuvent être fonctionnelles sans l’acceptation de cookies.{% endtrans %}<p>
+
+                <h4>{{ 'Liens hypertextes'|trans }}</h4
+                <p>{% trans %}Les sites internet de peuvent offrir des liens vers d’autres sites internet ou d’autres ressources disponibles sur Internet.
+                  L'Ornithotheque ne dispose d’aucun moyen pour contrôler les sites en connexion avec ses sites internet.
+                  ne répond pas de la disponibilité de tels sites et sources externes, ni ne la garantit.
+                  Il ne peut être tenue pour responsable de tout dommage, de quelque nature que ce soit,
+                  résultant du contenu de ces sites ou sources externes, et notamment des informations,
+                  produits ou services qu’ils proposent, ou de tout usage qui peut être fait de ces éléments.
+                  Les risques liés à cette utilisation incombent pleinement à l’internaute,
+                  qui doit se conformer à leurs conditions d’utilisation.{% endtrans %}</p>
+
+                <p>{% trans %}Les utilisateurs, les abonnés et les visiteurs des sites internet  ne peuvent pas mettre en place un hyperlien
+                  en direction de ce site sans l’autorisation expresse et préalable de l'Ornithothèque.{% endtrans %}</p>
+
+                <p>{% trans %}Dans l’hypothèse où un utilisateur ou visiteur souhaiterait mettre en place un hyperlien en direction d’un des sites internet
+                  de la NAO ou de l'Ornithothèque, il lui appartiendra d’adresser un email accessible sur le site afin de formuler sa demande de mise en place d’un hyperlien.
+                  La NAO et l'Ornithothèque se réserve le droit d’accepter ou de refuser un hyperlien sans avoir à en justifier sa décision.{% endtrans %}<p>
+
+                <h4>{{ 'Services fournis'|trans }}</h4>
+                <p>
+                 {% trans %}Ajouter vos observations ornithologiques, faites les valider par des professionnels.
+                 Partager celles-ci sur les réseaux sociaux.
+                 Options de géolocalisation pour les membres conectés{% endtrans %}
+                </p>
+
+                <h4>{{ 'Limitation contractuelles sur les données'|trans }}</h4>
+                <p>{% trans %}Les informations contenues sur ce site sont aussi précises que possible et le site remis à jour à différentes périodes de l’année, mais peut toutefois contenir des inexactitudes ou des omissions. Si vous constatez une lacune, erreur ou ce qui parait être un dysfonctionnement, merci de bien vouloir le signaler par email, à l’adresse contact@anthedesign.fr, en décrivant le problème de la manière la plus précise possible (page posant problème, type d’ordinateur et de navigateur utilisé, …).{% endtrans %}</p>
+
+                <p>{% trans %}Tout contenu téléchargé se fait aux risques et périls de l’utilisateur et sous sa seule responsabilité.
+                  En conséquence, ne saurait être tenu responsable d’un quelconque dommage subi par l’ordinateur de l’utilisateur ou d’une quelconque
+                  perte de données consécutives au téléchargement. De plus, l’utilisateur du site s’engage à accéder au site en utilisant un matériel récent,
+                  ne contenant pas de virus et avec un navigateur de dernière génération mis-à-jour.{% endtrans %}</p>
+
+                <p>{% trans %}Les liens hypertextes mis en place dans le cadre du présent site internet
+                  en direction d’autres ressources présentes sur le réseau Internet ne sauraient engager la responsabilité
+                  de la NAO ou de l'Ornithothèque.{% endtrans %}</p>
+
+                <h4>{{ 'Propriété intellectuelle'|trans }}</h4
+                <p>{% trans %}Tout le contenu du présent site, incluant, de façon non limitative, les graphismes,
+                  images, textes, vidéos, animations, sons, logos, gifs et icônes ainsi que leur mise en forme sont
+                  la propriété exclusive de la NAO ou de l'Ornithothèque à l’exception des marques, logos ou contenus appartenant
+                   à d’autres sociétés partenaires ou auteurs.{% endtrans %}</p>
+
+                <p>{% trans %}Toute reproduction, distribution, modification, adaptation, retransmission ou publication,
+                  même partielle, de ces différents éléments est strictement interdite sans l’accord exprès par écrit de la NAO ou de l'Ornithothèque.
+                  Cette représentation ou reproduction, par quelque procédé que ce soit, constitue une contrefaçon sanctionnée
+                  par les articles L.335-2 et suivants du Code de la propriété intellectuelle.
+                   Le non-respect de cette interdiction constitue une contrefaçon pouvant engager la responsabilité civile et pénale du contrefacteur.
+                   En outre, les propriétaires des Contenus copiés pourraient intenter une action en justice à votre encontre.{% endtrans %}</p>
+
+                <h4>{{ 'Déclaration à la CNIL'|trans }}</h4>
+                <p>{% trans %}Conformément à la loi 78-17 du 6 janvier 1978
+                  (modifiée par la loi 2004-801 du 6 août 2004 relative à la protection des personnes physiques à l’égard des traitements de données à caractère personnel)
+                  relative à l’informatique, aux fichiers et aux libertés, ce site a fait l’objet d’une déclaration 1656629
+                  auprès de la Commission nationale de l’informatique et des libertés (www.cnil.fr).{% endtrans %}</p>
+
+                <h4>{{ 'Litiges'|trans }}</h4>
+                <p>{% trans %}Les présentes conditions du site www.ornithotheque.surikatstudio.com sont régies par les lois françaises
+                  et toute contestation ou litiges qui pourraient naître de l’interprétation ou de l’exécution de celles-ci seront
+                  de la compétence exclusive des tribunaux dont dépend le siège social de la société. La langue de référence,
+                  pour le règlement de contentieux éventuels, est le français.{% endtrans %}</p>
+
+                <h4>{{ 'Données personnelles'|trans }}</h4>
+                <p>{% trans %}Les bases de données sont protégées par les dispositions de la loi du 1er juillet 1998 transposant
+                  la directive 96/9 du 11 mars 1996 relative à la protection juridique des bases de données.{% endtrans %}</p>
             </div>
           </div>
         </section>
@@ -46,26 +116,16 @@
             <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
           </div>
           <div class="container-fluid">
-            <div class="col-md-12 col-lg-12  mt-md-0 pl-5 pt-4 row">
-              <h3>L'Association</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-              <h3>Lorem Ipsum
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
-
+          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a class="btn btn-block " href="{{ (path("ornito_observation_add")) }}">{{ 'Ajouter une Observation'|trans }}</a>
+            <hr>
+            <a class="btn btn-block " href="{{ (path("fos_user_profile_show")) }}">{{ 'Mon Profil'|trans }}</a>
+            {% else %}
+            <a class="btn btn-block " href="{{ (path("fos_user_registration_register")) }}">{{ 'Créer Mon Compte'|trans }}</a>
+            <hr>
+            <a class="btn btn-block " href="{{ (path("fos_user_security_login")) }}">{{ 'Me Connecter'|trans }}</a>
+          {% endif %}
           </div>
-          <hr>
-          <a class="btn btn-block " href="">Créer Mon Compte</a>
-          <hr>
-          <a class="btn btn-block " href="">Me Connecter</a>
-        </div>
       </section>
     </div>
     <!-- END CONTENT -->
