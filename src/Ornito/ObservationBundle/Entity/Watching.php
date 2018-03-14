@@ -382,7 +382,8 @@ class Watching
      */
     public function selectValidateStatus()
     {
-        if (in_array('ROLE_NATURALIST', $this->user->getRoles())) {
+        $user = $this->user->getRoles();
+        if (in_array('ROLE_NATURALIST', $user) || in_array('ROLE_SUPER_ADMIN', $user)) {
             $this->setValidateStatus(self::ATTESTED);
         } else {
             $this->setValidateStatus(self::UNTREATED);
