@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - HOME
+  - {{ 'ACCUEIL'|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -25,7 +25,7 @@
               Thèque
               <h1>
                 <a href="{{ path('ornito_inventory_homepage')}}">
-                  <button class="shadowed-2  btn btn-carousel-title btn-lg" role="button">Accès à L'Inventaire</button>
+                  <button class="shadowed-2  btn btn-carousel-title btn-lg" role="button">{{ 'Accès à L\'Inventaire'|trans }}</button>
                 </a>
               </div>
             </div>
@@ -37,7 +37,7 @@
                   Tech
                   <h1>
                     <a href="#option-menu">
-                      <button class="shadowed btn btn-carousel-title btn-lg" role="button">Dernières Obs'</button>
+                      <button class="shadowed btn btn-carousel-title btn-lg" role="button">{{ 'Dernières Obs'|trans }}''</button>
                     </a>
                   </div>
                 </div>
@@ -49,24 +49,24 @@
                       Logue
                       <h1>
                         <a href="{{ (path("fos_user_registration_register")) }}">
-                          <button class="shadowed btn btn-carousel-title btn-lg" role="button">Rejoignez la Communauté !</button>
+                          <button class="shadowed btn btn-carousel-title btn-lg" role="button">{{ 'Rejoignez la Communauté'|trans }} !</button>
                         </a>
                       </div>
                     </div>
                   </div>
                   <a class="carousel-control-prev" href="#homeCarousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                    <span class="sr-only">{{ 'Précédent'|trans }}</span>
                   </a>
                   <a class="carousel-control-next" href="#homeCarousel" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                    <span class="sr-only">{{ 'Suivant'|trans }}</span>
                   </a>
                 </div>
                 <!-- END CAROUSEL HEADER -->
                 <!-- PAGE TITLE -->
                 <h1 class="band_title elegantshd">
-                  Fil d'Actu
+                  {{ 'Fil d\'Actu'|trans }}
                 </h1>
                 <!-- PAGE OPTION MENU -->
                 <div id="option-menu" class="margin-top-25 d-flex justify-content-center row">
@@ -89,7 +89,7 @@
                           <li class="timeline-inverted">
                             <!-- ASIDE -> USER INFO AND CONTENT ICON -->
                             <aside class="timeline-badge">
-                              <a title="Voir le profil" href="">
+                              <a title="{{ 'Voir le profil'|trans }}" href="">
                                 <span class="profil-img">
                                   <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : watch.user.username ,  userId : watch.user.id })) }}">
                                     {% if watch.user.avatar == null %}

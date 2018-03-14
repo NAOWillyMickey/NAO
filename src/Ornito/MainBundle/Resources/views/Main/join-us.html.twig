@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - Join Us
+  - {{ 'Particier'|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -19,34 +19,40 @@
               <div class="center col-md-12">
                 <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
               </div>
-              <h2>L'Ornithotèque</h2>
-              <h6 class="text-underline-primary">Un projet particpatif, une communauté ouverte, une application évolutive</h6>
+              <h2>{{ 'L\'Ornithotèque'|trans }}</h2>
+              <h6 class="text-underline-primary">{{ 'Un projet particpatif, une communauté ouverte, une application évolutive'|trans }}</h6>
             </div>
             <div class="three-panel-block mt-5">
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6">
                   <div class="service-block-overlay text-center mb-5 p-lg-3">
                     <i class="fa fa-users box-circle-solid mt-3 mb-3" aria-hidden="true"></i>
-                    <h3>Pour les Amateurs</h3>
-                    <p class="px-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <h3>{{ 'Pour les Amateurs'|trans }}</h3>
+                    <p class="px-4">{% trans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.{% endtrans %}</p>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                   <div class="service-block-overlay text-center mb-5 p-lg-3">
                     <i class="fa fa-user-secret  box-circle-solid mt-3 mb-3" aria-hidden="true"></i>
-                    <h3>Pour les Profesionnels</h3>
-                    <p class="px-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <h3>{{ 'Pour les Profesionnels'|trans }}</h3>
+                    <p class="px-4">{% trans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.{% endtrans %}
                     </p>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                   <div class="service-block-overlay text-center mb-5 p-lg-3">
                     <i class="fa fa-heart box-circle-solid mt-3 mb-3" aria-hidden="true"></i>
-                    <h3>Pour les Passionnés</h3>
-                    <p class="px-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <h3>{{ 'Pour les Passionnés'|trans }}</h3>
+                    <p class="px-4">{% trans %}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.{% endtrans %}
                     </p>
                   </div>
                 </div>
@@ -61,16 +67,16 @@
             <div class="row">
               <div class="col-md-12 col-lg-12 content-half mt-md-0 pl-5 pt-4">
                 <div class="head-box mb-5 pl-5 mt-2">
-                  <h2 class="text-white">Un projet en constante évolution</h2>
-                  <h6 class="text-white text-underline-rb-white">Autours de l'Ornithothèque il y à ...</h6>
+                  <h2 class="text-white">{{ 'Un projet en constante évolution'|trans }}</h2>
+                  <h6 class="text-white text-underline-rb-white">{{ 'Autours de l\'Ornithothèque il y à'|trans }} ...</h6>
                 </div>
                 <ul class="">
                   <li>
                     <i class="fa fa-university box-round-outline" aria-hidden="true"></i>
                     <span class="list-content">
-                      <strong>L'INPN</strong>
+                      <strong>{{ 'L\'INPN'|trans }}</strong>
                       <br>
-                      <p>Notre source de données pour l'inventaire et les Fiches Oiseaux provient de l'INPN.<p>
+                      <p>{{ 'Notre source de données pour l\'inventaire et les Fiches Oiseaux provient de l\'INPN'|trans }}.<p>
                           <hr>
                           <a class="link" href="https://inpn.mnhn.fr/">Site Web</a>
                         </span>
@@ -78,27 +84,33 @@
                       <li>
                         <i class="fa fa-leaf box-round-outline" aria-hidden="true"></i>
                         <span class="list-content">
-                          <strong>La NAO</strong>
+                          <strong>{{ 'La NAO'|trans }}</strong>
                           <br>
-                          <p>L'Association au coeur du projet de référencement participatif et du développement de l'application L'Ornithothèque.
+                          <p>{{ 'L\'Association au coeur du projet de référencement participatif et du développement de l\'application L\'Ornithothèque.'|trans }}
                           </p>
                           <hr>
-                          <a class="link" href="">Présentation de l'Association</a>
+                          <a class="link" href="">{{ 'Présentation de l\'Association'|trans }}</a>
                         </span>
                       </li>
                       <li>
                         <i class="fa fa-users box-round-outline" aria-hidden="true"></i>
                         <span class="list-content">
-                          <strong>Les Oiseaux et ... Vous</strong>
+                          <strong>{{ 'Les Oiseaux et ... Vous'|trans }}</strong>
                           <br>
-                          <p>Sans eux il n'y aurait pas d'Ornithothèque, sans vous il n'y à plus d'Ornithothèque. Ce projet est à destination de chacun, du simple curieux à l'expert le plus agueri. N'hésitez pas à soutenir le développement du projet, sur le terrain, en
+                          <p>{% trans %}Sans eux il n'y aurait pas d'Ornithothèque, sans vous il n'y à plus d'Ornithothèque. Ce projet est à destination de chacun, du simple curieux à l'expert le plus agueri. N'hésitez pas à soutenir le développement du projet, sur le terrain, en
                             partageant vos observations, sur les réseaux en proposant des orientations tant pour la sauvegarde des éspèces que pour l'amélioration de L'Ornithothèque, comme Membre Bienfaiteur par un don à la NAO. Un projet participatif dépend de sa communauté
-                            alors n'hésitez pas !
+                            alors n'hésitez pas !{% endtrans %}
                           </p>
                           <hr>
-                          <a class="btn btn-block " href="">Créer Mon Compte</a>
-                          <hr>
-                          <a class="btn btn-block " href="">Me Connecter</a>
+                          {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <a class="btn btn-block " href="{{ (path("ornito_observation_add")) }}">{{ 'Ajouter une Observation'|trans }}</a>
+                            <hr>
+                            <a class="btn btn-block " href="{{ (path("fos_user_profile_show")) }}">{{ 'Mon Profil'|trans }}</a>
+                            {% else %}
+                            <a class="btn btn-block " href="{{ (path("fos_user_registration_register")) }}">{{ 'Créer Mon Compte'|trans }}</a>
+                            <hr>
+                            <a class="btn btn-block " href="{{ (path("fos_user_security_login")) }}">{{ 'Me Connecter'|trans }}</a>
+                          {% endif %}
                         </span>
                       </li>
                     </ul>
@@ -107,27 +119,30 @@
               </section>
               <!-- MEMBER TYPE SECTION -->
               <section class="team-section py-5">
+                <div class="col-md-12 p-0 m-0">
+                  <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
+                </div>
                 <div class="container">
                   <div class="row mb-5">
                     <div class="head-box text-center mb-5 col-md-12">
-                      <h2>Devenez Membre de la Communauté</h2>
-                      <h6 class="text-underline-primary mb-5">Type d'Accès et Fonctionnalités</h6>
+                      <h2>{{ 'Devenez Membre de la Communauté'|trans }}</h2>
+                      <h6 class="text-underline-primary mb-5">{{ 'Type d\'Accès et Fonctionnalités'|trans }}</h6>
                     </div>
                     <div class="col-md-4 mb-md-0 mb-sm-4">
                       <div class="member-box anim-lf t-bottom">
                         <img class="img-fluid" src="{{ asset('assets/img/content/participer/dePassage.jpg') }}">
                         <div class="overlay-content">
-                          <h3 class="text-white ml-3 my-0">De Passage</h3>
-                          <p class="text-white ml-3 mb-3">S'informer et découvrir</p>
+                          <h3 class="text-white ml-3 my-0">{{ 'De Passage'|trans }}</h3>
+                          <p class="text-white ml-3 mb-3">{{ 'S\'informer et découvrir'|trans }}</p>
                           <span class="socail-l ml-3 mb-3">
                             <a href="#" class="mr-2">
-                              <i title="Restez informé" class="fa fa-info box-circle-solid"></i>
+                              <i title="{{ 'Restez informé'|trans }}" class="fa fa-info box-circle-solid"></i>
                             </a>
                             <a href="#" class="mr-2">
-                              <i title="Découvrez les Fiches Oiseaux" class="fa fa-twitter box-circle-solid"></i>
+                              <i title="{{ 'Découvrez les Fiches Oiseaux'|trans }}" class="fa fa-twitter box-circle-solid"></i>
                             </a>
                             <a href="#">
-                              <i title="Accéder à la Liste des Observations" class="fa fa-list box-circle-solid"></i>
+                              <i title="{{ 'Accéder à la Liste des Observations'|trans }}" class="fa fa-list box-circle-solid"></i>
                             </a>
                           </span>
                         </div>
@@ -137,17 +152,17 @@
                       <div class="member-box anim-lf t-bottom">
                         <img class="img-fluid" src="{{ asset('assets/img/content/participer/membre.jpg') }}" alt="">
                         <div class="overlay-content">
-                          <h3 class="text-white ml-3 my-0">Membre</h3>
-                          <p class="text-white ml-3 mb-3">Observer et Partager</p>
+                          <h3 class="text-white ml-3 my-0">{{ 'Membre'|trans }}</h3>
+                          <p class="text-white ml-3 mb-3">{{ 'Observer et Partager'|trans }}</p>
                           <span class="socail-l ml-3 mb-3">
                             <a href="#" class="mr-2">
-                              <i title="Personalisez votre Profil" class="fa fa-user box-circle-solid"></i>
+                              <i title="{{ 'Personalisez votre Profil'|trans }}" class="fa fa-user box-circle-solid"></i>
                             </a>
                             <a href="#" class="mr-2">
-                              <i title="Partagez vos Observations" class="fa fa-binoculars box-circle-solid"></i>
+                              <i title="{{ 'Partagez vos Observations'|trans }}" class="fa fa-binoculars box-circle-solid"></i>
                             </a>
                             <a href="#">
-                              <i title="Participez à la Protection des Oiseaux" class="fa fa-gavel box-circle-solid"></i>
+                              <i title="{{ 'Participez à la Protection des Oiseaux'|trans }}" class="fa fa-gavel box-circle-solid"></i>
                             </a>
                           </span>
                         </div>
@@ -157,26 +172,33 @@
                       <div class="member-box anim-lf t-bottom">
                         <img class="img-fluid" src="{{ asset('assets/img/content/participer/naturaliste.jpg') }}" alt="">
                         <div class="overlay-content">
-                          <h3 class="text-white ml-3 my-0">Naturaliste</h3>
-                          <p class="text-white ml-3 mb-3">Suivi par des Professionels</p>
+                          <h3 class="text-white ml-3 my-0">{{ 'Naturaliste'|trans }}</h3>
+                          <p class="text-white ml-3 mb-3">{{ 'Suivi par des Professionels'|trans }}</p>
                           <span class="socail-l ml-3 mb-3">
                             <a href="#" class="mr-2">
-                              <i title="Certifiez votre Profil" class="fa fa-address-card box-circle-solid"></i>
+                              <i title="{{ 'Certifiez votre Profil'|trans }}" class="fa fa-address-card box-circle-solid"></i>
                             </a>
                             <a href="#" class="mr-2">
-                              <i title="Validez les Observations des autres Membres" class="fa fa-certificate box-circle-solid"></i>
+                              <i title="{{ 'Validez les Observations des autres Membres'|trans }}" class="fa fa-certificate box-circle-solid"></i>
                             </a>
                             <a href="#">
-                              <i title="Accédez à une source de donnée participative" class="fa fa-stack-overflow box-circle-solid"></i>
+                              <i title="{{ 'Validez les Observations des autres Membres'|trans }}Accédez à une source de donnée participative" class="fa fa-stack-overflow box-circle-solid"></i>
                             </a>
                           </span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-12 p-0 m-0">
-                    <img src="{{ asset('assets/img/logo/logo-ornithotequeMD.png') }}" class="img-fluid">
-                  </div>
+                  <hr>
+                  {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a class="btn btn-block " href="{{ (path("ornito_observation_add")) }}">{{ 'Ajouter une Observation'|trans }}</a>
+                    <hr>
+                    <a class="btn btn-block " href="{{ (path("fos_user_profile_show")) }}">{{ 'Mon Profil'|trans }}</a>
+                    {% else %}
+                    <a class="btn btn-block " href="{{ (path("fos_user_registration_register")) }}">{{ 'Créer Mon Compte'|trans }}</a>
+                    <hr>
+                    <a class="btn btn-block " href="{{ (path("fos_user_security_login")) }}">{{ 'Me Connecter'|trans }}</a>
+                  {% endif %}
                 </div>
               </section>
             </div>
