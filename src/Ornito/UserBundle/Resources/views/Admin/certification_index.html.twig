@@ -46,9 +46,6 @@
                         <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : user.username ,  userId : user.id })) }}">
                           <i class="fa fa-eye"></i>
                         </a>
-                        <a title="{{"Modifier"|trans }}" href="">
-                          <i class="fa fa-edit"></i>
-                        </a>
                         <a title="{{ "Supprimer"|trans }}" href="{{ (path('ornito_user_admin_delete', { userId : user.id })) }}">
                           <i class="fa fa-trash"></i>
                         </a>
