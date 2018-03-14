@@ -53,19 +53,23 @@
 </div>
 <hr/>
 <div class="col-md-12 margin-top-25">
-  <label class="custom-file-label" for="customFile">{{ 'Charger une photo'|trans }}</label>
+  <label class="custom-file-label" for="customFile">{{ 'Image'|trans }}</label>
   {{ form_errors(form.image) }}
   {{ form_widget(form.image, {'attr': {'id': 'newObsPicture', 'class': 'marginAuto custom-file-input text-center center-block well well-sm' }}) }}
 </div>
 <hr />
 <div class="container d-sm-flex d-md-inline-flex align-content-around flex-wrap margin-top-25 ">
-  <div class="col-md-7 d-flex justify-content-start order-sm-0 order-md-1">
-    <input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="float-right btn  btn-outline-success"/>
-  </div>
   {% if watching is defined %}
-  <div class="col-md-5 d-flex justify-content-start order-sm-1 order-md-0 margin-top-10">
-    <a class="btn btn-outline-info btn-sm" role="button" href="{{ path('ornito_observation_view', { 'id' : watching.id }) }}">{{ "Revenir à L'observation"|trans }}</a>
+  <div class="col-sm-6 d-flex justify-content-center order-sm-1 order-md-1 margin-top-10">
+    <input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="btn  btn-outline-success"/>
   </div>
+  <div class="col-sm-6 d-flex justify-content-center order-sm-0 order-md-0 margin-top-10">
+    <a class="btn btn-outline-info" role="button" href="{{ path('ornito_observation_view', { 'id' : watching.id }) }}">{{ "Revenir à L'Obs'"|trans }}</a>
+  </div>
+  {% else %}
+    <div class="col-md-12 d-flex justify-content-center">
+      <input id="newObsBirdFormSubmit" type="submit"  value="{{ "valider"|trans }}"  name="newObsBirdFormSubmit" class="btn  btn-outline-success"/>
+    </div>
   {% endif %}
 </div>
 {{ form_rest(form) }}

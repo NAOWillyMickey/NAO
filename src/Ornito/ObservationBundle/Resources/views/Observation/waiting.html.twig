@@ -8,12 +8,8 @@
 
 {% block content %}{{ parent() }}
     <!-- CONTENT HERE -->
-    <h1 class="band_title elegantshd">{{ "En attente de validation"|trans }}
-        <span>
-            <i class="fa fa-angle-double-down fa-1x"></i>
-        </span>
-    </h1>
-    <hr />
+    <!-- PAGE TITLE -->
+    <h1 class="band_title deepshd">{{ "À Valider"|trans }}</h1>
     <div id="mapPanelListArea" class="col-xs-10 offset-1 margin-top-25">
         <div class="table-container">
             <table class="table table-filter">
@@ -35,7 +31,7 @@
                             </span>
                             <hr>
                             <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_validate', {id : watch.id}) }}">
-                                <i class="fa fa-eye fa-lg"></i>{{ "Sélectionner"|trans }}
+                                <i class="fa fa-eye fa-lg"></i>{{ "Voir"|trans }}
                             </a>
                         </td>
                         <td>

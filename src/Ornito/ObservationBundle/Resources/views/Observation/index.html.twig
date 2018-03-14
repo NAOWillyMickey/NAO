@@ -7,42 +7,9 @@
 {% endblock %}
 
 {% block content %}{{ parent() }}
+  <!-- PAGE TITLE -->
+  <h1 class="band_title deepshd">{{ "Observations"|trans }}</h1>
   <!-- CONTENT HERE -->
-  <div id="option-menu" class="d-flex justify-content-center row">
-    <!-- END PAGINATION OPTION FORM -->
-    <!-- RANGE DATE SELECTOR -->
-    <div id="rangeDate" class="input-group input-daterange">
-      <form id="rangeForm" name="rangeForm" class="col-md-12 d-flex justify-content-centerflex-wrap form-inline">
-        <div class="d-flex justify-content-space-between input-group date">
-          <label class=" input-group-addon" for="startDate">Du
-          </label>
-          <input id="startDate" name="startDate" type="date" class="form-control"/>
-          <label class=" input-group-addon" for="endDate">au</label>
-          <input id="endDate" name="endDate" type="date" class="form-control"/>
-          <button type="submit" class="badge badge-lg badge-primary">
-            <i class="fa fa-check"></i>
-          </button>
-        </div>
-      </form>
-    </div>
-    <!-- END DATE RANGE SELECTOR -->
-    <!-- ORDER SELECTOR -->
-    <ul class="d-flex justify-content-center flex-wrap tl-btn">
-      <li>
-        <a title="{{ "Ordre Chronologique"|trans }}" class="badge badge-lg badge-primary" href="#">
-          <i class="fa fa-arrow-circle-down fa-lg float-left"></i>
-          <span class="text-uppercase">{{ "Chronologique"|trans|upper }}<br>
-            <small>{{ "Plus Récent en premier"|trans }}</small></span></a>
-      </li>
-      <li>
-        <a title="{{ "Ordre Inversé"|trans }}" class="badge badge-lg badge-warning " href="#">
-          <i class="fa fa-history fa-lg float-left"></i>
-          <span class="text-uppercase">{{ "Ordre Inversé"|trans }}<br>
-            <small>{{ "Plus Ancien en premier"|trans }}</small></span></a>
-      </li>
-    </ul>
-    <!-- END ORDER SELECTOR -->
-  </div>
   <!-- END PAGE OPTION MENU -->
   <div class="col-xs-10 offset-1">
     <div class="table-container">
@@ -63,7 +30,7 @@
                   </span>
                   <span class="margin-left-10 font-size-10 badge badge-success ">{{ watch.user.username }}</span>
                   <br />
-                  <span class="badge badge-light ">{{ "Inscit le"|trans }}
+                  <span class="badge badge-light ">{{ "Inscrit le"|trans }}
                     {{ watch.user.registerAt|localizeddate('long', 'none') }}
                   </span>
                 </span>
@@ -78,9 +45,6 @@
                 {% endif %}
                 <a class="float-right" title="{{ "Voir l\'Obs"|trans }}" href="{{ path('ornito_observation_view', {id : watch.id}) }}">
                 <i class="fa fa-eye fa-lg"></i>
-                </a>
-                <a class="float-right" title="{{ "Voir sur la Map"|trans }}" href="{{ path('ornito_map_homepage') }}">
-                <i class="fa fa-map fa-lg"></i>
                 </a>
             </td>
             <td>
