@@ -132,7 +132,7 @@ $(document).ready(function() {
     myTooltipContent = myTooltipContent + myTooltipUser;
     var myTooltipDateContainer = "<div " + myTooltipDateStyle + " ><time class='font-size-1em obs-time'><i class='fa fa-calendar'></i>" + myTooltipObsDate + "</time></div>";
     myTooltipContent = myTooltipContent + myTooltipDateContainer;
-    var myTooltipObsContent = "<h2 " + myTooltipObsSciNameStyle + " > " + myTooltipObsSciName + " </h2><hr/><h3 " + myTooltipObsTitleStyle + " >" + myTooltipObsTitle + "</h3><div " + myTootipObsPicContainerStyle + " >" + myTooltipObsPic + "<hr /><h2 class='font-size-10'>Périmètre Observation - 100 m à 200 m de ce point / Around 100 m à 200 m of ths point</h2></div>";
+    var myTooltipObsContent = "<h2 " + myTooltipObsSciNameStyle + " > " + myTooltipObsSciName + " </h2><hr/><h3 " + myTooltipObsTitleStyle + " >" + myTooltipObsTitle + "</h3><div " + myTootipObsPicContainerStyle + " >" + myTooltipObsPic + "<hr /><h2 class='font-size-10'>Périmètre Observation - 100 m à 200 m de ce point / Within 100 m to 200 m of this point</h2></div>";
     myTooltipContent = myTooltipContent + myTooltipObsContent;
     var myTooltipContainer = "<div " + myTooltipContainerStyle + " ><a style='text-decoration: none;' href='#" + listItemLinkFocus + "' id='obsPicker-" + listItemLinkFocus + "'>" + myTooltipContent + "</div></a>";
 
