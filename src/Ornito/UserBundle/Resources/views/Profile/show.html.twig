@@ -198,12 +198,6 @@
                                     {% for watching in user.watchings %}
                                       <tr data-status="{{ watching.validateStatus }}">
                                         <td>
-                                          <div class="ckbox">
-                                            <input type="checkbox" id="checkbox1">
-                                            <label for="checkbox1"></label>
-                                          </div>
-                                        </td>
-                                        <td>
                                           <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                             <i class="fa fa-eye"></i>
                                           </a>
@@ -322,23 +316,9 @@
                                     {% for watching in user.watchings %}
                                       <tr data-status="{{ watching.validateStatus }}">
                                         <td>
-                                          <div class="ckbox">
-                                            <input type="checkbox" id="checkbox1">
-                                            <label for="checkbox1"></label>
-                                          </div>
-                                        </td>
-                                        <td>
                                           <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                             <i class="fa fa-eye"></i>
                                           </a>
-                                          {% if user.id == app.user.id %}
-                                            <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
-                                              <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
-                                              <i class="fa fa-trash"></i>
-                                            </a>
-                                          {% endif %}
                                         </td>
                                         <td>
                                           <div class="media">
