@@ -113,22 +113,10 @@
                             <!-- TIMELINE PANEL -->
                             <div class="timeline-panel">
                               <div class="obs-status-container">
-                                {% if watch.validateStatus is same as('untreated') %}
-                                  <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-warning">
-                                    {{ "En attente"|trans }}
-                                    <i class="fa fa-hourglass-half fa-lg"></i>
-                                  </span>
-                                {% elseif watch.validateStatus is same as('attested') %}
-                                  <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-success">
-                                    {{ "Validée"|trans }}
-                                    <i class="fa fa-certificate  fa-lg"></i>
-                                  </span>
-                                {% else %}
-                                  <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-alert">
-                                    {{ "Refusée"|trans }}
-                                    <i class="fa fa-frown-o fa-lg"></i>
-                                  </span>
-                                {% endif %}
+                                <span class="obs-status shadowed text-uppercase float-right font-size-12 italic badge badge badge-success">
+                                  {{ "Validée"|trans }}
+                                  <i class="fa fa-certificate  fa-lg"></i>
+                                </span>
                               </div>
                               <div class="timeline-heading">
                                 <h4 class="text-uppercase font-size-16 card-title">{{ watch.title }}</h4>
