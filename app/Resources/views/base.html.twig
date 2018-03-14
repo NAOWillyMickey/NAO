@@ -194,17 +194,21 @@
           <a title="{{ 'Communauté Facebook'|trans }}" href="{% if facebook is defined %}{{ facebook }}{% else %}https://www.facebook.com/{% endif %}" class="fa fa-facebook-square"></a>
         </div>
         <div>
-          {% if is_granted('ROLE_NATURALIST') %}
-            <a title="{{ 'Observations à Valider'|trans }}" href="{{ path('ornito_observation_waiting') }}" class="fa fa-certificate"></a>
+          {% if is_granted('ROLE_MEMBER') %}
+            {% if is_granted('ROLE_NATURALIST') %}
+              <a title="{{ 'Observations à Valider'|trans }}" href="{{ path('ornito_observation_waiting') }}" class="fa fa-certificate"></a>
+            {% else %}
+              <a title="{{ 'Devenez naturaliste!'|trans }}" href="{{ path('fos_user_profile_show')}}" class="fa fa-certificate"></a>
+            {% endif %}
           {% else %}
-            <a title="{{ 'Vous devez être naturaliste pour y accéder'|trans }}" href="{{ path('ornito_main_join')}}" class="fa fa-certificate"></a>
+            <a title="{{ 'Rejoignez-nous!'|trans }}" href="{{ path('ornito_main_join')}}" class="fa fa-certificate"></a>
           {% endif %}
         </div>
         <div>
           {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_observation_add')}}" class="fa fa-binoculars"></a>
           {% else %}
-            <a title="{{ 'Ajouter une Observation'|trans }}" href="{{ path('ornito_main_join')}}" class="fa fa-binoculars"></a>
+            <a title="{{ 'Créer un Compte!'|trans }}" href="{{ (path("fos_user_registration_register")) }}" class="fa fa-binoculars"></a>
           {% endif %}
         </div>
         <div>
