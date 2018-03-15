@@ -68,10 +68,12 @@ Toujours dans votre terminal, lancez la commande suivante et répondez par yes �
 
 Maintenant que la base de données est à jour, supprimez désormais le fichier TAXREF du répertoire afin de ne pas alourdir l'application.
 
-## 4. Publiez les assets
+## 5. Créez les dossiers d'upload
 
-Publiez les assets dans le répertoire web :
+Dans le répertoire web, créez un dossier intitulé uploads et ses sous-dossiers avatar et photos.
 
-    php bin/console assets:install web
+## 6. Créez un super admin
+
+Créez votre super admin dans votre console à l'aide des commandes que vous trouverez [ici](http://symfony.com/doc/2.0/bundles/FOSUserBundle/command_line_tools.html)
 
 ### ENJOY !!!
