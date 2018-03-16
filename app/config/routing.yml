@@ -1,21 +1,32 @@
 ornito_map:
     resource: "@OrnitoMapBundle/Resources/config/routing.yml"
-    prefix:   /map
+    prefix:   /{_locale}/map
+    requirements:
+        _locale: %app.locales%
 
 ornito_inventory:
     resource: "@OrnitoTaxrefBundle/Resources/config/routing.yml"
-    prefix:   /inventory
+    prefix:   /{_locale}/inventory
+    requirements:
+        _locale: %app.locales%
 
 ornito_observation:
     resource: "@OrnitoObservationBundle/Resources/config/routing.yml"
-    prefix:   /observation
+    prefix:   /{_locale}/observation
+    requirements:
+        _locale: %app.locales%
 
 ornito_main:
     resource: "@OrnitoMainBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/
+    requirements:
+        _locale: %app.locales%
 
 ornito_user:
     resource: "@OrnitoUserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+        _locale: %app.locales%
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
