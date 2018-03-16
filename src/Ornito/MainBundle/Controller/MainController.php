@@ -4,6 +4,8 @@ namespace Ornito\MainBundle\Controller;
 
 use Ornito\ObservationBundle\Entity\Watching;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MainController extends Controller
@@ -41,5 +43,28 @@ class MainController extends Controller
     public function joinUsAction()
     {
         return $this->render('OrnitoMainBundle:Main:join-us.html.twig');
+    }
+
+    public function setLocaleAction($language = null, Request $request)
+    {
+        if($language != null)
+        {
+            // On enregistre la langue en session
+            $this->get('session')->set('_locale', $language);
+        }
+
+        // on tente de rediriger vers la page d'origine
+        $url = $request->headers->get('referer');
+        if(empty($url))
+        {
+            $url = $this->container->get('router')->generate('ornito_main_homepage');
+        } else {
+
+            $previousLocale = '/'. $request->attributes->get('_locale') .'/';
+            $askedLocale = '/'. $language .'/';
+            $url = str_replace($previousLocale, $askedLocale, $url);
+        }
+
+        return new RedirectResponse($url);
     }
 }
