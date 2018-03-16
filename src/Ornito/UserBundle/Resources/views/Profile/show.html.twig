@@ -313,12 +313,33 @@
                               <div class="table-container">
                                 <table class="table table-filter">
                                   <tbody>
-                                    {% for watching in user.watchings %}
+                                    {% if naturalistObsList is defined %}
+                                    {% for watching in naturalistObsList %}
                                       <tr data-status="{{ watching.validateStatus }}">
                                         <td>
                                           <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                             <i class="fa fa-eye"></i>
                                           </a>
+                                          {% if watching.validateStatus == 'attested' %}
+                                          {% if ( user.id == app.user.id  and is_granted("ROLE_NATURALIST"))  or is_granted("ROLE_SUPER_ADMIN")  %}
+                                            <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-trash"></i>
+                                            </a>
+                                          {% endif %}
+                                          {% endif %}
+                                          {% if watching.validateStatus != 'attested' %}
+                                          {% if ( user.id == app.user.id )  or is_granted("ROLE_SUPER_ADMIN")  %}
+                                            <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
+                                              <i class="fa fa-trash"></i>
+                                            </a>
+                                          {% endif %}
+                                          {% endif %}
                                         </td>
                                         <td>
                                           <div class="media">
@@ -346,6 +367,7 @@
                                         </td>
                                       </tr>
                                     {% endfor %}
+                                    {% endif %}
                                   </tbody>
                                 </table>
                               </div>

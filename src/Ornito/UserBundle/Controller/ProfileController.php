@@ -26,7 +26,12 @@ class ProfileController extends Controller
   {
     $FOSuserManager = $this->get('fos_user.user_manager');
     $user = $FOSuserManager->finduserBy(array('id' => $userId));
-    return $this->render('OrnitoUserBundle:Profile:show.html.twig', array('user' => $user));
+    $em = $this->getDoctrine()->getManager();
+    $naturalistObsList = $em->getRepository('OrnitoObservationBundle:Watching')->findByValidateBy($userId);
+    return $this->render('OrnitoUserBundle:Profile:show.html.twig', array(
+      'user' => $user,
+      'naturalistObsList' => $naturalistObsList,
+    ));
   }
 
 
