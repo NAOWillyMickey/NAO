@@ -22,3 +22,8 @@ ornito_main_join:
     path: /join-us
     defaults:
         _controller: OrnitoMainBundle:Main:joinUs
+
+ornito_set_locale:
+    path: /setlocale/{language}
+    defaults:
+        _controller: OrnitoMainBundle:Main:setLocale
