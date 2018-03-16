@@ -28,7 +28,7 @@
               <a href="{{ (path('fos_user_change_password')) }}" class="nav-link">{{ "Sécurité"|trans }}</a>
             </li>
             <li role="presentation" class="nav-item">
-              <a href="{{ (path('fos_user_profile_show')) }}" class="nav-link">{{ "Profil"|trans }}</a>
+              <a href="{{ (path('ornito_user_profile_show', { username : app.user.username ,  userId : app.user.id })) }}" class="nav-link">{{ "Profil"|trans }}</a>
             </li>
           </ul>
         </div>

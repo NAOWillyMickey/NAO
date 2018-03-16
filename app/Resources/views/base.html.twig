@@ -87,7 +87,7 @@
                       <h6 class="dropdown-header">{{ 'Compte'|trans }} - {{ 'Membre'|trans }}</h6>
                       <li class="dropdown-divider"></li>
                       <li>
-                        <a href="{{ (path('fos_user_profile_show')) }}">
+                        <a href="{{ (path('ornito_user_profile_show', { username : app.user.username ,  userId : app.user.id })) }}">
                           <i class="fa fa-user"></i>
                           {{ 'Mon Profil'|trans }}</a>
                       </li>
