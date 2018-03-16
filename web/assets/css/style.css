@@ -771,7 +771,7 @@ ul.dropdown-menu.drp-mnu li {
 
 .carousel-title {
   position: absolute;
-  top: 330px;
+  top: 240px;
   left: 50%;
   z-index: 3;
   color: #fff;
@@ -794,7 +794,7 @@ ul.dropdown-menu.drp-mnu li {
 
 .carousel-content {
   position: absolute;
-  top: 45%;
+  top: 60%;
   left: 50%;
   z-index: 3;
   color: #fff;
@@ -827,7 +827,7 @@ ul.dropdown-menu.drp-mnu li {
     top: 200px;
   }
   .carousel-content {
-    top: 45%;
+    top: 52%;
   }
 }
 
@@ -926,13 +926,13 @@ ul.dropdown-menu.drp-mnu li {
 
 @media all and (min-width: 280px) and (max-width: 325px) {
   .carousel-title {
-    top: 200px;
+    top: 150px;
   }
   .carousel-title h1 {
     font-size: 1.5em;
   }
   .carousel-content {
-    top: 62%;
+    top: 75%;
   }
   .carousel-content h1 {
     font-size: 1.0em;
