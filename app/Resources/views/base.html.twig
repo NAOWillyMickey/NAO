@@ -46,11 +46,11 @@
                   {{ 'OBS\''|trans }}
                 </a>
                 {% else %}
-                <a class="nav-link" href="{{ path('ornito_main_homepage')}}">{{ 'FIL D\'ACTU'|trans }}</a>
+                <a class="nav-link" href="{{ path('ornito_main_homepage') ~ '#option-menu'}}">{{ 'FIL D\'ACTU'|trans }}</a>
                 {% endif %}
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ path('ornito_map_homepage')}}">{{ 'MAP'|trans }}</a>
+                <a class="nav-link" href="{{ path('ornito_map_homepage') }}">{{ 'MAP'|trans }}</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ path('ornito_inventory_homepage')}}">{{ 'INVENTAIRE'|trans }}</a>
@@ -118,10 +118,10 @@
           </div>
           <!-- LANGUAGE MENU BUTTON SELECT <span class="fa fa-question-circle fa-w-16 fa-2x"></span>-->
           <div class="nav_logos float-right ">
-            <a href="" class="font-size-05em">
+            <a href="{{ path('ornito_set_locale', {'language': 'fr'}) }}" class="font-size-05em">
               <span><img class="langSelector" src="{{ asset('assets/img/logo/fr_flag.png') }}"></span></a>
             <hr>
-            <a href="" class="font-size-05em">
+            <a href="{{ path('ornito_set_locale', {'language': 'en'}) }}" class="font-size-05em">
               <span><img class="langSelector" src="{{ asset('assets/img/logo/uk_flag.png') }}"></span></a>
           </button>
         </div>
