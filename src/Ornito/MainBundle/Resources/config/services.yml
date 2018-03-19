@@ -2,3 +2,7 @@ services:
 #    ornito_main.example:
 #        class: Ornito\MainBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    Ornito\MainBundle\EventSubscriber\LocaleSubscriber:
+        arguments: ['%kernel.default_locale%']
+        # redundant if you're using autoconfigure
+        tags: [kernel.event_subscriber]
