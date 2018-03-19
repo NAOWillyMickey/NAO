@@ -3,7 +3,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}{{ parent() }}
-  - {{ 'Particier'|trans }}
+  - {{ 'Participer'|trans }}
 {% endblock %}
 
 {% block content %}{{ parent() }}
@@ -78,7 +78,7 @@
                       <br>
                       <p>{{ 'Notre source de données pour l\'inventaire et les Fiches Oiseaux provient de l\'INPN'|trans }}.<p>
                           <hr>
-                          <a class="link" href="https://inpn.mnhn.fr/">Site Web</a>
+                          <a class="link" href="https://inpn.mnhn.fr/">{{ "Site Web"|trans }}</a>
                         </span>
                       </li>
                       <li>
@@ -86,8 +86,7 @@
                         <span class="list-content">
                           <strong>{{ 'La NAO'|trans }}</strong>
                           <br>
-                          <p>{{ 'L\'Association au coeur du projet de référencement participatif et du développement de l\'application L\'Ornithothèque.'|trans }}
-                          </p>
+                          <p>{% trans %}L'Association au coeur du projet de référencement participatif et du développement de l'application L'Ornithothèque.{% endtrans %}</p>
                           <hr>
                           <a class="link" href="">{{ 'Présentation de l\'Association'|trans }}</a>
                         </span>
@@ -98,7 +97,7 @@
                           <strong>{{ 'Les Oiseaux et ... Vous'|trans }}</strong>
                           <br>
                           <p>{% trans %}Sans eux il n'y aurait pas d'Ornithothèque, sans vous il n'y à plus d'Ornithothèque. Ce projet est à destination de chacun, du simple curieux à l'expert le plus agueri. N'hésitez pas à soutenir le développement du projet, sur le terrain, en
-                            partageant vos observations, sur les réseaux en proposant des orientations tant pour la sauvegarde des éspèces que pour l'amélioration de L'Ornithothèque, comme Membre Bienfaiteur par un don à la NAO. Un projet participatif dépend de sa communauté
+                            partageant vos observations, sur les réseaux en proposant des orientations tant pour la sauvegarde des espèces que pour l'amélioration de L'Ornithothèque, comme Membre Bienfaiteur par un don à la NAO. Un projet participatif dépend de sa communauté
                             alors n'hésitez pas !{% endtrans %}
                           </p>
                           <hr>
@@ -182,7 +181,7 @@
                               <i title="{{ 'Validez les Observations des autres Membres'|trans }}" class="fa fa-certificate box-circle-solid"></i>
                             </a>
                             <a href="#">
-                              <i title="{{ 'Validez les Observations des autres Membres'|trans }}Accédez à une source de donnée participative" class="fa fa-stack-overflow box-circle-solid"></i>
+                              <i title="{{ 'Accédez à une source de donnée participative'|trans }}" class="fa fa-stack-overflow box-circle-solid"></i>
                             </a>
                           </span>
                         </div>

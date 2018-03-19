@@ -37,7 +37,7 @@
                   Tech
                   <h1>
                     <a href="#option-menu">
-                      <button class="shadowed btn btn-carousel-title btn-lg" role="button">{{ 'Dernières Obs'|trans }}''</button>
+                      <button class="shadowed btn btn-carousel-title btn-lg" role="button">{{ "Dernières Obs'"|trans }}</button>
                     </a>
                   </div>
                 </div>
@@ -46,7 +46,7 @@
                   <img class="img-fluid  d-block w-100" src="{{ asset('assets/img/obs/carousel/explore.jpg') }}" alt="Third slide">
                   <div class="carousel-content">
                     <h1>
-                      Logue
+                      {{ "Logue"|trans }}
                       <h1>
                         <a href="{{ (path("fos_user_registration_register")) }}">
                           <button class="shadowed btn btn-carousel-title btn-lg" role="button">{{ 'Rejoignez la Communauté'|trans }} !</button>
@@ -116,7 +116,7 @@
                                 <h4 class="text-uppercase font-size-16 card-title">{{ watch.title }}</h4>
                                 <time class="obs-time">
                                   <i class="fa fa-calendar"></i>
-                                  {{ "Le "|trans }}{{ watch.date|localizeddate('full', 'short') }}</time>
+                                    {{ "Le"|trans }} {{ watch.date|localizeddate('full', 'short') }}</time>
                               </div>
                               <!-- TIMELINE BODY -->
                               <div class="timeline-body">
