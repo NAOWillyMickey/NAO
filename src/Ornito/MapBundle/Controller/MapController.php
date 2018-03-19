@@ -6,6 +6,7 @@ use Ornito\ObservationBundle\Entity\Watching;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class MapController extends Controller
 {
@@ -28,8 +29,10 @@ class MapController extends Controller
             $output = array_slice($tab, -4,2);
             $birds = $repository->mySelectList($output[0], $output[1]);
             // If user change values of the select form
-            if ($birds === null) { $request->getSession()->getFlashBag()->add('danger', 'Select a bird in the list please!!!'); }
-            else {
+            if ($birds === null) {
+                $translatedMessage = $this->get('translator')->trans('Sélectionnez un oiseau dans la liste s\'il vous plaît !!!');
+                $request->getSession()->getFlashBag()->add('danger', $translatedMessage);
+            } else {
               $watchingsList = [];
               $watchingsListJson = [];
               foreach ($birds as $bird) {
@@ -49,7 +52,8 @@ class MapController extends Controller
         }
         elseif ($request->isMethod('POST') && count($request->request) <= 1) {
           // User override the required field and send an empty form
-          $request->getSession()->getFlashBag()->add('danger', 'You should select a bird in the select form before find it...');
+          $translatedMessage = $this->get('translator')->trans('Vous devez sélectionner un oiseau dans le formulaire de sélection avant de le trouver ...');
+          $request->getSession()->getFlashBag()->add('danger', $translatedMessage);
         }
         $watchingsListJson = Json_encode($watchingsListJson);
         $ordreList = $repository->getList('ordre');

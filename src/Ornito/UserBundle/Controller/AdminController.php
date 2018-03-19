@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Ornito\UserBundle\Services\UsersManager;
-use UserBundle\Entity\User;
+use Ornito\UserBundle\Entity\User;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AdminController extends Controller
 {
@@ -40,9 +41,10 @@ class AdminController extends Controller
     $usersManager = $this->get('ornito_users_manager');
     $user = $FOSuserManager->finduserBy(array('id' => $userId));
     $usersManager->promoteAsNaturalist($user);
+    $translatedMessage = $this->get('translator')->trans('Promotion Compte Naturaliste transmise');
     $this->addFlash(
           'success',
-          'Promotion Compte Naturaliste transmise'
+          $translatedMessage
     );
     return $this->redirectToRoute('ornito_user_admin_certification_list');
   }
@@ -53,9 +55,10 @@ class AdminController extends Controller
     $usersManager = $this->get('ornito_users_manager');
     $user = $FOSuserManager->finduserBy(array('id' => $userId));
     $usersManager->declineAsNaturalist($user);
+    $translatedMessage = $this->get('translator')->trans('Le rejet de la demande à bien été transmis');
     $this->addFlash(
           'danger',
-          'Le rejet de la demande à bien été transmis'
+          $translatedMessage
     );
     return $this->redirectToRoute('ornito_user_admin_certification_list');
   }
@@ -66,9 +69,10 @@ class AdminController extends Controller
     $usersManager = $this->get('ornito_users_manager');
     $user = $FOSuserManager->finduserBy(array('id' => $userId));
     $usersManager->deleteUser($user);
+    $translatedMessage = $this->get('translator')->trans('Utlisateur supprimé avec succès');
     $this->addFlash(
           'danger',
-          'Utlisateur supprimé avec succès'
+          $translatedMessage
     );
     return $this->redirectToRoute('ornito_user_admin_list');
   }

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TaxrefController extends Controller
 {
@@ -30,11 +31,13 @@ class TaxrefController extends Controller
             $birds = $repository->mySelectList($output[0], $output[1]);
             // If user change values of the select form
             if ($birds === null) {
-                $request->getSession()->getFlashBag()->add('danger', 'Select a bird in the list please!!!');
+                $translatedMessage = $this->get('translator')->trans('Sélectionnez un oiseau dans la liste s\'il vous plaît !!!');
+                $request->getSession()->getFlashBag()->add('danger', $translatedMessage);
             }
         } elseif ($request->isMethod('POST') && count($request->request) <= 1) {
             // User override the required field and send an empty form
-            $request->getSession()->getFlashBag()->add('danger', 'You should select a bird in the select form before find it...');
+            $translatedMessage = $this->get('translator')->trans('Vous devez sélectionner un oiseau dans le formulaire de sélection avant de le trouver ...');
+            $request->getSession()->getFlashBag()->add('danger', $translatedMessage);
         }
 
         $ordreList = $repository->getList('ordre');

@@ -18,6 +18,7 @@ use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Ornito\UserBundle\Services\UsersManager;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ProfileController extends Controller
 {
@@ -54,9 +55,10 @@ class ProfileController extends Controller
       $usersManager = $this->get('ornito_users_manager');
       $usersManager->promoteNaturalistRequestPending($user);
 
+      $translatedMessage = $this->get('translator')->trans('Votre demande à bien été transmise. Nous vous remercions et la traitons au plus tôt');
       $this->addFlash(
             'success',
-            'Votre demande à bien été transmise. Nous Vous remercions et la traitons au plus tôt.'
+            $translatedMessage
       );
 
       return $this->redirectToRoute('fos_user_profile_show');

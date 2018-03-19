@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ObservationController extends Controller
 {
@@ -63,7 +64,8 @@ class ObservationController extends Controller
             $em->persist($watching);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('success', 'Annonce bien enregistrée.');
+            $translatedMessage = $this->get('translator')->trans('Annonce bien enregistrée');
+            $request->getSession()->getFlashBag()->add('success', $translatedMessage);
 
             return $this->redirectToRoute('ornito_observation_view', array(
                 'id' => $watching->getId(),
@@ -106,7 +108,8 @@ class ObservationController extends Controller
                 }
                 $em->flush();
 
-                $request->getSession()->getFlashBag()->add('success' , 'Annonce bien modifiée.');
+                $translatedMessage = $this->get('translator')->trans('Annonce bien modifiée');
+                $request->getSession()->getFlashBag()->add('success' , $translatedMessage);
 
                 return $this->redirectToRoute('ornito_observation_view', array(
                     'id' => $watching->getId(),
@@ -123,7 +126,8 @@ class ObservationController extends Controller
                 'vernList' => $vernList,
             ));
             } else {
-                $request->getSession()->getFlashBag()->add('warning', 'Vous n\'avez pas les droits nécessaires pour modifier cette annonce!');
+                $translatedMessage = $this->get('translator')->trans('Vous n\'avez pas les droits nécessaires pour modifier cette annonce!');
+                $request->getSession()->getFlashBag()->add('warning', $translatedMessage);
                 return $this->redirectToRoute('fos_user_profile_show');
         }
     }
@@ -143,10 +147,12 @@ class ObservationController extends Controller
         if ($authorization === true) {
             $em->remove($watching);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien été supprimée.');
+            $translatedMessage = $this->get('translator')->trans('L\'observation a bien été supprimée');
+            $request->getSession()->getFlashBag()->add('success', $translatedMessage);
             return $this->redirectToRoute('fos_user_profile_show');
         }
-        $request->getSession()->getFlashBag()->add('warning', 'Vous n\'avez pas les droits nécessaires pour supprimer cette annonce!');
+        $translatedMessage = $this->get('translator')->trans('Vous n\'avez pas les droits nécessaires pour supprimer cette annonce!');
+        $request->getSession()->getFlashBag()->add('warning', $translatedMessage);
         return $this->redirectToRoute('fos_user_profile_show');
     }
 
@@ -174,7 +180,8 @@ class ObservationController extends Controller
         $nbWatching = count($listWatching);
 
         if ($nbWatching <= 0) {
-            $request->getSession()->getFlashBag()->add('info', 'Aucune observation en attente de validation');
+            $translatedMessage = $this->get('translator')->trans('Aucune observation en attente de validation');
+            $request->getSession()->getFlashBag()->add('info', $translatedMessage);
             return $this->redirectToRoute('ornito_observation_homepage');
         }
 
@@ -216,7 +223,8 @@ class ObservationController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             if ( $currentStatus != Watching::UNTREATED) {
-                $request->getSession()->getFlashBag()->add('warning', 'L\'observation a déjà été traitée et a reçu le status : ' .$currentStatus);
+                $translatedMessage = $this->get('translator')->trans('L\'observation a déjà été traitée et a reçu le status : ');
+                $request->getSession()->getFlashBag()->add('warning', $translatedMessage . $currentStatus);
             } else {
                 // Get value of obs status for the flash message
                 $postStatus = $request->request->get('watching_validate')['validateStatus'];
@@ -224,7 +232,8 @@ class ObservationController extends Controller
                 $currentUser = $this->getUser()->getId();
                 $watching->setValidateBy($currentUser);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('success', 'L\'observation a bien reçu le status : ' . $postStatus);
+                $translatedMessage = $this->get('translator')->trans('L\'observation a bien reçu le status : ');
+                $request->getSession()->getFlashBag()->add('success', $translatedMessage . $postStatus);
             }
             return $this->redirectToRoute('ornito_observation_waiting');
         }
