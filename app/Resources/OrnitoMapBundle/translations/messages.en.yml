@@ -1,0 +1,18 @@
+Map: Map
+Ordre: Order
+Famille: Family
+'Nom Scientifique': 'Scientific Name'
+'Nom Vernaculaire': 'French Vernacular Name'
+reset: reset
+Valider: OK
+'Aucun Résultats à Afficher': 'No Results to Display'
+'Voir le profil': 'See the profile'
+'Voir l''Obs': 'See the Watching'
+'Voir sur la Map': 'Watch on the Map'
+'Voir la Fiche': 'Watch the Card'
+Protégé: Protected
+'En danger': Dying
+'Non menacée': 'Not in danger'
+'La Recherche n''a donné aucun Résultat': 'Empty result'
+Vous devez sélectionner un oiseau dans le formulaire de sélection avant de le trouver ...: You should select a bird in the select form before find it...
+"Sélectionnez un oiseau dans la liste s'il vous plaît !!!": Select a bird in the list please!!!

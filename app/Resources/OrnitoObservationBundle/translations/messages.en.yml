@@ -1,0 +1,55 @@
+Ajouter: Add
+'Nouvelle Obs''': 'Add Watching'
+Profil: Profile
+Edition: Edit
+'Modifier Obs''': 'Edit watching'
+Titre: Title
+Commentaire: Comment
+'Nom Scientifique': 'Scientific Name'
+'Nom Vernaculaire': 'French Vernacular Name'
+Longitude: Longitude
+Latitude: Latitude
+Annuler: Cancel
+Géolocaliser: Geolocation
+'Selectionnez un point sur la Map ou Utilisez la Géolocalisation': 'Select a point on the Map or Use Geolocation'
+'Appuyez sur OK, Les coordonnées sont récupérées automatiquement': 'Press OK, Coordinates are retrieved automatically'
+Image: Picture
+valider: ok
+'Revenir à L''Obs''': 'Back to watching'
+Observations: Watching
+'Voir le profil': 'See profile'
+'Inscrit le': 'Registered on'
+Supprimer: Delete
+'Voulez-vous vraiment supprimer cette observation?': 'Do you really want to delete this comment?'
+Modifier: Edit
+'Voir l''Obs': 'See Watching'
+'Agrandir l''image': 'Full Screen Picture'
+'Voir la Fiche': 'See the Card'
+Protégé: Protected
+'En danger': 'Dying'
+'Non menacée': 'Not in danger'
+Validation: Ok
+'En attente': 'Waiting'
+Validée: Validated
+Refusée: Rejected
+Le: 'On '
+'Non défini': 'Not Defined'
+Localisation: Location
+LATITUDE: LATITUDE
+LONGITUDE: LONGITUDE
+'Cet utilisateur n''a pas laissé de commentaire...': 'This user did not comment yet...'
+'Voir le Commentaire': 'See the Comment'
+Envoyer: Send
+'Observation dans un périmètre  de 100 à 200 metres de ce point': 'Within a perimeter of 100 to 200 meters radius from here'
+Vue: Watch
+'Fiche Inventaire': 'Inventory Card'
+'À Valider': 'To Validate'
+Voir: See
+Aucune observation en attente de validation: No watching waiting for validation
+Annonce bien enregistrée: Well recorded ad
+Annonce bien modifiée: Well modified ad
+Vous n''avez pas les droits nécessaires pour modifier cette annonce!: You do not have the rights to edit this ad!
+L''observation a bien été supprimée: The observation has been removed
+Vous n''avez pas les droits nécessaires pour supprimer cette annonce!: You do not have the rights to delete this ad!
+"L'observation a déjà été traitée et a reçu le status :": "The observation has already been processed and received the status: "
+"L'observation a bien reçu le status :": "The observation has received the status :"

@@ -1,0 +1,63 @@
+'Paramètres du Profil': 'Profile Parameters'
+Sécurité: Security
+Profil: Profile
+'Paramètre de Sécurité': 'Security Parameters'
+'Mon Mot de passe Actuel': 'My CurrentPassword'
+'Mon Nouveau Mot de passe': 'My New Password'
+Général: General
+Contacts: Contacts
+'Changer mon Avatar': 'Change my Avatar'
+'Informations Personnelles': 'Personal informations'
+Prénom: First name
+Nom: Last Name
+Pseudo: Pseudo
+'Mon Mail': 'My E-Mail'
+Bio: Bio
+'Informations de Contact': 'Contact Information'
+'Mon Facebook': 'My Facebook'
+'Mon Google': 'My Google'
+'Mon Twitter': 'My Twitter'
+'Mon Pinterest': 'My Pinterest'
+'Mon Linkedin': 'My Linkedin'
+Sécurisation: Securing
+Membre: Member
+Naturaliste: Naturalist
+Admin: Admin
+'Mes Obs': 'My Watching'
+'Inscrit le': 'Registered On'
+'Ajouter une Observation': 'Add Watching'
+Validé: Validated
+'En attente': 'Waiting'
+Invalide: Invalid
+Tous: All
+'Mes Observations': 'My Watching'
+'Ses Observations': 'Their Watching'
+'Voir l''Obs': 'See Watching'
+Modifier: Edit
+Supprimer: Delete
+'Voulez-vous vraiment supprimer cette observation?': 'Do you really want to delete this watching?'
+'Agrandir l''image': 'Full Screen Picture'
+Protégé: Protected
+'En danger': 'Dying'
+'Non menacée': 'Not in danger'
+'J''ai validé': 'I validated'
+'Il a validé': 'He validated'
+'J''ai refusé': 'I refused'
+'Il a refusé': 'He refused'
+'Voir le profil': 'See the profile'
+'Votre demande est en cours de traitement': 'Your request is under processed'
+'Votre demande à malheureusement été déclinée': 'Unfortunately your request has been declined'
+'Vous n''avez pas encore de Compte Naturaliste': 'You do not have any Naturalist Account'
+'Faites votre demande dès maintenant': 'Apply now'
+'Pour cela vous devez tout de même justifier une certaine expérience en matière d''observations et d''ornithologie': 'For this you must still justify some experience in the field of observation and ornithology'
+'Certification Naturaliste': 'Naturalist Certification'
+'Ce Compte n''est pas un compte Naturaliste': 'This Account is not a Naturalist one'
+'MON PROFIL': 'MY PROFILE'
+'FIL D''ACTU': 'NEWS'
+'OU CONNECTEZ VOUS AVEC': 'OR CONNECT WITH'
+security.login.username: security.login.username
+security.login.password: security.login.password
+security.login.remember_me: security.login.remember_me
+security.login.submit: security.login.submit
+OU: OR
+'Créer Mon Compte': 'Create My Account'
