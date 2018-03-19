@@ -87,7 +87,7 @@ i {
   font-size: 2em;
 }
 .toBold {
-  font-weight: : 700;
+  font-weight: 700;
 }
 
 .italic {
@@ -742,7 +742,8 @@ ul.dropdown-menu.drp-mnu li {
 /* DISPLAY AND FILTER OPTION MENU */
 
 #displayMenu {
-  display: flex z-index: 100;
+  display: flex;
+  z-index: 100;
   left: -160px;
   bottom: 30px;
   width: 190px;
@@ -1939,7 +1940,7 @@ i.box-circle-outline {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  w idth: 50px;
+  width: 50px;
 }
 
 i.box-circle-solid {
@@ -2164,7 +2165,8 @@ i.box-circle-solid {
 }
 
 .member-box {
-  width: 100% float:left;
+  width: 100%;
+  float:left;
   position: relative;
   overflow: hidden
 }
