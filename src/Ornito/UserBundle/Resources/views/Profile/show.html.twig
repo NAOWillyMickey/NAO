@@ -284,7 +284,7 @@
                       </section>
                     </div>
 
-                    <!-- Tab panes 3 NAURALISTE -->
+                    <!-- Tab panes 3 NATURALISTE -->
                     <div role="tabpanel" class="tab-pane" id="naturalistProfilePanel">
                       <section class="content">
                         <div class="col-md-12">
@@ -320,38 +320,28 @@
                                           <a title="{{ "Voir l'Obs"|trans }}" href="{{ path('ornito_observation_view', {'id' : watching.id } ) }}">
                                             <i class="fa fa-eye"></i>
                                           </a>
-                                          {% if watching.validateStatus == 'attested' %}
-                                          {% if ( user.id == app.user.id  and is_granted("ROLE_NATURALIST"))  or is_granted("ROLE_SUPER_ADMIN")  %}
+                                          {% if is_granted("ROLE_SUPER_ADMIN")  %}
                                             <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
                                               <i class="fa fa-edit"></i>
                                             </a>
                                             <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
                                               <i class="fa fa-trash"></i>
                                             </a>
-                                          {% endif %}
-                                          {% endif %}
-                                          {% if watching.validateStatus != 'attested' %}
-                                          {% if ( user.id == app.user.id )  or is_granted("ROLE_SUPER_ADMIN")  %}
-                                            <a title="{{ "Modifier"|trans }}" href="{{ path('ornito_observation_edit', {'id' : watching.id } ) }}">
-                                              <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a title="{{ "Supprimer"|trans }}" class="delete" data-confirm="{{ 'Voulez-vous vraiment supprimer cette observation?'|trans }}" href="{{ path('ornito_observation_delete', {'id' : watching.id } ) }}">
-                                              <i class="fa fa-trash"></i>
-                                            </a>
-                                          {% endif %}
                                           {% endif %}
                                         </td>
                                         <td>
                                           <div class="media">
                                             <a href="#" class="pull-left">
                                               <span class="profil-img">
-                                                {% if user.avatar == null %}
-                                                  <i class="fa fa-user fa-lg shadowed" aria-hidden="true"></i>
+                                                <a title="{{ "Voir le profil"|trans }}" href="{{ (path('ornito_user_profile_show', { username : watching.user.username ,  userId : watching.user.id })) }}">
+                                                {% if watching.user.avatar == null %}
+                                                  <i class="profil-picture shadowed fa fa-user fa-lg" aria-hidden="true"></i>
                                                 {% else %}
-                                                <a title="{{ "Voir le profil"|trans }}" href=""><img title="{{ user.username }}" class="profil-picture shadowed" src="{{ asset(user.avatar.webPath) }}" alt="{{ user.avatar.alt }}"></a>
+                                                  <img title="{{ watching.user.username }}" class="profil-picture shadowed" src="{{ asset(watching.user.avatar.webPath) }}" alt="{{ watching.user.avatar.alt }}">
                                                 {% endif %}
+                                                </a>
                                               </span>
-                                              <span class="margin-left-10  badge badge-success dropdown-name">{{ user.username }}</span>
+                                              <span class="margin-left-10  badge badge-success dropdown-name">{{ watching.user.username }}</span>
                                             </a>
                                             <div class="media-body">
                                               <span class="media-meta pull-right">{{ watching.date|localizeddate('medium', 'short') }}</span>
