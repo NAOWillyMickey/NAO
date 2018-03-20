@@ -68,6 +68,7 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('validateStatus', Watching::ATTESTED)
             ->orderBy('w.date', 'DESC')
         ;
+
         if ($format == 'json') {
           $result = $qb
               ->getQuery()
@@ -83,5 +84,36 @@ class WatchingRepository extends \Doctrine\ORM\EntityRepository
         sort($result);
 
         return $result;
+    }
+
+
+    /**
+     * Returns a list of observations managed by a naturalist without his
+     *
+     * @param $id
+     * @return mixed
+     */
+    function findNaturalistObsList($id)
+    {
+        $qb = $this->createQueryBuilder('w')
+            ->leftJoin('w.user', 'user')
+            ->addSelect('user')
+        ;
+        $qb
+            ->where($qb->expr()->andX(
+                $qb->expr()->andX(
+                    $qb->expr()->eq('w.validateBy', ':naturalistId')),
+                    $qb->expr()->neq('w.validateStatus', ':value')
+                ),
+                $qb->expr()->neq('user.id',':userId')
+            )
+            ->setParameter('naturalistId', $id)
+            ->setParameter('userId', $id)
+            ->setParameter('value', Watching::UNTREATED)
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }
