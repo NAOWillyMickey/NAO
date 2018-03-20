@@ -28,13 +28,12 @@ class ProfileController extends Controller
     $FOSuserManager = $this->get('fos_user.user_manager');
     $user = $FOSuserManager->finduserBy(array('id' => $userId));
     $em = $this->getDoctrine()->getManager();
-    $naturalistObsList = $em->getRepository('OrnitoObservationBundle:Watching')->findByValidateBy($userId);
+    $naturalistObsList = $em->getRepository('OrnitoObservationBundle:Watching')->findNaturalistObsList($userId);
     return $this->render('OrnitoUserBundle:Profile:show.html.twig', array(
       'user' => $user,
       'naturalistObsList' => $naturalistObsList,
     ));
   }
-
 
   /**
    *  Ask to be Promote  as Naturalist.
