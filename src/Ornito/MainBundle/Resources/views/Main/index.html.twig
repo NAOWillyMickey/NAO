@@ -125,18 +125,18 @@
                                   <div class=" col-sm-12 col-md-4 img-panel-container">
                                     {% if watch.species.protectedStatus == true %}
                                       {% if watch.species.protectedStatus starts with 'P' %}
-                                        <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-danger">
-                                          {{ "Protégé"|trans }}
+                                        <span class=" badge-status text-uppercase  font-size-12 badge shadowed badge-danger">
+                                          {{ "Protégée"|trans }}
                                           <i class="fa fa-gavel"></i>
                                         </span>
                                       {% else %}
-                                        <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-warning">
+                                        <span class=" badge-status text-uppercase  font-size-12 badge shadowed badge-warning">
                                           {{ "En danger"|trans }}
                                           <i class="fa fa-gavel"></i>
                                         </span>
                                       {% endif %}
                                     {% else %}
-                                      <span class="badge-status text-uppercase  font-size-12 badge shadowed badge-success">
+                                      <span class=" badge-status text-uppercase  font-size-12 badge shadowed badge-success">
                                         {{ "Non menacée"|trans }}
                                         <i class="fa fa-gavel"></i>
                                       </span>
